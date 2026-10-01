@@ -7,7 +7,7 @@
 <meta name="description" content="Coached math membership for ADHD learners, grades 4 to 9. Standard, All Access and Private.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Atkinson+Hyperlegible+Next:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
 :root{
   /* Ink / Bone / Signal */
@@ -92,6 +92,68 @@ h2.display{font-size:clamp(38px,6vw,68px)}
 @media (prefers-reduced-motion:no-preference){.float{animation:bob 6s ease-in-out infinite}.float.f2{animation-delay:-3s}}
 @keyframes bob{50%{transform:translateY(-8px)}}
 @media (max-width:1000px){.float,.float.f2{display:none}}
+
+
+/* ===== hero intro animation ===== */
+.hero h1 .w{display:inline-block}
+.cant{position:relative;display:inline-block;transition:color .4s ease .1s}
+.strike{position:absolute;left:-5%;right:-5%;top:50%;height:.12em;margin-top:-.06em;background:var(--signal);border-radius:3px;transform:rotate(-5deg) scaleX(1);transform-origin:left center;box-shadow:0 0 22px rgba(196,240,122,.75)}
+.cant.struck{color:rgba(255,255,255,.42)}
+.scrawl{display:inline-block;position:relative;width:1.75em;height:.8em;vertical-align:baseline;margin-left:.12em}
+.scrawl svg{position:absolute;left:0;bottom:-.08em;width:100%;overflow:visible;transform:rotate(-7deg);transform-origin:left bottom}
+.scrawl text{font-family:"Permanent Marker",cursive;font-size:118px;fill:var(--signal);stroke:var(--signal);stroke-width:2.5;paint-order:stroke;filter:drop-shadow(0 0 14px rgba(196,240,122,.45))}
+.hero h1 em{background:linear-gradient(100deg,var(--signal) 0 42%,#f3ffd9 50%,var(--signal) 58% 100%);background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-proof .st i{font-style:normal;display:inline-block}
+@media (max-width:600px){.hero h1{font-size:clamp(38px,11.6vw,48px)}.scrawl{width:1.6em}}
+.float.f1{right:4%}
+.f1 b{display:inline-block;transform-origin:left center}
+.f1 .ring{position:absolute;right:14px;top:14px;width:34px;height:34px;transform:rotate(-90deg)}
+.f1 .ring circle{fill:none;stroke-width:3}
+.f1 .ring .bg{stroke:rgba(255,255,255,.12)}
+.f1 .ring .fg{stroke:var(--signal);stroke-linecap:round;stroke-dasharray:88;stroke-dashoffset:26}
+.float.f1{padding-right:62px;min-width:200px}
+.pb{display:inline-block;margin-top:10px;font:800 10px/1 var(--display);letter-spacing:.16em;text-transform:uppercase;background:var(--signal);color:var(--signal-ink);padding:6px 8px;border-radius:2px}
+.spark{position:absolute;left:50%;top:50%;width:7px;height:7px;border-radius:2px;background:var(--signal);pointer-events:none}
+.f2 p .caret{display:inline-block;width:2px;height:1em;background:var(--signal);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.btn-signal{position:relative;overflow:hidden}
+.btn-signal::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-20deg);opacity:0}
+
+@media (prefers-reduced-motion:no-preference){
+  .js .hero-bg img{transform:scale(1.14);transition:transform 2.8s cubic-bezier(.2,.7,.2,1)}
+  .js .hero.go .hero-bg img{transform:scale(1)}
+  .js .hero .eyebrow,.js .hero .lede,.js .hero-cta,.js .hero-proof{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js .hero.go .eyebrow{opacity:1;transform:none;transition-delay:.1s}
+  .js .hero.go .lede{opacity:1;transform:none;transition-delay:2.5s}
+  .js .hero.go .hero-cta{opacity:1;transform:none;transition-delay:2.7s}
+  .js .hero.go .hero-proof{opacity:1;transform:none;transition-delay:2.9s}
+  .js .hero h1 .w{opacity:0;transform:translateY(.45em) rotate(2deg);filter:blur(10px);transition:opacity .55s ease,transform .7s cubic-bezier(.2,.8,.2,1.15),filter .55s ease;transition-delay:calc(var(--i) * 90ms + 250ms)}
+  .js .hero.go h1 .w{opacity:1;transform:none;filter:none}
+  .js .hero h1 .w.late{transition-delay:calc(var(--i) * 90ms + 1900ms)}
+  .js .strike{transform:rotate(-5deg) scaleX(0);transition:transform .38s cubic-bezier(.7,0,.3,1) 1.15s}
+  .js .hero.go .strike{transform:rotate(-5deg) scaleX(1)}
+  .js .cant{transition-delay:1.3s}
+  .js .scrawl text{fill-opacity:0;stroke-dasharray:900;stroke-dashoffset:900}
+  .js .hero.go .scrawl text{animation:draw .9s cubic-bezier(.5,0,.3,1) 1.45s forwards,fillin .35s ease 2.15s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes fillin{to{fill-opacity:1}}
+  .js .hero.go h1 em{animation:shimmer 1.6s ease 2.6s 1 both}
+  @keyframes shimmer{from{background-position:100% 0}to{background-position:0 0}}
+  .js .hero.go .hero-proof .st i{animation:pop .45s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--i) * 110ms + 3.1s)}
+  @keyframes pop{0%{transform:scale(0);opacity:0}100%{transform:none;opacity:1}}
+  .js .float{opacity:0;animation:none}
+  .js .hero.go .float.f1{animation:floatin .7s cubic-bezier(.2,.8,.2,1.2) 3s forwards,bob 6s ease-in-out 3.7s infinite}
+  .js .hero.go .float.f2{animation:floatin .7s cubic-bezier(.2,.8,.2,1.2) 4.6s forwards,bob 6s ease-in-out 5.3s infinite}
+  @keyframes floatin{from{opacity:0;transform:translateY(24px) scale(.94)}to{opacity:1;transform:none}}
+  .f1 b.bump{animation:bump .28s cubic-bezier(.3,1.8,.5,1)}
+  @keyframes bump{50%{transform:scale(1.22)}}
+  .js .f1 .ring .fg{stroke-dashoffset:88;transition:stroke-dashoffset 1.3s cubic-bezier(.3,0,.2,1) 3.3s}
+  .js .hero.go .f1 .ring .fg{stroke-dashoffset:26}
+  .js .pb{opacity:0;transform:scale(.6)}
+  .js .pb.on{opacity:1;transform:none;transition:all .4s cubic-bezier(.3,1.7,.5,1)}
+  .hero.go .btn-signal::after{animation:shine 4.5s ease 3.4s infinite}
+  @keyframes shine{0%{left:-60%;opacity:1}22%{left:130%;opacity:1}100%{left:130%;opacity:0}}
+}
 
 /* marquee */
 .marquee{background:var(--ink);color:#fff;border-top:1px solid var(--ink-line);overflow:hidden;white-space:nowrap;padding:18px 0}
@@ -319,6 +381,7 @@ footer a{text-decoration:none}
 .dock .btn{min-height:46px;padding:0 18px}
 @media (max-width:760px){.dock{display:flex;transform:translateY(110%);transition:transform .3s ease}.dock.show{transform:none}}
 </style>
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
@@ -336,17 +399,17 @@ footer a{text-decoration:none}
 
 <header class="hero">
   <div class="hero-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1800&q=70" srcset="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=70 900w, https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1800&q=70 1800w, https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=2600&q=70 2600w" sizes="100vw" alt="" fetchpriority="high"></div>
-  <div class="float f1" aria-hidden="true"><small>Tonight's streak</small><b>7 <em>in a row</em></b></div>
-  <div class="float f2" aria-hidden="true"><span class="catchie"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10140c" stroke-width="2.2" stroke-linecap="round"><circle cx="9" cy="10" r="1.2" fill="#10140c"/><circle cx="15" cy="10" r="1.2" fill="#10140c"/><path d="M8.5 14.5c1 1.3 2.2 2 3.5 2s2.5-.7 3.5-2"/></svg></span><p>One more. You've got this.</p></div>
+  <div class="float f1" aria-hidden="true"><svg class="ring" viewBox="0 0 34 34"><circle class="bg" cx="17" cy="17" r="14"/><circle class="fg" cx="17" cy="17" r="14"/></svg><small>Tonight's streak</small><b><span data-streak>7</span> <em>in a row</em></b><br><span class="pb">Personal best</span></div>
+  <div class="float f2" aria-hidden="true"><span class="catchie"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10140c" stroke-width="2.2" stroke-linecap="round"><circle cx="9" cy="10" r="1.2" fill="#10140c"/><circle cx="15" cy="10" r="1.2" fill="#10140c"/><path d="M8.5 14.5c1 1.3 2.2 2 3.5 2s2.5-.7 3.5-2"/></svg></span><p data-type="One more. You've got this.">One more. You've got this.</p></div>
   <div class="wrap">
     <p class="eyebrow">Membership · Grades 4–9 · Built for ADHD</p>
-    <h1 class="display">They were told they can't.<br><em>Train them to prove it wrong.</em></h1>
+    <h1 class="display" aria-label="They were told they can't. They can. Train them to prove it wrong."><span aria-hidden="true"><span class="w" style="--i:0">They</span> <span class="w" style="--i:1">were</span> <span class="w" style="--i:2">told</span><br><span class="w" style="--i:3">they</span> <span class="w" style="--i:4"><span class="cant">can't<i class="strike"></i></span>.</span><span class="scrawl"><svg viewBox="0 0 300 120"><text x="6" y="104">can!</text></svg></span><br><em><span class="w late" style="--i:0">Train</span> <span class="w late" style="--i:1">them</span> <span class="w late" style="--i:2">to</span><br><span class="w late" style="--i:3">prove</span> <span class="w late" style="--i:4">it</span> <span class="w late" style="--i:5">wrong.</span></em></span></h1>
     <p class="lede">Catcher is a coached math membership for ADHD learners. Every night, a dedicated coach gets them started, pushes one more problem, and records every win.</p>
     <div class="hero-cta">
       <a class="btn btn-signal" href="#plans">Start your 7-Day Guest Pass</a>
       <small>All Access. No card. Nothing auto-charges.</small>
     </div>
-    <div class="hero-proof"><span class="st" aria-hidden="true">★★★★★</span><b>5.0</b><span>912 ratings · 3,771 lessons with Coach Tony</span><a href="#proof">Read the reviews ↓</a></div>
+    <div class="hero-proof"><span class="st" aria-hidden="true"><i style="--i:0">★</i><i style="--i:1">★</i><i style="--i:2">★</i><i style="--i:3">★</i><i style="--i:4">★</i></span><b data-count="5" data-dec="1" data-delay="3100">5.0</b><span><span data-count="912" data-delay="3100">912</span> ratings · <span data-count="3771" data-delay="3100">3,771</span> lessons with Coach Tony</span><a href="#proof">Read the reviews ↓</a></div>
   </div>
 </header>
 
@@ -360,11 +423,11 @@ footer a{text-decoration:none}
       <p>Catcher is built on Coach Tony's method: 3,771 one-on-one math lessons since 2021. Every number below is public and verifiable.</p>
     </div>
     <div class="kpis">
-      <div><b>5.0</b><span>Average rating</span></div>
-      <div><b>912</b><span>Ratings</span></div>
-      <div><b>99.8%</b><span>Five stars</span></div>
-      <div><b>3,771</b><span>Lessons taught</span></div>
-      <div><b>14</b><span>Families who rated 10+ lessons</span></div>
+      <div><b data-count="5" data-dec="1" data-onview>5.0</b><span>Average rating</span></div>
+      <div><b data-count="912" data-onview>912</b><span>Ratings</span></div>
+      <div><b data-count="99.8" data-dec="1" data-suffix="%" data-onview>99.8%</b><span>Five stars</span></div>
+      <div><b data-count="3771" data-onview>3,771</b><span>Lessons taught</span></div>
+      <div><b data-count="14" data-onview>14</b><span>Families who rated 10+ lessons</span></div>
     </div>
   </div>
   <div class="rc-row "><div class="rc-track"><div class="rc-set"><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>At school he always said he understood the math, but his test scores never showed it. In his first lesson he whispered to Tony that the teacher goes too fast and he didn&#x27;t know how to ask, so he stopped asking. Thank you for the patience. He&#x27;s slowly gaining confidence in math.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span><span class="rc-badge">23 lessons rated</span></div><blockquote>After the trial, she said it was more detailed and easier to follow than her class at school. We bought 20 lessons on the spot, and she can&#x27;t wait for the next one.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">M</span><span><b>Maggie</b><small>Middle school math · 2022</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span><span class="rc-badge">7 lessons rated</span></div><blockquote>Right after the trial he asked me when the next lesson was. Tony knew he loves Pokémon and built the word problems around it. He worked happily and learned happily.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">F</span><span><b>Fanny</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>My child doesn&#x27;t like math. But the lesson was relaxed, and Tony guided him to think for himself. He&#x27;s slowly building confidence in math, in a way that feels easy for him.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span><span class="rc-badge">21 lessons rated</span></div><blockquote>My son loves Tony&#x27;s lessons. He teaches through what kids are into, so they actually want to learn math. Best part: he ran over time in the trial to finish the material.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">M</span><span><b>Marcus L.</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>My kid used to just grind through problems. Tony goes back to the core logic, so now he checks whether he truly understands a concept instead of memorizing problem types.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Middle school math · 2024</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>Clear, logical teaching and so much patience. My child learns happily and without stress.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">S</span><span><b>Sofie</b><small>Elementary math · 2024</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>Teacher is really patient and the materials are so pretty. My kid asked me to buy Mr. Tony&#x27;s lessons directly, haha.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Elementary math · 2021</small></span></figcaption></figure></div><div class="rc-set" aria-hidden="true"><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>At school he always said he understood the math, but his test scores never showed it. In his first lesson he whispered to Tony that the teacher goes too fast and he didn&#x27;t know how to ask, so he stopped asking. Thank you for the patience. He&#x27;s slowly gaining confidence in math.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span><span class="rc-badge">23 lessons rated</span></div><blockquote>After the trial, she said it was more detailed and easier to follow than her class at school. We bought 20 lessons on the spot, and she can&#x27;t wait for the next one.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">M</span><span><b>Maggie</b><small>Middle school math · 2022</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span><span class="rc-badge">7 lessons rated</span></div><blockquote>Right after the trial he asked me when the next lesson was. Tony knew he loves Pokémon and built the word problems around it. He worked happily and learned happily.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">F</span><span><b>Fanny</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>My child doesn&#x27;t like math. But the lesson was relaxed, and Tony guided him to think for himself. He&#x27;s slowly building confidence in math, in a way that feels easy for him.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span><span class="rc-badge">21 lessons rated</span></div><blockquote>My son loves Tony&#x27;s lessons. He teaches through what kids are into, so they actually want to learn math. Best part: he ran over time in the trial to finish the material.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">M</span><span><b>Marcus L.</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>My kid used to just grind through problems. Tony goes back to the core logic, so now he checks whether he truly understands a concept instead of memorizing problem types.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Middle school math · 2024</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>Clear, logical teaching and so much patience. My child learns happily and without stress.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">S</span><span><b>Sofie</b><small>Elementary math · 2024</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>Teacher is really patient and the materials are so pretty. My kid asked me to buy Mr. Tony&#x27;s lessons directly, haha.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Elementary math · 2021</small></span></figcaption></figure></div></div></div>
@@ -618,6 +681,48 @@ footer a{text-decoration:none}
   var dock = document.querySelector('.dock'), hero = document.querySelector('.hero');
   function dockState(){ dock.classList.toggle('show', hero.getBoundingClientRect().bottom < 0); }
   addEventListener('scroll', dockState, {passive:true}); dockState();
+
+  /* ===== hero intro ===== */
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmt(v, el){ var d = +el.dataset.dec || 0; return (d ? v.toFixed(d) : Math.round(v).toLocaleString('en-US')) + (el.dataset.suffix || ''); }
+  function countUp(el){
+    var end = parseFloat(el.dataset.count), dur = 1400, t0 = null;
+    el.textContent = fmt(0, el);
+    function step(t){ if (!t0) t0 = t; var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 4);
+      el.textContent = fmt(end * e, el); if (k < 1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  function burst(host){
+    for (var i = 0; i < 18; i++){
+      var sp = document.createElement('i'); sp.className = 'spark'; host.appendChild(sp);
+      var a = Math.random() * Math.PI * 2, r = 50 + Math.random() * 70;
+      sp.animate([{transform:'translate(-50%,-50%) scale(1)',opacity:1},{transform:'translate(calc(-50% + '+Math.cos(a)*r+'px), calc(-50% + '+Math.sin(a)*r+'px)) rotate('+(Math.random()*360)+'deg) scale(.3)',opacity:0}],{duration:700+Math.random()*400,easing:'cubic-bezier(.1,.8,.3,1)',fill:'forwards'});
+      setTimeout(sp.remove.bind(sp), 1200);
+    }
+  }
+  function intro(){
+    if (hero.classList.contains('go')) return;
+    hero.classList.add('go');
+    if (reduce) return;
+    document.querySelectorAll('.hero [data-count]').forEach(function(el){ el.textContent = fmt(0, el); setTimeout(function(){ countUp(el); }, +el.dataset.delay || 0); });
+    setTimeout(function(){ document.querySelector('.cant').classList.add('struck'); }, 1300);
+    var f1 = document.querySelector('.float.f1'), num = f1.querySelector('[data-streak]'), b = f1.querySelector('b'), n = 0;
+    num.textContent = '0';
+    setTimeout(function tick(){
+      n++; num.textContent = n; b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump');
+      if (n < 7) setTimeout(tick, 170 + n * 25); else { burst(f1); f1.querySelector('.pb').classList.add('on'); }
+    }, 3350);
+    var tp = document.querySelector('.f2 [data-type]'), full = tp.dataset.type;
+    tp.innerHTML = '<span></span><i class="caret"></i>';
+    setTimeout(function(){ var k = 0, out = tp.firstChild; (function type(){ out.textContent = full.slice(0, ++k); if (k < full.length) setTimeout(type, 38); })(); }, 5000);
+  }
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(intro); setTimeout(intro, 1200); } else intro();
+
+  /* count up on scroll */
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ countUp(e.target); io.unobserve(e.target); } }); }, {threshold:.6});
+    document.querySelectorAll('[data-onview]').forEach(function(el){ el.textContent = fmt(0, el); io.observe(el); });
+  }
   var feed = document.querySelector('.feed');
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function(es, o){ es.forEach(function(e){ if (e.isIntersecting){ feed.classList.add('in'); o.disconnect(); } }); }, {threshold:.35}).observe(feed);
