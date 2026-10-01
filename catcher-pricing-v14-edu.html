@@ -480,6 +480,53 @@ footer{background:transparent;border-top:1px solid var(--line)}
 #method{padding:90px 0}
 .faq{max-width:760px}
 .plans > .bg.heavy::after{background:rgba(14,16,15,.84)}
+
+/* ===== CTA system ===== */
+.cta{min-height:64px;padding:0 10px 0 28px;gap:18px;justify-content:space-between;border-radius:999px;letter-spacing:.08em;text-align:left;
+  box-shadow:0 10px 30px -8px rgba(196,240,122,.55),inset 0 -3px 0 rgba(16,20,12,.18),inset 0 1px 0 rgba(255,255,255,.55);
+  transition:transform .25s cubic-bezier(.2,.8,.2,1.3),box-shadow .25s ease,background .2s ease;will-change:transform}
+.cta-label{display:flex;flex-direction:column;gap:5px;line-height:1}
+.cta-label b{font:800 16px/1 var(--display);letter-spacing:.1em;text-transform:uppercase}
+.cta-label small{font:500 13px/1 var(--body);letter-spacing:0;text-transform:none;opacity:.72}
+.cta-arrow{flex:none;width:46px;height:46px;border-radius:50%;background:var(--signal-ink);color:var(--signal);display:grid;place-items:center;transition:transform .3s cubic-bezier(.2,.8,.2,1.4)}
+.cta-arrow svg{transition:transform .3s cubic-bezier(.2,.8,.2,1.4)}
+.cta:hover{background:#d6fa9c;box-shadow:0 18px 44px -8px rgba(196,240,122,.75),inset 0 -3px 0 rgba(16,20,12,.18),inset 0 1px 0 rgba(255,255,255,.6)}
+.cta:hover .cta-arrow{transform:scale(1.06)}
+.cta:hover .cta-arrow svg{transform:translateX(3px)}
+.cta:active{transform:scale(.97)!important;box-shadow:0 6px 18px -8px rgba(196,240,122,.6),inset 0 2px 0 rgba(16,20,12,.2)}
+.cta:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.cta.btn-block{padding-left:24px}
+.cta-sm{min-height:50px;padding:0 6px 0 20px;gap:12px}
+.cta-sm .cta-label b{font-size:14px}
+.cta-sm .cta-arrow{width:38px;height:38px}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);transform:translate(-50%,-50%) scale(0);pointer-events:none;animation:ripple .6s ease-out forwards}
+@keyframes ripple{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
+.confetti{position:fixed;width:8px;height:8px;border-radius:2px;pointer-events:none;z-index:100}
+@media (prefers-reduced-motion:no-preference){
+  .cta:not(.cta-sm){animation:breathe 2.8s ease-in-out 4s infinite}
+  .cta:hover{animation:none}
+  .cta .cta-arrow svg{animation:nudge 2.8s ease-in-out 4.6s infinite}
+  .cta:hover .cta-arrow svg{animation:none}
+}
+@keyframes breathe{0%,100%{box-shadow:0 10px 30px -8px rgba(196,240,122,.55),0 0 0 0 rgba(196,240,122,.45),inset 0 -3px 0 rgba(16,20,12,.18),inset 0 1px 0 rgba(255,255,255,.55)}50%{box-shadow:0 10px 30px -8px rgba(196,240,122,.55),0 0 0 12px rgba(196,240,122,0),inset 0 -3px 0 rgba(16,20,12,.18),inset 0 1px 0 rgba(255,255,255,.55)}}
+@keyframes nudge{0%,70%,100%{transform:none}80%{transform:translateX(4px)}90%{transform:translateX(0)}}
+.hero-cta{flex-direction:column;align-items:flex-start;gap:16px}
+.cta-trust{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none;margin:0;padding:0;font-size:14px;color:#c9cbc5}
+.cta-trust li{display:flex;align-items:center;gap:7px}
+.cta-trust svg{color:var(--signal)}
+.cta-trust.center{justify-content:center;margin-top:18px}
+.btn-quiet{display:inline-flex;align-self:center;gap:6px;min-height:48px;align-items:center;color:var(--muted);font-weight:700;font-size:15px;text-decoration:none;border-bottom:1px solid transparent}
+.btn-quiet:hover{color:#fff}
+.btn-quiet span{transition:transform .2s ease}
+.btn-quiet:hover span{transform:translateX(3px)}
+.btn-outline{border:1.5px solid rgba(244,241,234,.5);color:#f4f1ea;background:transparent;border-radius:999px}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+.plan .btn-quiet{margin:0 auto}
+@media (max-width:600px){.cta:not(.cta-sm){width:100%}.hero-cta{align-items:stretch}}
+.cta .cta-label,.cta .cta-label b,.cta .cta-label small,.dock .cta .cta-label{color:var(--signal-ink);display:flex}
+.cta .cta-label small{display:block;opacity:.7}
+.dock .cta .cta-label b{font-size:14px;line-height:1}
+.dock .cta .cta-arrow{display:grid;color:var(--signal);font-size:inherit}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -503,8 +550,8 @@ footer{background:transparent;border-top:1px solid var(--line)}
     <h1 class="display" aria-label="They were told they can't. They can. Teach them to prove it wrong."><span aria-hidden="true"><span class="w" style="--i:0">They</span> <span class="w" style="--i:1">were</span> <span class="w" style="--i:2">told</span><br><span class="w" style="--i:3">they</span> <span class="w" style="--i:4"><span class="cant">can't<i class="strike"></i></span>.</span><span class="scrawl"><svg viewBox="0 0 300 120"><text x="6" y="104">can!</text></svg></span><br><em><span class="w late" style="--i:0">Teach</span> <span class="w late" style="--i:1">them</span> <span class="w late" style="--i:2">to</span><br><span class="w late" style="--i:3">prove</span> <span class="w late" style="--i:4">it</span> <span class="w late" style="--i:5">wrong.</span></em></span></h1>
     <p class="lede">Catcher is one-on-one math tutoring built for ADHD learners. Every night, a dedicated tutor helps them start, stretches them one problem further, and records every win.</p>
     <div class="hero-cta">
-      <a class="btn btn-signal" href="#plans">Start your free trial week</a>
-      <small>The full Honors program. No card. Nothing auto-charges.</small>
+      <a class="btn btn-signal cta" href="#plans"><span class="cta-label"><b>Start my free week</b><small>7 days of the full Honors program</small></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <ul class="cta-trust"><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No card needed</li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Nothing auto-charges</li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Cancel in one tap</li></ul>
     </div>
     <div class="hero-proof"><span class="st" aria-hidden="true"><i style="--i:0">★</i><i style="--i:1">★</i><i style="--i:2">★</i><i style="--i:3">★</i><i style="--i:4">★</i></span><b data-count="5" data-dec="1" data-delay="3100">5.0</b><span><span data-count="912" data-delay="3100">912</span> ratings · <span data-count="3771" data-delay="3100">3,771</span> lessons taught by Tony</span><a href="#proof">Read the reviews ↓</a></div>
   </div>
@@ -563,7 +610,7 @@ footer{background:transparent;border-top:1px solid var(--line)}
           <li class="no"><svg viewBox="0 0 24 24" fill="none" class="ic-no" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg>Tutor leaves at minute 30, mid-problem or not</li>
           <li class="no"><svg viewBox="0 0 24 24" fill="none" class="ic-no" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg>No session reports to parents</li>
         </ul>
-        <a class="btn btn-line btn-block" href="#">Choose Core</a>
+        <a class="btn-quiet" href="#">Choose Core <span aria-hidden="true">→</span></a>
       </article>
 
       <article class="plan featured">
@@ -580,8 +627,8 @@ footer{background:transparent;border-top:1px solid var(--line)}
           <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Lessons with Tony, bookable anytime</li>
           <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Everything in Core</li>
         </ul>
-        <a class="btn btn-signal btn-block" href="#">Start 7 days free</a>
-        <p class="foot">Then <span data-dock-price>$200/mo</span>. No card required to start.</p>
+        <a class="btn btn-signal cta btn-block" href="#"><span class="cta-label"><b>Try Honors free</b><small>7 days · no card needed</small></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <p class="foot">Then <span data-dock-price>$200/mo</span>. Cancel in one tap.</p>
       </article>
 
       <article class="plan">
@@ -596,7 +643,7 @@ footer{background:transparent;border-top:1px solid var(--line)}
           <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Direct line to Tony, seven days a week</li>
           <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Monthly review with you and the school</li>
         </ul>
-        <a class="btn btn-ink btn-block" href="#">Apply</a>
+        <a class="btn btn-outline btn-block" href="#">Apply for a spot</a>
       </article>
     </div>
 
@@ -639,7 +686,8 @@ footer{background:transparent;border-top:1px solid var(--line)}
     <p class="eyebrow">Free trial week</p>
     <h2 class="display">The first week<br>is on us.</h2>
     <p class="lede">Seven days of the full Honors program. No card. Nothing auto-charges.</p>
-    <a class="btn btn-signal" href="#plans">Start your free trial week</a>
+    <a class="btn btn-signal cta" href="#plans"><span class="cta-label"><b>Start my free week</b><small>Takes 30 seconds</small></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <ul class="cta-trust center"><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No card needed</li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Nothing auto-charges</li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Cancel in one tap</li></ul>
   </div>
 </section>
 
@@ -652,7 +700,7 @@ footer{background:transparent;border-top:1px solid var(--line)}
 
 <div class="dock" role="region" aria-label="Recommended program">
   <div><b>Honors</b><span data-dock-line>$200/mo · 7 days free</span></div>
-  <a class="btn btn-signal" href="#plans">Start free</a>
+  <a class="btn btn-signal cta cta-sm" href="#plans"><span class="cta-label"><b>Start free</b></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
 </div>
 
 <script>
@@ -739,6 +787,33 @@ footer{background:transparent;border-top:1px solid var(--line)}
     var rio = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); rio.unobserve(e.target); } }); }, {threshold:.12});
     rvs.forEach(function(el, i){ el.classList.add('rv'); if (el.matches('.plan, .step')) el.classList.add('d' + ([].indexOf.call(el.parentNode.children, el) % 4)); rio.observe(el); });
   }
+
+  /* ===== CTA feel: magnetic hover, ripple, confetti ===== */
+  var fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  document.querySelectorAll('.cta').forEach(function(btn){
+    if (fine && !reduce && !btn.classList.contains('btn-block') && !btn.classList.contains('cta-sm')) {
+      btn.addEventListener('pointermove', function(e){ var r = btn.getBoundingClientRect();
+        var x = (e.clientX - r.left - r.width / 2) / r.width, y = (e.clientY - r.top - r.height / 2) / r.height;
+        btn.style.transform = 'translate(' + (x * 10).toFixed(1) + 'px,' + (y * 8 - 2).toFixed(1) + 'px)'; });
+      btn.addEventListener('pointerleave', function(){ btn.style.transform = ''; });
+    }
+    btn.addEventListener('pointerdown', function(e){
+      var r = btn.getBoundingClientRect(), d = Math.max(r.width, r.height) * 2.2, rp = document.createElement('span');
+      rp.className = 'ripple'; rp.style.cssText = 'width:'+d+'px;height:'+d+'px;left:'+(e.clientX - r.left)+'px;top:'+(e.clientY - r.top)+'px';
+      btn.appendChild(rp); setTimeout(function(){ rp.remove(); }, 650);
+    });
+    btn.addEventListener('click', function(e){
+      if (reduce) return;
+      var r = btn.getBoundingClientRect(), cx = r.right - 30, cy = r.top + r.height / 2, cols = ['#c4f07a','#f4f1ea','#9fdc4a','#ffffff'];
+      for (var i = 0; i < 22; i++){
+        var c = document.createElement('i'); c.className = 'confetti'; c.style.left = cx + 'px'; c.style.top = cy + 'px'; c.style.background = cols[i % 4];
+        document.body.appendChild(c);
+        var a = -Math.PI / 2 + (Math.random() - .5) * Math.PI * 1.4, v = 70 + Math.random() * 110;
+        c.animate([{transform:'translate(-50%,-50%)',opacity:1},{transform:'translate(calc(-50% + '+(Math.cos(a)*v)+'px), calc(-50% + '+(Math.sin(a)*v+60)+'px)) rotate('+(Math.random()*540)+'deg)',opacity:0}],{duration:800+Math.random()*300,easing:'cubic-bezier(.15,.7,.3,1)',fill:'forwards'});
+        setTimeout(c.remove.bind(c), 1200);
+      }
+    });
+  });
   var feed = document.querySelector('.feed');
   if (!feed) {} else if ('IntersectionObserver' in window) {
     new IntersectionObserver(function(es, o){ es.forEach(function(e){ if (e.isIntersecting){ feed.classList.add('in'); o.disconnect(); } }); }, {threshold:.35}).observe(feed);
