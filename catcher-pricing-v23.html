@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing – Catcher Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream-50:#fffdf9; --cream-100:#f7f2ea; --cream-200:#eee4d8; --cream-300:#dfd1bf;
+  --earth-900:#2f2925; --earth-800:#3e3530; --earth-700:#5e554d; --earth-500:#8e8378;
+  --sage-50:#eaf4ee; --sage-100:#d9eadf; --sage-400:#5a8f6b; --sage-500:#4a7c59; --sage-600:#4d7d5d; --sage-700:#31553d;
+  --focus-50:#fff5d9; --focus-500:#d28a17; --focus-700:#835500;
+  --coral-500:#ee806b; --violet-500:#8a7bc4; --violet-50:#eeeaf8;
+  --peach-soft:#fff8f0;
+  --forest-deep:#27400f; --forest-border:#3d5824; --mint:#bcf0ae; --wisdom:#adcd8d;
+  --line:#e4e2de; --border:#e0dbd3;
+  --r-lg:14px; --r-xl:18px; --r-2xl:24px;
+  --shadow-card:0 1px 2px rgb(47 41 37 / .04), 0 10px 30px rgb(47 41 37 / .06);
+  --shadow-featured:0 20px 50px rgb(74 124 89 / .22), 0 2px 6px rgb(47 41 37 / .06);
+  --font:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",Inter,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:90px}
+body{margin:0; font-family:var(--font); color:var(--earth-900); background:var(--cream-100); line-height:1.5; -webkit-font-smoothing:antialiased}
+a{color:inherit; text-decoration:none}
+h1,h2,h3{margin:0; color:var(--earth-800); font-weight:800; letter-spacing:-.015em}
+p{margin:0}
+img{max-width:100%; height:auto; display:block}
+button{font-family:inherit}
+.container{max-width:1160px; margin:0 auto; padding:0 24px}
+.container.wide{max-width:1280px}
+.section{padding:80px 0}
+.section.white{background:var(--cream-50)}
+.section.peach{background:var(--peach-soft)}
+.section-head{text-align:center; max-width:640px; margin:0 auto 36px}
+.eyebrow{display:block; font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin-bottom:12px}
+.eyebrow.coral{color:var(--coral-500)} .eyebrow.sage{color:var(--sage-500)} .eyebrow.violet{color:var(--violet-500)} .eyebrow.amber{color:var(--focus-500)}
+.section-head h2{font-size:36px; line-height:1.15}
+.section-head p{font-size:17px; color:var(--earth-700); font-weight:700; margin-top:10px}
+@media (max-width:640px){ .section{padding:56px 0} .section-head h2{font-size:28px} }
+:focus-visible{outline:2px solid var(--sage-400); outline-offset:3px}
+
+/* tooltip trigger */
+.tip{border-bottom:1.5px dotted currentColor; cursor:help}
+.tip::after{content:"i"; display:inline-grid; place-items:center; width:14px; height:14px; border-radius:50%; font-size:10px; font-weight:800; margin-left:5px; background:var(--sage-100); color:var(--sage-700); vertical-align:1px; line-height:1}
+.plan.dark .tip::after{background:var(--forest-border); color:var(--mint)}
+.plan.featured .tip::after{background:#f6e1a6; color:#835500}
+#tooltip{position:fixed; z-index:50; max-width:260px; background:var(--earth-900); color:#fff; font-size:13px; font-weight:700; line-height:1.45; padding:10px 12px; border-radius:10px; box-shadow:0 12px 30px rgb(47 41 37 / .25); opacity:0; visibility:hidden; transform:translateY(4px); transition:opacity .15s, transform .15s, visibility .15s; pointer-events:none}
+#tooltip.show{opacity:1; visibility:visible; transform:translateY(0)}
+#tooltip::before{content:""; position:absolute; left:var(--ax, 50%); bottom:-6px; width:12px; height:12px; background:var(--earth-900); transform:translateX(-50%) rotate(45deg)}
+#tooltip.below::before{bottom:auto; top:-6px}
+
+/* nav */
+.nav{position:sticky; top:0; z-index:10; background:rgba(255,253,249,.94); backdrop-filter:saturate(160%) blur(10px); border-bottom:1px solid var(--line)}
+.nav .container{display:flex; align-items:center; justify-content:space-between; height:72px}
+.logo{font-weight:800; font-size:24px; color:var(--sage-500); letter-spacing:-.02em}
+.nav-links{display:flex; align-items:center; gap:24px; font-size:15px; font-weight:700; color:var(--earth-700)}
+.nav-links a.login{color:var(--sage-500)}
+@media (max-width:860px){ .nav-links a:not(.cta-button){display:none} }
+
+/* hero */
+.hero{background:var(--peach-soft); padding:56px 0 36px}
+.hero-grid{display:grid; grid-template-columns:220px 1fr; gap:40px; align-items:center}
+@media (max-width:860px){ .hero-grid{grid-template-columns:1fr; text-align:center; gap:20px} .hero-grid img{margin:0 auto; width:150px} .toggle-wrap{justify-content:center} }
+.hero img{width:200px}
+.pill{display:inline-block; background:var(--focus-50); color:var(--focus-700); font-weight:800; font-size:12px; padding:6px 16px; border-radius:24px; margin-bottom:16px}
+.hero h1{font-size:52px; line-height:1.08; margin-bottom:12px}
+.hero h1 .accent{color:var(--sage-400)}
+.hero p{font-size:18px; font-weight:700; color:var(--earth-700); margin-bottom:22px}
+.toggle-wrap{display:flex}
+.toggle{display:inline-flex; align-items:center; background:var(--cream-100); border:1px solid var(--border); border-radius:999px; padding:4px; gap:2px}
+.toggle button{border:0; background:transparent; font-weight:700; font-size:14px; color:var(--earth-700); padding:9px 18px; border-radius:999px; cursor:pointer; display:inline-flex; align-items:center; gap:8px}
+.toggle button.on{background:#fff; color:var(--earth-900); box-shadow:var(--shadow-card)}
+.save{background:var(--focus-50); color:var(--focus-700); font-size:11px; font-weight:800; padding:3px 8px; border-radius:999px}
+@media (max-width:640px){ .hero{padding:40px 0 24px} .hero h1{font-size:34px} .hero p{font-size:16px} }
+
+/* plans */
+.plans{display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; align-items:stretch; margin-top:36px}
+@media (max-width:1100px){ .plans{grid-template-columns:repeat(2, 1fr); gap:24px} }
+@media (max-width:640px){ .plans{grid-template-columns:1fr; max-width:440px; margin-inline:auto} }
+.plan{--plan-rest-y:0px; position:relative; background:#fff; border:1px solid var(--border); border-radius:var(--r-2xl); padding:26px; display:flex; flex-direction:column; box-shadow:var(--shadow-card); transform:translateY(var(--plan-rest-y)); transition:transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .25s}
+.plan.featured{border:2px solid #e2b455; box-shadow:0 20px 50px rgba(210,138,23,.22), 0 2px 6px rgba(47,41,37,.06); background:linear-gradient(180deg, #fff1c9 0, #fff9ec 180px, #fff 440px)}
+@media (min-width:1101px){ .plan.featured{--plan-rest-y:-12px} }
+.plan.lite{background:linear-gradient(180deg, var(--sage-50) 0, #f3f8f4 150px, #fff 340px)}
+.badge{position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:linear-gradient(180deg, #ffd76a, #f2ac33); color:#3b2a0f; border:1px solid #d9992f; font-size:12px; font-weight:800; padding:6px 14px; border-radius:999px; white-space:nowrap; box-shadow:0 4px 12px rgba(210,138,23,.3)}
+.plan h3{font-size:20px; margin-bottom:4px}
+.plan .desc{color:var(--earth-700); font-size:15px; font-weight:700}
+.price{display:flex; align-items:baseline; gap:5px; margin:18px 0 2px}
+.price .amt{font-size:44px; font-weight:800; letter-spacing:-.03em; line-height:1; color:var(--earth-800)}
+.plan.featured .amt{color:#835500}
+.price .per{color:var(--earth-700); font-size:15px; font-weight:700}
+.bill{font-size:13px; color:var(--earth-500); font-weight:700; min-height:20px}
+.features{list-style:none; margin:18px 0 22px; padding:0; display:grid; gap:11px; font-size:15px; color:var(--earth-800); font-weight:700}
+.features li{display:flex; gap:9px; align-items:flex-start}
+.features svg{flex:none; width:19px; height:19px; margin-top:2px}
+.plan .cta-wrap{margin-top:auto}
+.plan.featured .cta-wrap{padding-top:14px; border-top:1px solid #f1e3bf}
+.plan.dark{background:var(--forest-deep); border-color:var(--forest-deep); color:#fff}
+.plan.dark h3,.plan.dark .price .amt{color:#fff}
+.plan.dark .desc,.plan.dark .bill,.plan.dark .per{color:var(--wisdom)}
+.plan.dark .features{color:#fff}
+.tag{display:inline-block; font-size:11px; font-weight:800; letter-spacing:.06em; color:var(--wisdom); border:1px solid var(--forest-border); padding:4px 9px; border-radius:6px; margin-bottom:10px}
+@media (hover:hover) and (pointer:fine){
+  .plan:hover{transform:translateY(calc(var(--plan-rest-y) - 3px)); box-shadow:0 18px 38px rgb(47 41 37 / .09)}
+  .plan.featured:hover{box-shadow:0 24px 58px rgba(210,138,23,.3)}
+}
+.trust{display:flex; justify-content:center; gap:28px; flex-wrap:wrap; margin-top:36px; color:var(--earth-700); font-size:14px; font-weight:700}
+.trust span{display:inline-flex; align-items:center; gap:8px}
+.trust svg{width:18px; height:18px; color:var(--sage-500)}
+
+/* CTA button: soft depth, colored glow, two-line label, arrow chip */
+.cta-button{
+  --depth:#2f5a3d; --glow:rgba(74,124,89,.35); --chip:#fff; --chip-ink:#31553d;
+  position:relative; isolation:isolate; display:inline-flex; align-items:center; gap:14px; width:100%;
+  min-height:62px; padding:10px 12px 10px 20px; border:1px solid rgba(0,0,0,.06); border-radius:16px;
+  text-align:left; cursor:pointer; overflow:hidden; touch-action:manipulation; text-decoration:none;
+  box-shadow:0 4px 0 var(--depth), 0 12px 24px -6px var(--glow), inset 0 1px 0 rgba(255,255,255,.45);
+  transform:translateY(0); transition:transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .2s;
+}
+.cta-text{display:flex; flex-direction:column; gap:2px; flex:1; min-width:0; position:relative; z-index:2}
+.cta-label{font-size:16px; font-weight:800; line-height:1.15; letter-spacing:-.01em}
+.cta-sub{font-size:11.5px; font-weight:700; line-height:1.2; opacity:.72}
+.cta-arrow{display:grid; place-items:center; position:relative; z-index:2; flex:0 0 36px; width:36px; height:36px; border-radius:50%; background:var(--chip); color:var(--chip-ink); box-shadow:0 1px 2px rgba(0,0,0,.12); transition:transform .22s cubic-bezier(.2,.8,.2,1)}
+.cta-arrow svg{width:18px; height:18px}
+.cta-button::before{content:""; position:absolute; z-index:1; pointer-events:none; left:-40%; top:-25%; height:150%; width:35%; background:linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent); transform:translateX(-160%) skewX(-20deg); opacity:0}
+/* themes */
+.cta-button[data-cta-theme="gold"]{--depth:#b5761a; --glow:rgba(210,138,23,.5); --chip:#3b2a0f; --chip-ink:#ffd76a; background:linear-gradient(180deg, #ffd76a 0%, #f2ac33 100%); color:#3b2a0f; border-color:#d9992f}
+.cta-button[data-cta-theme="green"]{--depth:#2f5a3d; --glow:rgba(74,124,89,.45); --chip:#fff; --chip-ink:#31553d; background:linear-gradient(180deg, #62986f 0%, #4a7c59 100%); color:#fff; border-color:#3f6d4c}
+.cta-button[data-cta-theme="sage"]{--depth:#b7cfbc; --glow:rgba(74,124,89,.18); --chip:#4a7c59; --chip-ink:#fff; background:linear-gradient(180deg, #f1f7f3 0%, #d9eadf 100%); color:#31553d; border-color:#c3d9c9}
+.cta-button[data-cta-theme="paper"]{--depth:#d6cfc4; --glow:rgba(62,53,48,.12); --chip:#eaf4ee; --chip-ink:#4a7c59; background:linear-gradient(180deg, #fff 0%, #f4efe7 100%); color:#3e674a; border-color:#ddd5c9}
+.cta-button[data-cta-theme="mint"]{--depth:#6fa562; --glow:rgba(188,240,174,.35); --chip:#154212; --chip-ink:#bcf0ae; background:linear-gradient(180deg, #d4f7c9 0%, #a8e69a 100%); color:#154212; border-color:#8fcf80}
+.cta-button[data-cta-theme="ivory"]{--depth:#c7ddcb; --glow:rgba(26,63,36,.25); --chip:#4a7c59; --chip-ink:#fff; background:linear-gradient(180deg, #fff 0%, #f1f6ec 100%); color:#31583d; border-color:#e2ebe0}
+/* sizes */
+.cta-button.small{width:auto; min-height:44px; padding:6px 8px 6px 16px; border-radius:12px; gap:10px}
+.cta-button.small .cta-label{font-size:14px} .cta-button.small .cta-arrow{width:28px; height:28px; flex-basis:28px} .cta-button.small .cta-arrow svg{width:15px; height:15px}
+.banner .cta-button{width:auto; min-width:280px; min-height:68px; padding:12px 14px 12px 24px; border-radius:18px}
+.banner .cta-label{font-size:17px}
+/* motion */
+@media (hover:hover) and (pointer:fine){
+  .cta-button:hover{transform:translateY(-2px); box-shadow:0 6px 0 var(--depth), 0 20px 34px -8px var(--glow), inset 0 1px 0 rgba(255,255,255,.5)}
+  .cta-button:hover .cta-arrow{transform:translateX(4px) scale(1.06)}
+  .cta-button:hover::before{animation:cta-sheen 1.05s cubic-bezier(.2,.65,.3,1) 1}
+}
+.cta-button:active{transform:translateY(3px) scale(.995); box-shadow:0 1px 0 var(--depth), 0 4px 10px -4px var(--glow); transition-duration:.08s}
+.cta-button:active .cta-arrow{transform:translateX(5px) scale(.96)}
+.cta-button:focus-visible{outline:3px solid #835500; outline-offset:5px}
+.cta-ripple{position:absolute; z-index:1; border-radius:50%; background:rgba(255,255,255,.22); pointer-events:none; transform:scale(0); opacity:0; animation:cta-ripple .5s ease-out 1}
+.cta-button.cta-intro{animation:cta-attention 3.6s ease-in-out 1}
+.cta-button.cta-intro::before{animation:cta-sheen 1.2s cubic-bezier(.2,.65,.3,1) .6s 1}
+@keyframes cta-sheen{0%{transform:translateX(-160%) skewX(-20deg); opacity:0} 20%{opacity:1} 75%{opacity:1} 100%{transform:translateX(510%) skewX(-20deg); opacity:0}}
+@keyframes cta-attention{0%,100%{box-shadow:0 4px 0 var(--depth), 0 12px 24px -6px var(--glow), inset 0 1px 0 rgba(255,255,255,.45)} 42%{box-shadow:0 4px 0 var(--depth), 0 12px 24px -6px var(--glow), inset 0 1px 0 rgba(255,255,255,.45), 0 0 0 7px rgba(210,138,23,.14), 0 0 36px rgba(210,138,23,.28)}}
+@keyframes cta-ripple{0%{transform:scale(0); opacity:.75} 100%{transform:scale(1); opacity:0}}
+
+/* tables */
+.table-wrap{overflow-x:auto; border:1px solid var(--border); border-radius:var(--r-xl); background:#fff; box-shadow:var(--shadow-card)}
+table{width:100%; border-collapse:collapse; min-width:720px; font-size:15px; font-weight:700}
+th,td{padding:15px 18px; text-align:center; border-bottom:1px solid var(--line); vertical-align:middle}
+th:first-child,td:first-child{text-align:left; color:var(--earth-700); width:26%}
+thead th{font-weight:800; color:var(--earth-800); background:var(--cream-100)}
+thead th small{display:block; font-weight:700; color:var(--earth-500); font-size:12px; margin-top:2px}
+tbody tr:last-child td{border-bottom:0}
+td.hl,th.hl{background:var(--sage-50)}
+td.hl{font-weight:800; color:var(--sage-700)}
+thead th.hl{color:var(--sage-700)}
+td svg{width:22px; height:22px; vertical-align:middle}
+.cost{font-weight:800; font-size:16px; color:var(--earth-800)}
+.dash{color:var(--cream-300)}
+
+/* parent trio */
+.trio{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px}
+@media (max-width:820px){ .trio{grid-template-columns:1fr; max-width:440px; margin-inline:auto} }
+.trio .card{background:#fff; border:1px solid var(--border); border-radius:var(--r-2xl); padding:28px 24px; text-align:center; box-shadow:var(--shadow-card)}
+.trio img{width:150px; margin:0 auto 14px}
+.trio h3{font-size:20px; margin-bottom:6px}
+.trio p{color:var(--earth-700); font-size:15px; font-weight:700}
+
+/* tony reviews */
+.stats{display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; max-width:800px; margin:0 auto 32px}
+@media (max-width:640px){ .stats{grid-template-columns:repeat(2, 1fr)} }
+.stats div{background:#fff; border:1px solid var(--border); border-radius:var(--r-xl); padding:16px 10px; text-align:center; box-shadow:var(--shadow-card)}
+.stats b{display:block; font-size:30px; font-weight:800; letter-spacing:-.02em; color:var(--sage-500); line-height:1.1}
+.stats span{font-size:13px; font-weight:700; color:var(--earth-700)}
+.reviews{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px}
+@media (max-width:980px){ .reviews{grid-template-columns:repeat(2, 1fr)} }
+@media (max-width:640px){ .reviews{grid-template-columns:1fr} }
+.review{background:#fff; border:1px solid var(--border); border-radius:var(--r-2xl); padding:20px 22px; box-shadow:var(--shadow-card); display:flex; flex-direction:column; gap:10px}
+.r-head{display:flex; align-items:center; gap:12px}
+.r-head > div{flex:1; min-width:0}
+.r-head b{display:block; font-size:15px; color:var(--earth-900); line-height:1.2}
+.r-head > div span{display:block; font-size:12px; font-weight:700; color:var(--earth-500); margin-top:2px}
+.r-avatar{width:40px; height:40px; border-radius:50%; flex:none; object-fit:cover; display:grid; place-items:center}
+.r-initial{background:var(--sage-100); color:var(--sage-700); font-weight:800; font-size:16px}
+.r-anon{background:var(--cream-200); color:var(--earth-500)} .r-anon svg{width:22px; height:22px}
+.r-stars{color:var(--focus-500); font-size:13px; letter-spacing:1px; flex:none}
+.r-body{font-size:15px; font-weight:700; color:var(--earth-800); line-height:1.5; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden}
+.review.open .r-body{display:block; -webkit-line-clamp:unset}
+.r-foot{display:flex; justify-content:space-between; align-items:center; margin-top:auto}
+.r-note{font-size:12px; font-weight:700; color:var(--earth-500)}
+.r-more{border:0; background:none; color:var(--sage-500); font-weight:800; font-size:13px; cursor:pointer; padding:4px 0; text-decoration:underline; text-underline-offset:3px}
+.review.short .r-more{display:none}
+.r-source{text-align:center; font-size:13px; font-weight:700; color:var(--earth-500); margin-top:24px}
+.r-source a{color:var(--sage-500); text-decoration:underline}
+
+/* faq */
+.faq{max-width:720px; margin:0 auto}
+.faq details{border:1px solid var(--border); border-radius:var(--r-lg); padding:0 20px; margin-bottom:10px; background:#fff}
+.faq summary{list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:16px 0; font-weight:800; font-size:16px; color:var(--earth-800)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary svg{flex:none; width:20px; height:20px; color:var(--sage-500); transition:transform .2s}
+.faq details[open] summary svg{transform:rotate(180deg)}
+.faq details p{padding:0 0 16px; color:var(--earth-700); font-size:15px; font-weight:700}
+
+/* catchie + banner */
+.catchie{display:grid; grid-template-columns:160px 1fr; gap:30px; align-items:center; max-width:680px}
+@media (max-width:640px){ .catchie{grid-template-columns:1fr; text-align:center} .catchie img{margin:0 auto} }
+.catchie img{width:150px}
+.bubble{position:relative; background:var(--cream-50); border:1px solid #f2dcc6; border-radius:var(--r-2xl); padding:22px 26px; font-size:17px; font-weight:700; color:var(--earth-800); line-height:1.5}
+.bubble b{color:var(--sage-400)}
+.bubble::before{content:""; position:absolute; left:-12px; top:50%; width:20px; height:20px; background:var(--cream-50); border-left:1px solid #f2dcc6; border-bottom:1px solid #f2dcc6; transform:translateY(-50%) rotate(45deg)}
+@media (max-width:640px){ .bubble::before{display:none} }
+.banner{position:relative; overflow:hidden; background:var(--sage-400); color:#fff; border-radius:var(--r-2xl); padding:56px 24px; text-align:center}
+.banner h2{color:#fff; font-size:34px; margin-bottom:8px}
+.banner p{font-size:17px; font-weight:700; color:#e6f0e9; margin:0 auto 24px}
+.banner img{position:absolute; right:32px; top:50%; transform:translateY(-50%); width:150px; opacity:.16; pointer-events:none}
+@media (max-width:640px){ .banner{padding:44px 20px} .banner h2{font-size:26px} .banner img{display:none} .banner .cta-button{width:100%; min-width:0} }
+
+footer{background:var(--cream-50); border-top:1px solid var(--line); padding:36px 0}
+footer .container{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; font-size:14px; font-weight:700; color:var(--earth-500)}
+footer .logo{font-size:22px}
+footer nav{display:flex; gap:18px; flex-wrap:wrap}
+
+/* mobile decision dock */
+.dock{display:none}
+@media (max-width:640px){
+  .dock{display:flex; align-items:center; justify-content:space-between; gap:12px; position:fixed; z-index:15; bottom:max(12px, env(safe-area-inset-bottom)); left:50%; width:calc(100% - 24px); max-width:500px; padding:12px 13px 12px 17px; background:rgba(255,253,249,.97); border:1px solid #ccd9c8; border-radius:20px; box-shadow:0 10px 35px rgb(45 68 44 / .16); backdrop-filter:blur(12px); visibility:hidden; opacity:0; transform:translate(-50%, 12px); pointer-events:none; transition:opacity .2s, transform .2s, visibility .2s}
+  .dock.show{visibility:visible; opacity:1; transform:translate(-50%, 0); pointer-events:auto}
+  .dock-copy strong{display:block; font-size:15px} .dock-copy span{display:block; font-size:11px; color:var(--earth-700); font-weight:700}
+  .dock .cta-button{width:auto; min-width:120px; min-height:48px; padding:10px 11px 10px 14px; font-size:13px; border-radius:12px}
+  .dock .cta-arrow{width:25px; height:25px; flex-basis:25px} .dock .cta-arrow svg{width:16px; height:16px}
+}
+@media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none !important; transition:none !important} .cta-button:hover,.cta-button:active,.cta-arrow,.cta-arrow svg{transform:none !important} .plan:hover{transform:translateY(var(--plan-rest-y)) !important} html{scroll-behavior:auto} }
+
+/* ===== v21: precise, confident type ===== */
+body{font-weight:500}
+.section{padding:104px 0}
+.section-head{max-width:760px;margin-bottom:48px}
+.section-head h2{font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-.03em}
+.section-head p{font-weight:500;font-size:19px}
+.eyebrow{letter-spacing:.16em;font-size:12px}
+.hero{padding:88px 0 56px}
+@media (min-width:861px){.hero-grid{grid-template-columns:200px 1fr;gap:56px}}
+.hero h1{font-size:clamp(44px,5.8vw,72px);line-height:1;letter-spacing:-.04em;margin-bottom:22px;text-wrap:balance}
+.hero h1 .accent{color:var(--sage-500);display:block}
+.hero p.lede{font-size:21px;font-weight:500;color:var(--earth-700);margin-bottom:30px;max-width:560px}
+.hero p.lede b{color:var(--earth-900);font-weight:800}
+.features,.plan .desc,.bill,.trust,table,.trio p,.faq details p,.r-body,.bubble,.banner p,.stats span{font-weight:500}
+.plan h3{font-size:22px}
+.price .amt{font-size:48px}
+@media (max-width:640px){.section{padding:64px 0}.hero{padding:44px 0 28px}.hero p.lede{font-size:18px}}
+
+/* pain -> answer */
+.pains{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pain{background:#fff;border:1px solid var(--border);border-radius:var(--r-2xl);padding:30px 28px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:18px}
+.pain q{font-size:21px;line-height:1.3;color:var(--earth-500);font-weight:500;quotes:"\201C" "\201D"}
+.pain .arrow{width:28px;height:2px;background:var(--cream-300)}
+.pain b{font-size:22px;line-height:1.25;color:var(--earth-900);font-weight:800;letter-spacing:-.015em}
+@media (max-width:860px){.pains{grid-template-columns:1fr;max-width:480px;margin-inline:auto}}
+
+/* credentials */
+.creds{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:-8px auto 36px;max-width:900px}
+.creds span{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:10px 16px;font-size:14px;font-weight:700;color:var(--earth-800);box-shadow:var(--shadow-card)}
+.creds span i{font-style:normal;color:var(--focus-500)}
+
+/* ===== v23 ===== */
+.hero h1{font-size:clamp(46px,6.4vw,84px)}
+.hero p.lede{margin-bottom:10px}
+.hero .sig{font-size:15px;font-weight:700;color:var(--earth-500);margin-bottom:30px}
+.hero .sig::before{content:"— "}
+.nine{max-width:1040px;margin:0 auto;border-top:1px solid var(--line)}
+.nine-head,.nine .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:36px}
+.nine-head{padding:18px 0;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--earth-500);border-bottom:1px solid var(--line)}
+.nine .row{padding:30px 0;border-bottom:1px solid var(--line);align-items:start}
+.nine .see{font-size:21px;line-height:1.3;color:var(--earth-500);font-weight:500}
+.nine .truth{font-size:21px;line-height:1.3;color:var(--earth-900);font-weight:800;letter-spacing:-.01em}
+.nine .fix{font-size:21px;line-height:1.3;color:var(--sage-600);font-weight:800;letter-spacing:-.01em}
+@media (max-width:860px){.nine-head{display:none}.nine .row{grid-template-columns:1fr;gap:8px;padding:26px 0}.nine .see,.nine .truth,.nine .fix{font-size:19px}}
+.banner h2{font-size:clamp(34px,4.6vw,56px);line-height:1.05;letter-spacing:-.03em}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#d9eadf"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#4a7c59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="check-dark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#bcf0ae"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#154212" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#eee4d8"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" fill="none" stroke="#8e8378" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+<div id="tooltip" role="tooltip"></div>
+
+<header class="nav">
+  <div class="container">
+    <a class="logo" href="#">Catcher Academy</a>
+    <nav class="nav-links">
+      <a href="#">About us</a>
+      <a href="#">Math tutoring</a>
+      <a href="#">Blog</a>
+      <a class="login" href="#">Log in</a>
+      <a class="cta-button small" data-cta-theme="green" href="#" style="width:auto"><span class="cta-text"><span class="cta-label">Start free</span></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <img src="https://catcheracademy.com/assets/cloud/animations/cloud-graduate-transparent-compact.webp" alt="Catchie">
+    <div>
+      <span class="pill">Math for ADHD · Grades 4–9</span>
+      <h1>3,771 lessons.<span class="accent">Not one lazy kid.</span></h1>
+      <p class="lede">Only kids no one had taught the way their brain works.</p>
+      <p class="sig">Tony Lai, head teacher</p>
+      <div class="toggle-wrap">
+        <div class="toggle" role="group" aria-label="Billing period">
+          <button class="on" data-period="monthly" type="button">Monthly</button>
+          <button data-period="semester" type="button" data-tip="5 months for the price of 4. Ends on its own, no auto-renew.">Semester <span class="save">Save 20%</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="plans" style="padding-top:20px">
+  <div class="container wide">
+    <div class="plans">
+
+      <div class="plan" id="plan-free">
+        <h3>Free trial</h3>
+        <p class="desc">Everything, for 7 days.</p>
+        <div class="price"><span class="amt">$0</span></div>
+        <p class="bill">7 days. No card.</p>
+        <ul class="features">
+          <li><svg><use href="#check"/></svg><span class="tip" tabindex="0" data-tip="Voice tutoring, handwriting checked, hints, reports. The whole $200 plan, for 7 days.">All features, no limits</span></li>
+          <li><svg><use href="#check"/></svg><span class="tip" tabindex="0" data-tip="Every problem, grades 4 through 9. Handwriting on the tablet.">The whole workbook</span></li>
+          <li><svg><use href="#check"/></svg><span class="tip" tabindex="0" data-tip="No card on file, so nothing can charge you. Pick a plan on day 7, or don't.">Nothing auto-charges</span></li>
+        </ul>
+        <div class="cta-wrap">
+          <a class="cta-button" data-cta-theme="paper" href="#" ><span class="cta-text"><span class="cta-label">Start 7 days free</span><span class="cta-sub">No card</span></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        </div>
+      </div>
+
+      <div class="plan lite" id="plan-lite">
+        <h3>Lite</h3>
+        <p class="desc">30 minutes of AI a day.</p>
+        <div class="price"><span class="amt" data-price="lite">$20</span><span class="per">/month</span></div>
+        <p class="bill" data-bill="lite">Cancel in one tap.</p>
+        <ul class="features">
+          <li><svg><use href="#check"/></svg><span class="tip" tabindex="0" data-tip="Unlimited problems and unlimited sessions inside the 30 minutes. Three 10-minute rounds or one long one, your kid's call.">30 min of AI tutoring a day</span></li>
+          <li><svg><use href="#check"/></svg><span class="tip" tabindex="0" data-tip="Talks out loud, reads the handwriting on the tablet, gives hints, texts you after. Nothing is held back.">Every AI feature included</span></li>
+          <li><svg><use href="#check"/></svg><span class="tip" tabindex="0" data-tip="The whole grades 4 to 9 workbook. No limit on problems, with or without the AI.">Unlimited practice</span></li>
+          <li><svg><use href="#check"/></svg><span class="tip" tabindex="0" data-tip="When the 30 minutes are up the AI goes quiet and practice keeps going. Nothing locks.">Pause anytime</span></li>
+        </ul>
+        <div class="cta-wrap">
+          <a class="cta-button" data-cta-theme="sage" href="#" ><span class="cta-text"><span class="cta-label">Start Lite</span><span class="cta-sub">$20 a month</span></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        </div>
+      </div>
+
+      <div class="plan featured" id="plan-catcher">
+        <span class="badge">Most families choose this</span>
+        <h3>Catcher</h3>
+        <p class="desc">No clock.</p>
+        <div class="price"><span class="amt" data-price="catcher">$200</span><span class="per">/month</span></div>
+        <p class="bill" data-bill="catcher">No daily limit.</p>
+        <ul class="features">
+          <li><svg><use href="#check"/></svg><span class="tip" tabindex="0" data-tip="No daily cap on AI tutoring. If your kid is finally in the zone at 9:47 PM, nothing cuts them off.">Unlimited AI time</span></li>
+          <li><svg><use href="#check"/></svg><span class="tip" tabindex="0" data-tip="After every session and every week: what they did, what they got wrong, what they fixed themselves, what to show the teacher.">Reports for you</span></li>
+          <li><svg><use href="#check"/></svg><span>Everything in Lite</span></li>
+          <li><svg><use href="#check"/></svg><span class="tip" tabindex="0" data-tip="Never required, and nothing is charged unless you book him yourself. $150 an hour, 5.0 on AmazingTalker. He reads your kid's sessions first, so the hour isn't spent catching up.">Can book Tony if you want</span></li>
+          <li><svg><use href="#check"/></svg><span class="tip" tabindex="0" data-tip="30-day money-back. Idle for 30 days? We pause it and text you.">Pause or refund anytime</span></li>
+        </ul>
+        <div class="cta-wrap">
+          <a class="cta-button" data-cta-theme="gold" href="#" data-intro><span class="cta-text"><span class="cta-label">Start 7 days free</span><span class="cta-sub">No card · Nothing auto-charges</span></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        </div>
+      </div>
+
+      <div class="plan dark" id="plan-academy">
+        <span class="tag">BY APPLICATION</span>
+        <h3>Academy</h3>
+        <p class="desc">Catcher + Tony in person.</p>
+        <div class="price"><span class="amt">$5,000</span><span class="per">/month</span></div>
+        <p class="bill">Monthly.</p>
+        <ul class="features">
+          <li><svg><use href="#check-dark"/></svg><span>Everything in Catcher</span></li>
+          <li><svg><use href="#check-dark"/></svg><span class="tip" tabindex="0" data-tip="Three afternoons a week at your home. NTU graduate, 3,771 lessons taught.">Tony in person</span></li>
+          <li><svg><use href="#check-dark"/></svg><span class="tip" tabindex="0" data-tip="Text Tony directly, 7 days a week. Monthly call with you and, if you want, the school.">Direct line to Tony</span></li>
+          <li><svg><use href="#check-dark"/></svg><span class="tip" tabindex="0" data-tip="Tony's calendar sets the cap. He reviews every application.">6 families max</span></li>
+        </ul>
+        <div class="cta-wrap">
+          <a class="cta-button" data-cta-theme="mint" href="#" ><span class="cta-text"><span class="cta-label">Apply</span><span class="cta-sub">Tony reads every one</span></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="trust">
+      <span><svg><use href="#shield"/></svg>Cancel in one tap</span>
+      <span><svg><use href="#shield"/></svg>30-day money-back</span>
+      <span><svg><use href="#shield"/></svg><span class="tip" tabindex="0" data-tip="Billing lives on your side only. The AI never says 'upgrade'.">Your kid never sees a paywall</span></span>
+    </div>
+  </div>
+</section>
+
+<section class="section white">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow sage">Compare</span>
+      <h2>One difference: the clock.</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Free trial<small>7 days</small></th>
+            <th>Lite<small>$20/mo</small></th>
+            <th class="hl">Catcher<small>$200/mo</small></th>
+            <th>Academy<small>$5,000/mo</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="tip" tabindex="0" data-tip="Every problem, grades 4 through 9. Handwriting on the tablet.">Practice problems</span></td><td>Unlimited</td><td>Unlimited</td><td class="hl">Unlimited</td><td>Unlimited</td></tr>
+          <tr><td>AI tutoring time</td><td>No limit</td><td>30 min a day</td><td class="hl">No limit</td><td>No limit</td></tr>
+          <tr><td>Texts you after</td><td><svg><use href="#check"/></svg></td><td><svg><use href="#check"/></svg></td><td class="hl"><svg><use href="#check"/></svg></td><td><svg><use href="#check"/></svg></td></tr>
+          <tr><td><span class="tip" tabindex="0" data-tip="Weekly: what they got wrong, what they fixed themselves, what to show the teacher.">Reports</span></td><td><svg><use href="#check"/></svg></td><td><svg><use href="#cross"/></svg></td><td class="hl"><svg><use href="#check"/></svg></td><td><svg><use href="#check"/></svg></td></tr>
+          <tr><td><span class="tip" tabindex="0" data-tip="A human tutor. Optional on every plan, and only charged if you book him. Included on Academy.">Tony, the human tutor</span></td><td class="dash">–</td><td class="dash">–</td><td class="hl">Optional, $150/hr</td><td>Included, in person</td></tr>
+          <tr><td>Pause or refund</td><td class="dash">–</td><td><svg><use href="#check"/></svg></td><td class="hl"><svg><use href="#check"/></svg></td><td><svg><use href="#check"/></svg></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section peach">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow coral">What you pay now</span>
+      <h2>Every night. For less than one tutor.</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="hl">Catcher</th>
+            <th><span class="tip" tabindex="0" data-tip="A private math tutor like Tony, one hour a week.">Tutor</span></th>
+            <th><span class="tip" tabindex="0" data-tip="2 to 3 fixed slots a week. One instructor per 3 to 4 kids.">Learning center</span></th>
+            <th><span class="tip" tabindex="0" data-tip="General AI. Typing, no tablet, no parent texts.">ChatGPT</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Per month</td><td class="hl cost">$200</td><td class="cost"><span class="tip" tabindex="0" data-tip="$150 an hour, once a week. Plus $150 if you cancel late.">$600+</span></td><td class="cost"><span class="tip" tabindex="0" data-tip="Plus a $99 to $200 enrollment fee.">$300 to $450</span></td><td class="cost">$20</td></tr>
+          <tr><td>Sessions</td><td class="hl">Every night</td><td>4</td><td>8 to 12</td><td>Unlimited</td></tr>
+          <tr><td>There at 9:47 PM</td><td class="hl"><svg><use href="#check"/></svg></td><td><svg><use href="#cross"/></svg></td><td><svg><use href="#cross"/></svg></td><td><svg><use href="#check"/></svg></td></tr>
+          <tr><td>Built for ADHD</td><td class="hl"><svg><use href="#check"/></svg></td><td><svg><use href="#check"/></svg></td><td><svg><use href="#cross"/></svg></td><td><svg><use href="#cross"/></svg></td></tr>
+          <tr><td>Texts you after</td><td class="hl"><svg><use href="#check"/></svg></td><td><svg><use href="#cross"/></svg></td><td><svg><use href="#cross"/></svg></td><td><svg><use href="#cross"/></svg></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section white">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow violet">For parents</span>
+      <h2>What you see at 9 PM.</h2>
+    </div>
+    <div class="nine">
+      <div class="nine-head" aria-hidden="true"><span>What you see</span><span>What's really happening</span><span>What Catcher does</span></div>
+      <div class="row"><p class="see">They stare at the first problem for twenty minutes.</p><p class="truth">Not defiance. Starting is the hardest part for an ADHD brain.</p><p class="fix">Every session opens with a problem they can win.</p></div>
+      <div class="row"><p class="see">They knew it last night. Blank on the test.</p><p class="truth">Learned once isn't learned yet.</p><p class="fix">We practice it every night until it holds.</p></div>
+      <div class="row"><p class="see">They say, &ldquo;I'm stupid.&rdquo;</p><p class="truth">They've heard it enough.</p><p class="fix">Every session ends with proof they're not.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow amber">The teacher behind Catcher</span>
+      <h2>Same teacher. Same method.<br>Now every night.</h2>
+    </div>
+    <div class="stats">
+      <div><b>5.0</b><span>rating</span></div>
+      <div><b>912</b><span>ratings</span></div>
+      <div><b>99.8%</b><span>five stars</span></div>
+      <div><b>3,771</b><span>lessons</span></div>
+    </div>
+    <div class="creds">
+      <span><i>●</i>Former students at National Taiwan University</span>
+      <span><i>●</i>National Tsing Hua University</span>
+      <span><i>●</i>The Ohio State University</span>
+      <span><i>●</i>LANDED Accelerator · Stony Brook University</span>
+    </div>
+    <div class="reviews">
+      <article class="review">
+        <div class="r-head"><span class="r-avatar r-anon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4.5 20c1-4 4-6 7.5-6s6.5 2 7.5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div><b>Anonymous</b><span>Elementary Math, May 2021</span></div><span class="r-stars" aria-label="5 stars">★★★★★</span></div>
+        <p class="r-body">My son always said he understood the math at school, but his test scores never matched. In his first lesson he whispered to Tony that his teacher goes a bit fast and he didn't know how to ask, so he just stopped asking. Thank you for the patience. He's slowly getting his confidence back.</p>
+        <div class="r-foot"><span class="r-note">Translated from Chinese</span><button class="r-more" type="button" aria-expanded="false">More</button></div>
+      </article>
+      <article class="review">
+        <div class="r-head"><img class="r-avatar" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABYAFgDASIAAhEBAxEB/8QAGwABAAIDAQEAAAAAAAAAAAAAAAYHAQQFAwL/xAA0EAACAgECAwQHBwUAAAAAAAAAAQIDBAUREjFBBiFRcRMyUmFygbEHFBYzNEKRIoKSwdH/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAwQFAQIG/8QAHxEAAwACAgMBAQAAAAAAAAAAAAECAxEEIRIxQUJR/9oADAMBAAIRAxEAPwC1AAfUmMAAAAAAAAAAAAAAAAAADEmoxcpNKKW7b6GSMdvc6WPp1WNW2pZEnxNeyua+baPeOHdKUcp6WzS1nthJWSq0qMeFd3pprffyXh5nD/Emr8fF9+s38No7fxscgGtODHK1oqu2yZ6N2wk7I1arGPC+700Ftt5rw8iZxalFSi04tbprqUyWB2CzpZGnW41j3ePJcLfsvkvk9ypycCleckuO23pknABRJgAAAAAAQv7Ra5cWDb+3acPn3Mmhoa3p0NU06zGm+GXrQl7MlyZLhtRapnm1taKnBsZuJfg5MqMqt12R6Pr714o1zYT32ioCZ/Z1XLizrf2bQh8+9kUwsS/OyY0Ytbssl0XT3vwRaGiadDS9OrxoPil605e1J82VeXkSjx+slxTt7N8AGYWAAAAAAADm6zrGLpNSlkNysl6lUfWl/wAXvIVqHavUcptUTji1+Fa/q/yZPj495O16PFWpJ/m4eNmVcGZRXbDpxrl5Pocj8M6Lx7+j/t9O9vqV7dk33ybuutsfjObZ47FqeLUrq9ETyJ/C38LDxsOrgw6K6odeBc/N9TYKdpvupe9N1lb8YzaOzgdqdSxWlZasmv2bV3/yu8jvh37T2ellX8LJBytD1zF1aDVW9d8VvKqXNe9eKOqVKly9MlTT7QAB5OgLmgZXNeYBUer5VmZqeTda95ObS9yT2SNM9cn9Td8cvqzyN2VpaRTYAB04AAAbGn5NmJm0X0vacJpr/aLfKar/ADI/EvqXKZ/NXcsnw/QACiTAyua8wACnMn9Td8cvqzyAN1eikAAdAAAB9V/mR+JfUuUAoc38k+H6AAUCY//Z" alt=""><div><b>kATE</b><span>Elementary Math, May 2021</span></div><span class="r-stars" aria-label="5 stars">★★★★★</span></div>
+        <p class="r-body">This was my daughter’s first lesson with Tony. She really enjoyed Tony’s class and his teaching style. Before the class, Tony communicate with parent what the student need and the preparation was very adequate.</p>
+        <div class="r-foot"><span class="r-note">Original English</span><button class="r-more" type="button" aria-expanded="false">More</button></div>
+      </article>
+      <article class="review">
+        <div class="r-head"><span class="r-avatar r-initial">F</span><div><b>Fanny</b><span>Elementary Math, May 2021</span></div><span class="r-stars" aria-label="5 stars">★★★★★</span></div>
+        <p class="r-body">My kid loved Tony's class. Right after the trial he asked me when the next lesson was. Tony knew he loves Pokémon, so a lot of the word problems were built around it. He worked happily and learned happily.</p>
+        <div class="r-foot"><span class="r-note">Translated from Chinese</span><button class="r-more" type="button" aria-expanded="false">More</button></div>
+      </article>
+      <article class="review">
+        <div class="r-head"><span class="r-avatar r-anon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4.5 20c1-4 4-6 7.5-6s6.5 2 7.5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div><b>Anonymous</b><span>Elementary Math, Nov 2022</span></div><span class="r-stars" aria-label="5 stars">★★★★★</span></div>
+        <p class="r-body">My daughter was very nervous at the start and couldn't get into it, but with Tony guiding her she caught on fast. He figured out her level quickly and gently took apart her idea that she's bad at math. She says he's easy to get along with and funny.</p>
+        <div class="r-foot"><span class="r-note">Translated from Chinese</span><button class="r-more" type="button" aria-expanded="false">More</button></div>
+      </article>
+      <article class="review">
+        <div class="r-head"><img class="r-avatar" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABYAFgDASIAAhEBAxEB/8QAHAAAAgMBAQEBAAAAAAAAAAAABgcABAUDCAIB/8QANRAAAQMDAgUCBQIFBQEAAAAAAQIDBAAFERIhBhMxQVEiYQcUI3GBodEVMjORwRckQlJysf/EABoBAAIDAQEAAAAAAAAAAAAAAAQFAQMGAgD/xAArEQABBAEDAwIFBQAAAAAAAAABAAIDERIEITEFQVETcSIygZHwFEJSYaH/2gAMAwEAAhEDEQA/AFvxU5IukdyXKcdKEjW2t4gFQOPHgVncBPzpHEtvt9uewqQsNr1eoaOpP9s1qxozLlhiruOvW2Rsk4ykjcVd4Kdh2aU3cy3rW0Toz1wdjvQQqiEVGQX2U+bcxFt0YMxvTvlRUrcnyaszY7EjkuKjtSJCcEak528UI2fiG3TXWX5MlLacDSwgZUTg41HoOtaPE/EibWttFqIOs6V49QWcdc+1U+n3ci5dfGA5rRlXPhbNxu8tlC25CA0wlO6mU5yPGe1A9+uTbbylJQlYcUNbjqzt9hWE1xNJnyXEl06UbqGrCfzVmTMYTAekKCSlOFp1dPtmunBo2CEgmk1IOQof0hriSXbrclTFojBh0krdkKRlSwe2/avjgrga7cSP6IDKOWlR5sxz+mjO+B5PsK34Fpk8TLD1vtwezvzjhLaT9z1NMNd1NhtzFn5ce2MNs5U4yv0rP/Ig1A4Xi0k7n7LhbPg/ZoTKP4lOkyXu5BDSc+wG9BvFMW22++NsWT5mS0MpUEuajnPtvimPBuMNcFDLrqpmpGpxQVu5kbJz4xua4MOR47p+Qt7LBVt9NPqP561WLO6vD6S6dc0EpWHUKSMEqGMnFSj2/WiTNjjmWxtzO4WpQSpJ9t6lSQ7sVT6cR3xH2CTt1sS24KX5KeWkhQQjrnB6nwKqRIJXbgU4aSBkFasnHfFOziWxxrvKiOZS2y2kkhs4GB/9NC134bb+eYKgl23xjrbjI7qPnzvvR50jxu0WEvb1GNwpxopb3m8GOuMI6VvLbKUpQMABQOwP3/zW0VXR6AWI6Q7NQFF5eCGm1E5IHsK/Z3CEO3SysvONOrGpID4JU4d0gJA9ulMuMtHD3CNghG2vLLjSFEiMt1KnF+o5I6bncmhJAY6HJTDSNikydHwUjLXZb3cWJcmC06lcZzU6cka/IA/et7gq5M36Wvh29vfJPkHQspz6k76SD5A2NNviCem1MNBcQNId0g8lhThBPQYSP1NKiRY4/wDq7ZJD6NERxtUhxCgRq0A7HvvlNebIZLBHsiJIhE3IH3RjM4gunB1k/wBlEVMgsfQadDYSFqJ6gZ33NdZEF4W6RO4leMm4PNhPy6R6EA7lP471rXC+R7nd4tufghLDCkuh1JBGUjI9P3xgVm/EC0/NxFT25LjUkbchJyk57ff3qKNUhMgTQQVeL89HuvzUSMGmkgJWyhWAvAwD96Nfh1eZr8Nq5SSUNO6+UnG5SDipbvh5b2LPHF5fSZqkham9YBBUM4wTWbdVsWG2xmbNIUpDZWkBRCgcnJ3Gw3qC4cBdJs/xCI5F5xdQgdCCeh+9SvL3E1+4hur0WI46GIZcS2pLZxkEgEqPc1K7EFiyVBm7AL0LzjEt8cPJDrhQG8g9PNDd6uUQytKFOhWyQEdqJjGYuEQTbe44tpsJCWkjPbzQJebXNMwGNHdeeWvGlCc7/fpTSGfLYLPanRlgsi10nQGpLSFRn0uTGVpWnV1OOoz9qP5fEUO3tModePLQhKQsJJ7eBS3lrNjjZuDzPzyjsyggpR/6UO/sKo2DieTNjtzGPlzMiLUy40dkuJ7EeDg0P1OEGpe6b9BdLCHRv4PHlHTHFkdU13m3JuStaAhKUx1N4xnrQ3OZFzupmKKyP5Bg4PnrVG78USHYyhJjsQY+ocxaNzjP2rRjyk/JtCOsFCk+gpORg9Vfn96p6fAC/wBV3A7eSiOt64xxehHy7v4Hf6rJjWWU1c1P2p95s83UpSxr17dN+iR+taE+Le7ilhLk+NHbjvJcUoNHcg5Gd/0rZjSkx0b/AMyhslOxP7CuqnGnWiXeoOQntTj0oXisfr+fgWUGqmj3y+i4X25Q5LaV3NSkNqOgPpQcE439wKXNwmQzKZiR1FboHobaVrAB8nsfaj+c0qZHDeAUYJx2rDY4fZiyg40yELG2cdc1VF0iIuyyNIl/W5AysRaFb7Z5DEHmAF0EalIb6gVKO1Rg0k80EJX271KYHp8Z+U0EEzq0gHxiz7q1EU7amx8o680WhsQshWPasm+8ZXK3RXOY7y1FQaQBjUpWMkqPTYHG3U5rtxNcDbn2GUq5roKnHE9fZAGN+uTnyKX3xMlgXCKyFf0idQHkgZ/XNJ9JCWMzfyf8Wmkkz2CyrvfF3IrUTgZ9SfeqdguotlwPO1BlwaXNPt0V+Kww/iQ8E9AAT/eu5HNOMevqB/28ir5AJGlrl5jiwhzUa8RzY71tw3K5ynlANhB2xncn2xVv4aS1v3R21ualgJU6gAZIx12+1BFss09+elllsozglTiCCke4r0BwLw/ZLB8pcG2UOXAAodez61JUMK9u36UAJGaZuAN2ipIHawWQvl6Er6igopI336/n3rJemvxkqToC1+56U7nLDb5zTrCAlWdzpVk7+fFBfFvBPKhqTb3CHEoJwrBB+/eio9QNgUmm0B3LUAs3ZTKUh/bJzt4q1GujTiXFLcOScjJoakSCzK+UnIWh1s46bVxWkl76SsHchIP+KNZIK2KTywODqpGS5bRUeYoKAGx81KBVyJKFjOrpvUols23KFdDvwv1u6QZXEjEtSnSgqCda3gpISkbDbGRnqTQXxLMM+4vO6sp1HSSe1eh0fCbh+NakPMwFvyG8L1l1RVkb7b4P9qwbt8PbXdW3pUWOG5DmcnfY+cUkm6gxhpbuHQPkF2vP/C8aPcb441Onswoylet1xWNh1CfJpiIvVjszK4vDLbS3EjC5q/Wr8E9T7DAoTa4BuzvFH8CTGLKmgXFyHUnlpb7uE9wPHk4otuNth8PW02ezBx198cyVLdQOa8kYwEp/4IzvgH7ml+rY3UOGTiR/Ht7nyroIS2yRVd19We6SGEuLMcHmbqdfV6lHz5rXtl7U24EJSUtOqIDiiQkkdQKCG49xmuBlhKtWSAFHfbrtRj8PoyH1LjXBpUiMsELStWwPlOOhHmoEQCs/U70Anlw5fF3SMeVoblJGVAbawO4Hf3qzcJEhqM6+8464+Nw2hCdJH/U5pYNNyuHZXNgvrlwEKylwH6rP/odx7j801OGL1HvMP6hbS7gewV7j9qIjkB+CTnz5VEsP74uPHhL+92GJOU1PeCTKfyS0gj6I7pI7n7VUd4DRIbcktSkF8ZXg7YGMYpmsWCM1JW+NRKiVHfY13jsuy5iGoehlgZKiEA5HiiC2t2lBYh3zBefbzYZ8RIUwl4FWPQ4NST9j/ipT24lhNIPy0nCyo5Rnf+9SpEjvKqdpGE3S6W248yyRVqOS40FHPfbegTjfiprhkC4ob5sdB+u2nZWnyPf271KlJmtDnUVqCcYsh4Vy4cYW8R0NRn3YcmS0laHVs60gEZ0rT1HXt5zSZ+LF1t8FTL8a2ZuLa0pRNZXlhaT6lNEjc9zjGRkdOlSpRcETQ5B6iZxi90RRLY+9wzBvTTDZjymQ4t2NKDhZJOMKJGceduu1VhHRDWtSZCWGcj6qiNJHcZ7fgfipUqXtAkxCDB+G0R8HyoMviBCosxqQWU5UClWhzscZwNs9MU0BYmhNQuCQywsalobGwz4HapUq30wdioZI5u4W1GhqYAS09qb6LQrof2rrcQLTaJsyOvDwRhseFE4qVK7e0MYcVIObxklZerm6StYJU51CwdyfOalSpSxqZlf/2Q==" alt=""><div><b>Marcus Lam</b><span>Elementary Math, May 2021</span></div><span class="r-stars" aria-label="5 stars">★★★★★</span></div>
+        <p class="r-body">Marcus loves Tony's lessons. He teaches through whatever the kid is into, so the kid actually wants to learn math. Best part: he ran over time in the trial to finish the material 👍🏻</p>
+        <div class="r-foot"><span class="r-note">Translated from Chinese</span><button class="r-more" type="button" aria-expanded="false">More</button></div>
+      </article>
+      <article class="review">
+        <div class="r-head"><img class="r-avatar" src="data:image/jpeg;base64,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" alt=""><div><b>Sofie</b><span>Elementary Math, Nov 2024</span></div><span class="r-stars" aria-label="5 stars">★★★★★</span></div>
+        <p class="r-body">Clear teaching logic and very patient. My kid learns happily and without stress.</p>
+        <div class="r-foot"><span class="r-note">Translated from Chinese</span><button class="r-more" type="button" aria-expanded="false">More</button></div>
+      </article>
+    </div>
+    <p class="r-source">Book Tony 1:1 on any plan, $150 an hour, only when you want. Reviews of Tony's 1:1 online lessons, 2021 to 2025. <a href="https://en.amazingtalker.com/teachers-and-tutors/d1f9384e-d941-49d8-81cc-95bb5d855e96" target="_blank" rel="noopener">All 464 reviews</a></p>
+  </div>
+</section>
+
+<section class="section white">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow sage">Questions</span>
+      <h2>Quick answers</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Lite or Catcher?<svg><use href="#chev"/></svg></summary><p>Lite has a clock: 30 minutes of AI a day. Catcher has none, and it sends you reports.</p></details>
+      <details><summary>Do I schedule anything?<svg><use href="#chev"/></svg></summary><p>No. Open it when homework starts.</p></details>
+      <details><summary>What happens on day 7?<svg><use href="#chev"/></svg></summary><p>Nothing automatic. There is no card on file. Pick a plan when you want to.</p></details>
+      <details><summary>Can I pause?<svg><use href="#chev"/></svg></summary><p>Yes. If your kid stops for 30 days, we pause it for you.</p></details>
+      <details><summary>Isn't this just ChatGPT?<svg><use href="#chev"/></svg></summary><p>ChatGPT answers questions. Ours talks out loud and watches the pen on the tablet.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section peach">
+  <div class="container">
+    <div class="catchie">
+      <img src="https://catcheracademy.com/assets/cloud/animations/cloud-cheering-transparent-compact.webp" alt="Catchie" loading="lazy">
+      <div class="bubble">Hi, I'm <b>Catchie</b>. I'll be there tonight. And every night after.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section peach" style="padding-top:0">
+  <div class="container">
+    <div class="banner" id="banner">
+      <img src="https://catcheracademy.com/assets/cloud/animations/cloud-heart-transparent-compact.webp" alt="" aria-hidden="true" loading="lazy">
+      <h2>The day they run home<br>to show you a test.</h2>
+      <p>It's closer than you think. 7 days free, no card.</p>
+      <a class="cta-button" data-cta-theme="ivory" href="#" data-intro><span class="cta-text"><span class="cta-label">Start 7 days free</span><span class="cta-sub">No card · Nothing auto-charges</span></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div style="display:flex; align-items:center; gap:14px"><span class="logo">Catcher Academy</span><span>© 2026 AsiaMath AI, Inc.</span></div>
+    <nav><a href="#">About us</a><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Blog</a></nav>
+  </div>
+</footer>
+
+<aside class="dock" id="dock" aria-hidden="true">
+  <div class="dock-copy"><strong>Catcher</strong><span data-dock-price>$200/mo</span></div>
+  <a class="cta-button" data-cta-theme="gold" href="#" ><span class="cta-text"><span class="cta-label">Try 7 days free</span></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+</aside>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var motion = function(){ return !reduce.matches; };
+
+  /* billing toggle */
+  var prices = {
+    monthly:  { lite:'$20',  catcher:'$200', liteBill:'Cancel in one tap.', catcherBill:'No daily limit. Nothing extra to pay.', dock:'$200/mo' },
+    semester: { lite:'$16',  catcher:'$160', liteBill:'$80 for 5 months. No auto-renew.', catcherBill:'$800 for 5 months. No auto-renew.', dock:'$160/mo' }
+  };
+  var buttons = document.querySelectorAll('.toggle button');
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){
+      buttons.forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      var p = prices[b.dataset.period];
+      document.querySelector('[data-price="lite"]').textContent = p.lite;
+      document.querySelector('[data-price="catcher"]').textContent = p.catcher;
+      document.querySelector('[data-bill="lite"]').textContent = p.liteBill;
+      document.querySelector('[data-bill="catcher"]').textContent = p.catcherBill;
+      document.querySelector('[data-dock-price]').textContent = p.dock;
+      if (motion()) document.querySelectorAll('.price [data-price]').forEach(function(el){ if (el.animate) el.animate([{opacity:.2, transform:'translateY(7px)'}, {opacity:1, transform:'translateY(0)'}], {duration:260, easing:'cubic-bezier(.2,.7,.2,1)'}); });
+    });
+  });
+
+  /* tooltips: hover, focus, tap */
+  var tip = document.getElementById('tooltip'), current = null;
+  function show(el){
+    current = el; tip.textContent = el.getAttribute('data-tip'); tip.classList.remove('below');
+    tip.style.left = '0px'; tip.style.top = '0px'; tip.classList.add('show');
+    var r = el.getBoundingClientRect(), t = tip.getBoundingClientRect();
+    var left = r.left + r.width/2 - t.width/2; left = Math.max(10, Math.min(left, window.innerWidth - t.width - 10));
+    var top = r.top - t.height - 10;
+    if (top < 8) { top = r.bottom + 10; tip.classList.add('below'); }
+    tip.style.left = left + 'px'; tip.style.top = top + 'px';
+    tip.style.setProperty('--ax', (r.left + r.width/2 - left) + 'px');
+  }
+  function hide(){ current = null; tip.classList.remove('show'); }
+  document.querySelectorAll('[data-tip]').forEach(function(el){
+    el.addEventListener('mouseenter', function(){ show(el); });
+    el.addEventListener('mouseleave', hide);
+    el.addEventListener('focus', function(){ show(el); });
+    el.addEventListener('blur', hide);
+    el.addEventListener('click', function(e){ if (el.tagName !== 'BUTTON') e.preventDefault(); current === el && tip.classList.contains('show') ? hide() : show(el); });
+  });
+  document.addEventListener('scroll', function(){ if (current) show(current); }, {passive:true});
+
+  /* review cards: clamp + more */
+  document.querySelectorAll('.review').forEach(function(card){
+    var body = card.querySelector('.r-body'), btn = card.querySelector('.r-more');
+    if (body.scrollHeight <= body.clientHeight + 2) card.classList.add('short');
+    btn.addEventListener('click', function(){
+      var open = card.classList.toggle('open');
+      btn.textContent = open ? 'Less' : 'More'; btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  /* CTA: ripple on press, one attention pulse when the main buttons enter view */
+  document.addEventListener('pointerdown', function(e){
+    var b = e.target.closest('.cta-button'); if (!b || !motion()) return;
+    var r = b.getBoundingClientRect(), d = Math.max(r.width, r.height) * 1.6;
+    var s = document.createElement('span'); s.className = 'cta-ripple';
+    s.style.width = s.style.height = d + 'px'; s.style.left = (e.clientX - r.left - d/2) + 'px'; s.style.top = (e.clientY - r.top - d/2) + 'px';
+    b.appendChild(s); s.addEventListener('animationend', function(){ s.remove(); }, {once:true}); setTimeout(function(){ s.remove(); }, 700);
+  });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (!en.isIntersecting) return; io.unobserve(en.target); if (motion()) en.target.classList.add('cta-intro'); });
+    }, {threshold:.75});
+    document.querySelectorAll('[data-intro]').forEach(function(b){ io.observe(b); });
+  }
+  document.querySelectorAll('.cta-button').forEach(function(b){ b.addEventListener('click', function(e){ if (b.getAttribute('href') === '#') e.preventDefault(); }); });
+
+  /* mobile dock */
+  var dock = document.getElementById('dock'), plans = document.getElementById('plans'), banner = document.getElementById('banner'), frame;
+  function updateDock(){
+    var small = window.matchMedia('(max-width:640px)').matches;
+    var p = plans.getBoundingClientRect(), b = banner.getBoundingClientRect();
+    var on = small && p.bottom < 0 && b.top > window.innerHeight;
+    dock.classList.toggle('show', on); dock.setAttribute('aria-hidden', String(!on));
+  }
+  window.addEventListener('scroll', function(){ if (frame) cancelAnimationFrame(frame); frame = requestAnimationFrame(updateDock); }, {passive:true});
+  window.addEventListener('resize', updateDock); updateDock();
+})();
+</script>
+</body>
+</html>
