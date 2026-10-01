@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Honors Math – Catcher Academy</title>
+<meta name="description" content="Honors-level math tutoring for ADHD learners, grades 4 to 9. From the hardest stretch to the light at the end of it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --night:#06080a; --night-2:#0c1110; --dusk:#16231b; --dawn:#7a5b2e; --sun:#f6c768; --sunlit:#fde9b8; --cream:#fbf6ea;
+  --ink:#10140f; --text:#141a14; --muted:#5d655d; --line:rgba(20,26,20,.12);
+  --light:#fff7df; --signal:#c4f07a; --signal-ink:#10140c; --leaf:#3f9e1c; --forest:#2f7d12; --gold:#f2b416;
+  --display:"Archivo",system-ui,sans-serif; --body:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{background:var(--night);-webkit-text-size-adjust:100%}
+body{margin:0;font:400 17px/1.55 var(--body);color:#fff;-webkit-font-smoothing:antialiased}
+html,body{overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+@media (max-width:600px){.wrap{padding:0 16px}}
+.eyebrow{font:800 12px/1 var(--display);letter-spacing:.2em;text-transform:uppercase;margin:0}
+.display{font-family:var(--display);font-weight:900;font-stretch:76%;text-transform:uppercase;letter-spacing:-.01em;line-height:.9;margin:0}
+h2.display{font-size:clamp(40px,6.4vw,78px)}
+:focus-visible{outline:3px solid var(--signal);outline-offset:3px}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;transition:background .4s ease,color .4s ease}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font:800 18px/1 var(--display);letter-spacing:.02em;text-decoration:none}
+.brand b{color:var(--signal)}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-size:15px}
+.nav ul a{text-decoration:none;opacity:.8}
+.nav.light{background:rgba(251,246,234,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--text);box-shadow:0 1px 0 var(--line)}
+.nav.light .brand b{color:var(--leaf)}
+.nav.dark{background:rgba(6,8,10,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+@media (max-width:760px){.nav ul li:not(:last-child){display:none}}
+
+/* ===== HERO: the tunnel ===== */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:var(--night);--vx:72%;--vy:46%;--glow:1}
+.tunnel{position:absolute;inset:0;pointer-events:none}
+.tunnel i{position:absolute;left:var(--vx);top:var(--vy);width:46vmax;height:38vmax;margin:-19vmax 0 0 -23vmax;border-radius:48% 48% 6% 6% / 60% 60% 6% 6%;
+  border:2px solid rgba(255,230,170,.32);box-shadow:0 0 40px rgba(255,214,120,.1),inset 0 0 50px rgba(255,214,120,.07);
+  transform:scale(.02);opacity:0}
+@media (prefers-reduced-motion:no-preference){.tunnel i{animation:fly 9s cubic-bezier(.55,0,.9,.6) infinite;animation-delay:calc(var(--k) * -.75s)}}
+@media (prefers-reduced-motion:reduce){.tunnel i{transform:scale(calc(.1 + var(--k) * .22));opacity:calc(.9 - var(--k) * .07)}}
+@keyframes fly{0%{transform:scale(.02);opacity:0}12%{opacity:.9}80%{opacity:.55}100%{transform:scale(3.4);opacity:0}}
+.beam{position:absolute;left:var(--vx);top:var(--vy);width:0;height:0}
+.beam::before{content:"";position:absolute;left:-46vmax;top:-46vmax;width:92vmax;height:92vmax;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,252,240,calc(1 * var(--glow))) 0%,rgba(255,240,196,calc(.85 * var(--glow))) 4%,rgba(255,214,130,calc(.5 * var(--glow))) 10%,rgba(246,199,104,calc(.2 * var(--glow))) 22%,rgba(246,199,104,.04) 38%,transparent 56%)}
+.beam::after{content:"";position:absolute;left:-60vmax;top:-60vmax;width:120vmax;height:120vmax;border-radius:50%;opacity:calc(.5 * var(--glow));
+  background:repeating-conic-gradient(from 0deg,rgba(255,236,190,.16) 0deg 2deg,transparent 2deg 14deg);-webkit-mask-image:radial-gradient(circle,#000 0%,transparent 55%);mask-image:radial-gradient(circle,#000 0%,transparent 55%)}
+@media (prefers-reduced-motion:no-preference){.beam::after{animation:spin 80s linear infinite}.beam::before{animation:breathe-light 5s ease-in-out infinite}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes breathe-light{50%{transform:scale(1.06)}}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(6,8,10,.92) 0%,rgba(6,8,10,.6) 38%,rgba(6,8,10,0) 62%),linear-gradient(0deg,var(--night) 0%,transparent 24%)}
+.hero .wrap{position:relative;z-index:1;width:100%;padding-top:96px;padding-bottom:64px}
+.hero .eyebrow{color:var(--sun)}
+.hero h1{font-size:clamp(52px,9.4vw,124px);margin:22px 0 26px;max-width:900px}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--signal) 0 42%,#fff8d8 50%,var(--signal) 58% 100%);background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(17px,1.8vw,20px);max-width:560px;margin:0}
+.hero .lede{color:#d9dcd5}
+.hero .lede b{color:var(--light)}
+@media (max-width:760px){.hero{--vx:60%;--vy:28%}.hero::after{background:linear-gradient(180deg,rgba(6,8,10,.1) 0%,rgba(6,8,10,.7) 42%,var(--night) 100%)}.hero{align-items:flex-end}.hero .wrap{padding-top:30vh}.hero h1{font-size:clamp(42px,12vw,56px)}}
+/* headline animation */
+.hero h1 .w{display:inline-block}
+.cant{position:relative;display:inline-block;transition:color .4s ease 1.3s}
+.strike{position:absolute;left:-5%;right:-5%;top:50%;height:.12em;margin-top:-.06em;background:var(--signal);border-radius:3px;transform:rotate(-5deg) scaleX(1);transform-origin:left;box-shadow:0 0 22px rgba(196,240,122,.75)}
+.cant.struck{color:rgba(255,255,255,.38)}
+.scrawl{display:inline-block;position:relative;width:1.75em;height:.8em;margin-left:.12em}
+.scrawl svg{position:absolute;left:0;bottom:-.08em;width:100%;overflow:visible;transform:rotate(-7deg);transform-origin:left bottom}
+.scrawl text{font-family:"Permanent Marker",cursive;font-size:118px;fill:var(--signal);stroke:var(--signal);stroke-width:2.5;paint-order:stroke;filter:drop-shadow(0 0 14px rgba(196,240,122,.5))}
+@media (prefers-reduced-motion:no-preference){
+  .js .hero .eyebrow,.js .hero .lede,.js .hero-cta,.js .hero-proof{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js .hero.go .eyebrow{opacity:1;transform:none;transition-delay:.1s}
+  .js .hero.go .lede{opacity:1;transform:none;transition-delay:2.4s}
+  .js .hero.go .hero-cta{opacity:1;transform:none;transition-delay:2.6s}
+  .js .hero.go .hero-proof{opacity:1;transform:none;transition-delay:2.8s}
+  .js .hero h1 .w{opacity:0;transform:translateY(.45em);filter:blur(10px);transition:opacity .55s ease,transform .7s cubic-bezier(.2,.8,.2,1.15),filter .55s ease;transition-delay:calc(var(--i) * 90ms + 250ms)}
+  .js .hero.go h1 .w{opacity:1;transform:none;filter:none}
+  .js .hero h1 .w.late{transition-delay:calc(var(--i) * 90ms + 1900ms)}
+  .js .strike{transform:rotate(-5deg) scaleX(0);transition:transform .38s cubic-bezier(.7,0,.3,1) 1.15s}
+  .js .hero.go .strike{transform:rotate(-5deg) scaleX(1)}
+  .js .scrawl text{fill-opacity:0;stroke-dasharray:900;stroke-dashoffset:900}
+  .js .hero.go .scrawl text{animation:draw .9s cubic-bezier(.5,0,.3,1) 1.45s forwards,fillin .35s ease 2.15s forwards}
+  .js .hero.go h1 em{animation:shimmer 1.6s ease 2.6s 1 both}
+  .js .hero{--glow:.35}
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fillin{to{fill-opacity:1}}
+@keyframes shimmer{from{background-position:100% 0}to{background-position:0 0}}
+
+/* CTA */
+.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer;border:0}
+.cta{position:relative;overflow:hidden;min-height:64px;padding:0 10px 0 28px;gap:18px;justify-content:space-between;border-radius:999px;text-align:left;
+  background:linear-gradient(180deg,#d6fa98,#b2ea5e);color:var(--signal-ink);
+  box-shadow:0 14px 34px -10px rgba(170,230,90,.6),inset 0 -3px 0 rgba(16,20,12,.16),inset 0 1px 0 rgba(255,255,255,.6);
+  transition:transform .25s cubic-bezier(.2,.8,.2,1.3),box-shadow .25s ease,filter .2s ease}
+.cta-label{display:flex;flex-direction:column;gap:5px;line-height:1}
+.cta-label b{font:800 16px/1 var(--display);letter-spacing:.1em;text-transform:uppercase}
+.cta-label small{font:500 13px/1 var(--body);opacity:.72}
+.cta-arrow{flex:none;width:46px;height:46px;border-radius:50%;background:var(--signal-ink);color:var(--signal);display:grid;place-items:center;transition:transform .3s cubic-bezier(.2,.8,.2,1.4)}
+.cta-arrow svg{transition:transform .3s cubic-bezier(.2,.8,.2,1.4)}
+.cta:hover{filter:brightness(1.05);box-shadow:0 20px 44px -10px rgba(170,230,90,.75),inset 0 -3px 0 rgba(16,20,12,.16),inset 0 1px 0 rgba(255,255,255,.6)}
+.cta:hover .cta-arrow svg{transform:translateX(3px)}
+.cta:active{transform:scale(.97)!important}
+.cta.btn-block{width:100%;padding-left:24px}
+.cta::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-20deg);opacity:0}
+@media (prefers-reduced-motion:no-preference){
+  .cta:not(.cta-sm){animation:pulse 2.8s ease-in-out 4s infinite}
+  .cta:hover{animation:none}
+  .cta::after{animation:shine 4.5s ease 3.4s infinite}
+}
+@keyframes pulse{0%,100%{box-shadow:0 14px 34px -10px rgba(170,230,90,.6),0 0 0 0 rgba(196,240,122,.5),inset 0 -3px 0 rgba(16,20,12,.16),inset 0 1px 0 rgba(255,255,255,.6)}50%{box-shadow:0 14px 34px -10px rgba(170,230,90,.6),0 0 0 13px rgba(196,240,122,0),inset 0 -3px 0 rgba(16,20,12,.16),inset 0 1px 0 rgba(255,255,255,.6)}}
+@keyframes shine{0%{left:-60%;opacity:1}22%{left:130%;opacity:1}100%{left:130%;opacity:0}}
+.cta-sm{min-height:50px;padding:0 6px 0 20px;gap:12px}
+.cta-sm .cta-label b{font-size:14px}
+.cta-sm .cta-arrow{width:38px;height:38px}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);transform:translate(-50%,-50%) scale(0);pointer-events:none;animation:ripple .6s ease-out forwards}
+@keyframes ripple{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
+.confetti{position:fixed;width:8px;height:8px;border-radius:2px;pointer-events:none;z-index:100}
+.hero-cta{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:34px}
+.cta-trust{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none;margin:0;padding:0;font-size:14px}
+.cta-trust li{display:flex;align-items:center;gap:7px}
+.cta-trust svg{color:var(--signal)}
+.hero .cta-trust{color:#c9ccc5}
+.cta-trust.center{justify-content:center;margin-top:18px;color:var(--muted)}
+.cta-trust.center svg{color:var(--leaf)}
+@media (max-width:600px){.cta:not(.cta-sm){width:100%}.hero-cta{align-items:stretch}}
+.hero-proof{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);max-width:620px;font-size:15px;color:#c9ccc5}
+.hero-proof .st{color:var(--gold);letter-spacing:2px;font-size:17px}
+.hero-proof b{font:800 22px/1 var(--display);color:#fff}
+.hero-proof a{color:var(--sun);font-weight:700;text-decoration:none}
+
+/* ===== the journey: one continuous gradient, night to day ===== */
+.journey{overflow-x:clip;background:linear-gradient(180deg,var(--night) 0%,var(--night-2) 14%,var(--dusk) 30%,#2c3523 40%,var(--dawn) 50%,#d99a4e 56%,var(--sun) 61%,var(--sunlit) 68%,var(--cream) 76%,var(--cream) 100%)}
+.sec{padding:110px 0;position:relative}
+.on-dark{color:#fff}
+.on-dark .eyebrow{color:var(--sun)}
+.on-light{color:var(--text)}
+.on-light .eyebrow{color:var(--forest)}
+
+/* the tunnel section */
+.dark-moments{display:flex;flex-wrap:wrap;gap:12px;margin:40px 0 0;padding:0;list-style:none}
+.dark-moments li{padding:14px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#a9aea7;font-size:16px}
+.turn{margin:56px 0 0;font:900 clamp(30px,4.4vw,52px)/1 var(--display);font-stretch:80%;text-transform:uppercase;color:#fff}
+.turn span{color:var(--sun);text-shadow:0 0 30px rgba(246,199,104,.55)}
+
+/* proof */
+.proof-head{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end}
+.proof-head h2 em{font-style:normal;color:var(--signal)}
+.proof-head p{color:#b9beb6;margin:0}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);margin:44px 0 46px;border-top:1px solid rgba(255,255,255,.16);border-bottom:1px solid rgba(255,255,255,.16)}
+.kpis div{padding:22px 0}
+.kpis div + div{padding-left:22px;border-left:1px solid rgba(255,255,255,.12)}
+.kpis b{display:block;font:900 clamp(38px,5vw,60px)/1 var(--display);font-stretch:80%}
+.kpis span{display:block;margin-top:8px;font-size:14px;color:#b9beb6}
+@media (max-width:900px){.proof-head{grid-template-columns:1fr;gap:16px}}
+.rc-row{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.rc-track{display:flex;width:max-content}
+.rc-set{display:flex;gap:18px;padding-right:18px}
+.rc{margin:0;width:360px;flex:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:22px 22px 18px;display:flex;flex-direction:column;color:#eef0ea;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.rc-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.rc-stars{color:var(--gold);letter-spacing:3px;font-size:15px}
+.rc-badge{font:800 10px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;background:var(--signal);color:var(--signal-ink);padding:6px 8px;border-radius:2px;white-space:nowrap}
+.rc blockquote{margin:14px 0 18px;font-size:16px;line-height:1.5;flex:1}
+.rc figcaption{display:flex;gap:12px;align-items:center}
+.rc-mono{width:38px;height:38px;border-radius:50%;background:var(--sun);color:var(--ink);display:grid;place-items:center;font:800 16px/1 var(--display);flex:none}
+.rc figcaption b{display:block;font-size:15px}
+.rc figcaption small{display:block;font-size:13px;color:#a9aea7}
+.rc-tr{display:block;font-size:11px;color:#8d928b;font-style:italic;margin-top:2px}
+@media (prefers-reduced-motion:no-preference){.rc-track{animation:slide 90s linear infinite}.rc-row:hover .rc-track{animation-play-state:paused}}
+@media (prefers-reduced-motion:reduce){.rc-row{overflow-x:auto}.rc-set[aria-hidden]{display:none}}
+@keyframes slide{to{transform:translateX(-50%)}}
+@media (max-width:600px){.rc{width:290px}}
+.proof-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;margin-top:30px;font-size:14px;color:#a9aea7}
+.proof-foot a{color:var(--sun);font-weight:700}
+
+/* the climb (dawn) */
+.climb{position:relative}
+.climb h2{color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.25)}
+.climb .sub{color:#fbe9c6;margin:18px 0 0;max-width:560px}
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:70px;align-items:end}
+.stp{background:rgba(255,252,242,.94);color:var(--text);border-radius:16px;padding:24px 22px 26px;box-shadow:0 24px 50px -24px rgba(90,50,0,.45)}
+.stp:nth-child(1){margin-bottom:0}.stp:nth-child(2){margin-bottom:26px}.stp:nth-child(3){margin-bottom:52px}.stp:nth-child(4){margin-bottom:78px;background:#fff;box-shadow:0 0 0 2px var(--signal),0 30px 60px -20px rgba(90,50,0,.5)}
+.stp .n{font:800 13px/1 var(--display);letter-spacing:.14em;color:var(--forest)}
+.stp h3{font:900 34px/1 var(--display);font-stretch:78%;text-transform:uppercase;margin:12px 0 10px}
+.stp p{margin:0;color:var(--muted);font-size:15px}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}.stp{margin-bottom:0!important}.steps::before{display:none}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
+.sunrise{position:absolute;left:50%;bottom:-260px;width:900px;height:520px;margin-left:-450px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(255,252,236,.95) 0%,rgba(255,236,180,.6) 30%,rgba(255,214,130,.0) 70%)}
+
+/* plans (daylight) */
+.plans-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:44px}
+.plans-head p{margin:14px 0 0;color:var(--muted)}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px;background:#fff}
+.toggle button{font:800 13px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;border:0;background:none;padding:12px 16px;border-radius:999px;cursor:pointer;color:var(--text)}
+.toggle button.on{background:var(--text);color:#fff}
+.toggle button span{color:var(--forest);margin-left:6px}
+.toggle button.on span{color:var(--signal)}
+.grid{display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:18px;align-items:stretch}
+.plan{background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px 30px 30px;display:flex;flex-direction:column;box-shadow:0 18px 40px -26px rgba(60,40,0,.35)}
+.plan .tier{font:800 13px/1 var(--display);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0}
+.plan h3{font:900 40px/1 var(--display);font-stretch:78%;text-transform:uppercase;margin:14px 0 8px}
+.plan .pitch{margin:0 0 24px;color:var(--muted);min-height:3.1em}
+.price{display:flex;align-items:baseline;gap:6px}
+.price b{font:900 64px/1 var(--display);font-stretch:85%}
+.price span{color:var(--muted);font-size:15px}
+.bill{font-size:14px;color:var(--muted);margin:8px 0 22px}
+.perday{margin:6px 0 0;font-size:14px;font-weight:700;color:var(--forest)}
+.plan ul{list-style:none;margin:0 0 28px;padding:0;flex:1}
+.plan li{display:flex;gap:12px;padding:11px 0;border-top:1px solid var(--line);font-size:16px}
+.plan li:last-child{border-bottom:1px solid var(--line)}
+.plan li svg{flex:none;margin-top:3px;width:18px;height:18px}
+.plan li.no{color:#8a918a}
+.ic-yes{stroke:var(--leaf)} .ic-no{stroke:#a3a69f}
+.plan .foot{font-size:13px;color:var(--muted);text-align:center;margin:12px 0 0}
+.plan.featured{position:relative;margin:-18px 0;padding-top:52px;border:2px solid #9ad85a;background:linear-gradient(180deg,#f3fbe4,#fff 40%);box-shadow:0 34px 70px -26px rgba(63,158,28,.5)}
+.badge{position:absolute;top:0;left:30px;transform:translateY(-50%);background:var(--ink);color:var(--signal);font:800 12px/1 var(--display);letter-spacing:.16em;text-transform:uppercase;padding:9px 12px;border-radius:999px}
+.guarantee{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px 0 0;padding:10px;border-radius:10px;background:#fff6dc;color:#7a5a00;font-size:14px;font-weight:700}
+.btn-quiet{display:inline-flex;align-self:center;gap:6px;min-height:48px;align-items:center;color:var(--muted);font-weight:700;font-size:15px;text-decoration:none}
+.btn-quiet:hover{color:var(--text)}
+.btn-outline{min-height:56px;border:1.5px solid rgba(20,26,20,.35);color:var(--text);background:transparent;border-radius:999px;font:800 14px/1 var(--display);letter-spacing:.12em;text-transform:uppercase}
+.btn-outline:hover{border-color:var(--text)}
+.btn-block{width:100%}
+.assure{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 36px;margin:48px 0 0;padding:0;list-style:none;font-size:15px;color:var(--muted)}
+.assure li::before{content:"— ";color:var(--leaf)}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.plan.featured{order:-1;margin:12px 0 0}.plan .pitch{min-height:0}}
+
+/* faq */
+.faq{max-width:780px}
+.faq h2{margin:16px 0 34px}
+details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 22px;margin-bottom:10px}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:22px 0;font:800 20px/1.15 var(--display);font-stretch:85%;text-transform:uppercase}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:24px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin:0 0 22px;color:var(--muted)}
+
+/* final: into the light */
+.final{position:relative;overflow:hidden;text-align:center;padding:170px 0 150px;background:var(--cream)}
+.final-bg{position:absolute;inset:0}
+.final-bg video{width:100%;height:100%;object-fit:cover;opacity:.55;filter:saturate(1.05) brightness(1.1)}
+.final-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 55% 65% at 50% 50%,rgba(255,253,244,.97) 0%,rgba(255,248,226,.8) 50%,rgba(255,240,200,.35) 100%),linear-gradient(180deg,var(--cream) 0%,transparent 25%)}
+.final .wrap{position:relative}
+.final h2{font-size:clamp(48px,8.4vw,112px)!important;color:var(--text)}
+.final h2 span{background:linear-gradient(90deg,#d98a1a,#f2b416,#d98a1a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.final .lede{margin:24px auto 34px;color:#3c463c}
+footer{background:var(--cream);color:var(--muted);border-top:1px solid var(--line);font-size:14px;padding:30px 0 110px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
+footer a{text-decoration:none}
+
+/* mobile dock */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--text);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:none;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .3s ease}
+.dock.show{transform:none}
+.dock .dl b{display:block;font:800 16px/1.1 var(--display);text-transform:uppercase;letter-spacing:.06em}
+.dock .dl span{display:block;font-size:13px;color:var(--muted)}
+@media (max-width:760px){.dock{display:flex}}
+
+/* reveal */
+@media (prefers-reduced-motion:no-preference){
+  .js .rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .js .rv.in{opacity:1;transform:none}
+  .js .dark-moments li.rv:nth-child(2){transition-delay:.12s}.js .dark-moments li.rv:nth-child(3){transition-delay:.24s}.js .dark-moments li.rv:nth-child(4){transition-delay:.36s}.js .dark-moments li.rv:nth-child(5){transition-delay:.48s}
+  .js .stp.rv:nth-child(2){transition-delay:.15s}.js .stp.rv:nth-child(3){transition-delay:.3s}.js .stp.rv:nth-child(4){transition-delay:.45s}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav dark" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="/">CATCHER <b>ACADEMY</b></a>
+    <ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="#plans">Programs</a></li>
+      <li><a href="#">Log in</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="tunnel" aria-hidden="true"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7"></i><i style="--k:8"></i><i style="--k:9"></i><i style="--k:10"></i><i style="--k:11"></i></div>
+  <div class="beam" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow">Honors Math · Grades 4–9 · Built for ADHD</p>
+    <h1 class="display" aria-label="They were told they can't. They can. Teach them to prove it wrong."><span aria-hidden="true"><span class="w" style="--i:0">They</span> <span class="w" style="--i:1">were</span> <span class="w" style="--i:2">told</span><br><span class="w" style="--i:3">they</span> <span class="w" style="--i:4"><span class="cant">can't<i class="strike"></i></span>.</span><span class="scrawl"><svg viewBox="0 0 300 120"><text x="6" y="104">can!</text></svg></span><br><em><span class="w late" style="--i:0">Teach</span> <span class="w late" style="--i:1">them</span> <span class="w late" style="--i:2">to</span><br><span class="w late" style="--i:3">prove</span> <span class="w late" style="--i:4">it</span> <span class="w late" style="--i:5">wrong.</span></em></span></h1>
+    <p class="lede">Homework with ADHD can feel like a tunnel with no end. <b>Catcher walks in with them</b>, one problem at a time, until they reach the light.</p>
+    <div class="hero-cta">
+      <a class="btn btn-signal cta" href="#plans"><span class="cta-label"><b>Start my free week</b><small>7 days of the full Honors program</small></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <ul class="cta-trust"><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No card needed</li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Nothing auto-charges</li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Cancel in one tap</li></ul>
+    </div>
+    <div class="hero-proof"><span class="st" aria-hidden="true">★★★★★</span><b data-count="5" data-dec="1" data-delay="3000">5.0</b><span><span data-count="912" data-delay="3000">912</span> ratings · <span data-count="3771" data-delay="3000">3,771</span> lessons taught by Tony</span><a href="#proof">Read their stories ↓</a></div>
+  </div>
+</header>
+
+<main class="journey">
+
+<section class="sec on-dark" aria-labelledby="tunnel-title">
+  <div class="wrap">
+    <p class="eyebrow">Right now</p>
+    <h2 class="display rv" id="tunnel-title" style="margin-top:16px">It feels like<br>the bottom.</h2>
+    <ul class="dark-moments">
+      <li class="rv">Another fight over homework.</li>
+      <li class="rv">"I'm just stupid."</li>
+      <li class="rv">Knew it in class. Blank on the test.</li>
+      <li class="rv">The teacher stopped calling on them.</li>
+      <li class="rv">You don't know how to help anymore.</li>
+    </ul>
+    <p class="turn rv">Every tunnel has an end.<br><span>Kids who keep moving reach it.</span></p>
+  </div>
+</section>
+
+<section class="sec on-dark" id="proof" aria-labelledby="proof-title">
+  <div class="wrap">
+    <div class="proof-head">
+      <div>
+        <p class="eyebrow">They made it through</p>
+        <h2 class="display rv" id="proof-title" style="margin-top:16px">912 ratings.<br><em>99.8% five stars.</em></h2>
+      </div>
+      <p class="rv">Catcher is built on Tony's teaching method: 3,771 one-on-one math lessons since 2021. These are the families who came out the other side.</p>
+    </div>
+    <div class="kpis rv">
+      <div><b data-count="5" data-dec="1" data-onview>5.0</b><span>Average rating</span></div>
+      <div><b data-count="912" data-onview>912</b><span>Ratings</span></div>
+      <div><b data-count="3771" data-onview>3,771</b><span>Lessons taught</span></div>
+    </div>
+  </div>
+  <div class="rc-row "><div class="rc-track"><div class="rc-set"><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>At school he always said he understood the math, but his test scores never showed it. In his first lesson he whispered to Tony that the teacher goes too fast and he didn&#x27;t know how to ask, so he stopped asking. Thank you for the patience. He&#x27;s slowly gaining confidence in math.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span><span class="rc-badge">23 lessons rated</span></div><blockquote>After the trial, she said it was more detailed and easier to follow than her class at school. We bought 20 lessons on the spot, and she can&#x27;t wait for the next one.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">M</span><span><b>Maggie</b><small>Middle school math · 2022</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span><span class="rc-badge">7 lessons rated</span></div><blockquote>Right after the trial he asked me when the next lesson was. Tony knew he loves Pokémon and built the word problems around it. He worked happily and learned happily.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">F</span><span><b>Fanny</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>My child doesn&#x27;t like math. But the lesson was relaxed, and Tony guided him to think for himself. He&#x27;s slowly building confidence in math, in a way that feels easy for him.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span><span class="rc-badge">21 lessons rated</span></div><blockquote>My son loves Tony&#x27;s lessons. He teaches through what kids are into, so they actually want to learn math. Best part: he ran over time in the trial to finish the material.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">M</span><span><b>Marcus L.</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>My kid used to just grind through problems. Tony goes back to the core logic, so now he checks whether he truly understands a concept instead of memorizing problem types.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Middle school math · 2024</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>Clear, logical teaching and so much patience. My child learns happily and without stress.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">S</span><span><b>Sofie</b><small>Elementary math · 2024</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>Teacher is really patient and the materials are so pretty. My kid asked me to buy Mr. Tony&#x27;s lessons directly, haha.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Elementary math · 2021</small></span></figcaption></figure></div><div class="rc-set" aria-hidden="true"><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>At school he always said he understood the math, but his test scores never showed it. In his first lesson he whispered to Tony that the teacher goes too fast and he didn&#x27;t know how to ask, so he stopped asking. Thank you for the patience. He&#x27;s slowly gaining confidence in math.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span><span class="rc-badge">23 lessons rated</span></div><blockquote>After the trial, she said it was more detailed and easier to follow than her class at school. We bought 20 lessons on the spot, and she can&#x27;t wait for the next one.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">M</span><span><b>Maggie</b><small>Middle school math · 2022</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span><span class="rc-badge">7 lessons rated</span></div><blockquote>Right after the trial he asked me when the next lesson was. Tony knew he loves Pokémon and built the word problems around it. He worked happily and learned happily.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">F</span><span><b>Fanny</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>My child doesn&#x27;t like math. But the lesson was relaxed, and Tony guided him to think for himself. He&#x27;s slowly building confidence in math, in a way that feels easy for him.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span><span class="rc-badge">21 lessons rated</span></div><blockquote>My son loves Tony&#x27;s lessons. He teaches through what kids are into, so they actually want to learn math. Best part: he ran over time in the trial to finish the material.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">M</span><span><b>Marcus L.</b><small>Elementary math · 2021</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>My kid used to just grind through problems. Tony goes back to the core logic, so now he checks whether he truly understands a concept instead of memorizing problem types.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Middle school math · 2024</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>Clear, logical teaching and so much patience. My child learns happily and without stress.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">S</span><span><b>Sofie</b><small>Elementary math · 2024</small><span class="rc-tr">Translated from Chinese</span></span></figcaption></figure><figure class="rc"><div class="rc-top"><span class="rc-stars" aria-label="5 out of 5 stars">★★★★★</span></div><blockquote>Teacher is really patient and the materials are so pretty. My kid asked me to buy Mr. Tony&#x27;s lessons directly, haha.</blockquote><figcaption><span class="rc-mono" aria-hidden="true">P</span><span><b>Verified parent</b><small>Elementary math · 2021</small></span></figcaption></figure></div></div></div>
+  <div class="wrap proof-foot">
+    <span>Reviews of Tony's one-on-one online lessons, 2021–2025. Translated from Chinese where noted. Names shortened for privacy.</span>
+    <a href="https://en.amazingtalker.com/teachers-and-tutors/d1f9384e-d941-49d8-81cc-95bb5d855e96" target="_blank" rel="noopener">Verify all 912 on AmazingTalker ↗</a>
+  </div>
+</section>
+
+<section class="sec climb" aria-labelledby="climb-title" style="padding-bottom:150px">
+  <div class="wrap">
+    <p class="eyebrow" style="color:#fff3cf">The way out</p>
+    <h2 class="display rv" id="climb-title" style="margin-top:16px">One step.<br>Then the next.</h2>
+    <p class="sub rv">Every session climbs the same four steps. For an ADHD brain, starting and staying are the hard part. The math comes after.</p>
+    <div class="steps">
+      <div class="stp rv"><span class="n">01</span><h3>Warm up</h3><p>The hardest problem is the first one. Every session opens with one they can win.</p></div>
+      <div class="stp rv"><span class="n">02</span><h3>Stretch</h3><p>One more. Then one more. A harder problem the moment they're ready.</p></div>
+      <div class="stp rv"><span class="n">03</span><h3>Rethink</h3><p>Stuck is part of learning. The tutor splits it into smaller steps. No sighing.</p></div>
+      <div class="stp rv"><span class="n">04</span><h3>Master</h3><p>Every win logged. Every mistake they fixed themselves, reported to you.</p></div>
+    </div>
+  </div>
+  <div class="sunrise" aria-hidden="true"></div>
+</section>
+
+<section class="sec on-light" id="plans" aria-labelledby="plans-title">
+  <div class="wrap">
+    <div class="plans-head">
+      <div>
+        <p class="eyebrow">Programs</p>
+        <h2 class="display rv" id="plans-title" style="margin-top:14px">Choose how far<br>they go.</h2>
+        <p>One difference matters: whether the tutor stays until the last problem.</p>
+      </div>
+      <div class="toggle" role="group" aria-label="Billing period">
+        <button type="button" class="on" data-period="monthly" aria-pressed="true">Monthly</button>
+        <button type="button" data-period="semester" aria-pressed="false">Semester<span>−20%</span></button>
+      </div>
+    </div>
+    <div class="grid">
+      <article class="plan">
+        <p class="tier">Core</p>
+        <h3>The foundations.</h3>
+        <p class="pitch">Thirty tutored minutes a day.</p>
+        <div class="price"><b data-price="standard">$20</b><span>/ month</span></div>
+        <p class="bill" data-bill="standard">Billed monthly. Cancel anytime.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>30 minutes of tutoring a day</li>
+          <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Unlimited practice problems</li>
+          <li class="no"><svg viewBox="0 0 24 24" fill="none" class="ic-no" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg>Tutor leaves at minute 30, mid-problem or not</li>
+          <li class="no"><svg viewBox="0 0 24 24" fill="none" class="ic-no" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg>No session reports to parents</li>
+        </ul>
+        <a class="btn-quiet" href="#">Choose Core <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="plan featured">
+        <span class="badge">Recommended</span>
+        <p class="tier">Honors</p>
+        <h3>The full program.</h3>
+        <p class="pitch">No clock. The tutor stays until the last problem is done.</p>
+        <div class="price"><b data-price="all">$200</b><span>/ month</span></div>
+        <p class="perday" data-perday>About $6.60 a day, less than one tutoring session a month.</p>
+        <p class="bill" data-bill="all">Billed monthly. Pause or cancel anytime.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Unlimited tutoring, every night</li>
+          <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>A report to you after every session</li>
+          <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Weekly progress review</li>
+          <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Lessons with Tony, bookable anytime</li>
+          <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Everything in Core</li>
+        </ul>
+        <a class="btn btn-signal cta btn-block" href="#"><span class="cta-label"><b>Try Honors free</b><small>7 days · no card needed</small></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <p class="foot">Then <span data-dock-price>$200/mo</span>. Cancel in one tap.</p>
+        <p class="guarantee"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6z"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>30-day money-back guarantee</p>
+      </article>
+
+      <article class="plan">
+        <p class="tier">Scholars · By application</p>
+        <h3>The scholars' circle.</h3>
+        <p class="pitch">Honors, plus Tony teaching in person.</p>
+        <div class="price"><b>$5,000</b><span>/ month</span></div>
+        <p class="bill">Six families. Reviewed personally.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Everything in Honors</li>
+          <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Tony teaching at your home, three afternoons a week</li>
+          <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Direct line to Tony, seven days a week</li>
+          <li><svg viewBox="0 0 24 24" fill="none" class="ic-yes" stroke-width="2.5"><path d="M4 12.5l5 5L20 6.5"/></svg>Monthly review with you and the school</li>
+        </ul>
+        <a class="btn btn-outline btn-block" href="#">Apply for a spot</a>
+      </article>
+    </div>
+
+    <ul class="assure">
+      <li>30-day money-back guarantee</li>
+      <li>Pause anytime. Idle 30 days, we pause for you</li>
+      <li>Your child never sees a price</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec on-light" aria-labelledby="faq-title" style="padding-top:40px">
+  <div class="wrap faq">
+    <p class="eyebrow">Questions</p>
+    <h2 class="display" id="faq-title">Before you start.</h2>
+    <details><summary>Core or Honors?</summary><p>Core gives your child thirty tutored minutes a day. Honors has no clock and sends you a report after every session. Homework rarely ends at minute thirty.</p></details>
+    <details><summary>Does the tutor give answers?</summary><p>No. The tutor asks, prompts and breaks problems down. Your child does the work. That is the point.</p></details>
+    <details><summary>What happens on day seven?</summary><p>Nothing automatic. There is no card on file. Choose a program when you are ready.</p></details>
+  </div>
+</section>
+
+</main>
+
+<section class="final on-light" aria-labelledby="final-title">
+  <div class="final-bg" aria-hidden="true"><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/12820/12820-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/12820/12820-720.mp4" data-src-sm="https://assets.mixkit.co/videos/12820/12820-360.mp4"></video></div>
+  <div class="wrap">
+    <p class="eyebrow">The light at the end</p>
+    <h2 class="display rv" id="final-title" style="margin-top:18px">Their first step<br><span>starts tonight.</span></h2>
+    <p class="lede">Seven days of the full Honors program, free. No card. Nothing auto-charges.</p>
+    <a class="btn btn-signal cta" href="#plans"><span class="cta-label"><b>Start my free week</b><small>Takes 30 seconds</small></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <ul class="cta-trust center"><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No card needed</li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Nothing auto-charges</li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Cancel in one tap</li></ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 AsiaMath AI, Inc.</span>
+    <span><a href="/about">About</a> · <a href="/terms-of-service">Terms</a> · <a href="/privacy-policy">Privacy</a></span>
+  </div>
+</footer>
+
+<div class="dock" role="region" aria-label="Recommended program">
+  <div class="dl"><b>Honors</b><span data-dock-line>$200/mo · 7 days free</span></div>
+  <a class="btn btn-signal cta cta-sm" href="#plans"><span class="cta-label"><b>Start free</b></span><span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+</div>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hero = document.querySelector('.hero'), nav = document.querySelector('.nav'), dock = document.querySelector('.dock');
+
+  /* billing */
+  var prices = {
+    monthly:  { standard:'$20', all:'$200', sBill:'Billed monthly. Cancel anytime.', aBill:'Billed monthly. Pause or cancel anytime.', dock:'$200/mo', day:'About $6.60 a day, less than one tutoring session a month.' },
+    semester: { standard:'$16', all:'$160', sBill:'$80 for 5 months. No auto-renew.', aBill:'$800 for 5 months. No auto-renew.', dock:'$160/mo', day:'About $5.30 a day for the whole semester.' }
+  };
+  var buttons = document.querySelectorAll('.toggle button');
+  buttons.forEach(function(b){ b.addEventListener('click', function(){
+    buttons.forEach(function(x){ x.classList.remove('on'); x.setAttribute('aria-pressed','false'); });
+    b.classList.add('on'); b.setAttribute('aria-pressed','true');
+    var p = prices[b.dataset.period];
+    document.querySelector('[data-price="standard"]').textContent = p.standard;
+    document.querySelector('[data-price="all"]').textContent = p.all;
+    document.querySelector('[data-bill="standard"]').textContent = p.sBill;
+    document.querySelector('[data-bill="all"]').textContent = p.aBill;
+    document.querySelector('[data-dock-price]').textContent = p.dock;
+    document.querySelector('[data-perday]').textContent = p.day;
+    document.querySelector('[data-dock-line]').textContent = p.dock + ' · 7 days free';
+  }); });
+
+  /* counters */
+  function fmt(v, el){ var d = +el.dataset.dec || 0; return d ? v.toFixed(d) : Math.round(v).toLocaleString('en-US'); }
+  function countUp(el){ var end = parseFloat(el.dataset.count), t0 = null;
+    (function step(t){ if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 1400); el.textContent = fmt(end * (1 - Math.pow(1 - k, 4)), el); if (k < 1) requestAnimationFrame(step); })(performance.now()); }
+
+  /* hero intro: headline, then the light swells */
+  function intro(){
+    if (hero.classList.contains('go')) return;
+    hero.classList.add('go');
+    if (reduce) return;
+    setTimeout(function(){ document.querySelector('.cant').classList.add('struck'); }, 1300);
+    document.querySelectorAll('.hero [data-count]').forEach(function(el){ el.textContent = fmt(0, el); setTimeout(function(){ countUp(el); }, +el.dataset.delay); });
+    var t0 = null; (function grow(t){ if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 2600); hero.style.setProperty('--glow', (.35 + .65 * (1 - Math.pow(1 - k, 3))).toFixed(3)); if (k < 1) requestAnimationFrame(grow); })(performance.now() + 1400);
+  }
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(intro); setTimeout(intro, 1200); } else intro();
+
+  /* scroll: nav theme, dock, light keeps growing as you leave the tunnel */
+  var lightSecs = [].slice.call(document.querySelectorAll('.on-light, .climb'));
+  var ticking = false;
+  function onScroll(){
+    var y = scrollY, h = hero.offsetHeight;
+    if (!reduce && hero.classList.contains('go')) hero.style.setProperty('--glow', Math.min(1.6, 1 + y / h).toFixed(3));
+    var lightNow = lightSecs.some(function(s){ var r = s.getBoundingClientRect(); return r.top < 64 && r.bottom > 64; });
+    nav.classList.toggle('light', lightNow); nav.classList.toggle('dark', !lightNow);
+    dock.classList.toggle('show', hero.getBoundingClientRect().bottom < 0);
+    ticking = false;
+  }
+  addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, {passive:true});
+  onScroll();
+
+  /* reveal + counters on view + lazy video */
+  if (!reduce && 'IntersectionObserver' in window) {
+    var rio = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); rio.unobserve(e.target); } }); }, {threshold:.15});
+    document.querySelectorAll('.rv, .plan').forEach(function(el){ el.classList.add('rv'); rio.observe(el); });
+    var cio = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ countUp(e.target); cio.unobserve(e.target); } }); }, {threshold:.6});
+    document.querySelectorAll('[data-onview]').forEach(function(el){ el.textContent = fmt(0, el); cio.observe(el); });
+    var small = innerWidth < 760;
+    var vio = new IntersectionObserver(function(es){ es.forEach(function(e){ var v = e.target;
+      if (e.isIntersecting){ if (!v.src) v.src = small ? v.dataset.srcSm : v.dataset.src; v.play().catch(function(){}); } else if (v.src) v.pause(); }); }, {rootMargin:'200px 0px'});
+    document.querySelectorAll('video[data-src]').forEach(function(v){ vio.observe(v); });
+  }
+
+  /* CTA feel */
+  var fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  document.querySelectorAll('.cta').forEach(function(btn){
+    if (fine && !reduce && !btn.classList.contains('btn-block') && !btn.classList.contains('cta-sm')) {
+      btn.addEventListener('pointermove', function(e){ var r = btn.getBoundingClientRect();
+        btn.style.transform = 'translate(' + (((e.clientX - r.left) / r.width - .5) * 10).toFixed(1) + 'px,' + (((e.clientY - r.top) / r.height - .5) * 8 - 2).toFixed(1) + 'px)'; });
+      btn.addEventListener('pointerleave', function(){ btn.style.transform = ''; });
+    }
+    btn.addEventListener('pointerdown', function(e){ var r = btn.getBoundingClientRect(), d = Math.max(r.width, r.height) * 2.2, rp = document.createElement('span');
+      rp.className = 'ripple'; rp.style.cssText = 'width:'+d+'px;height:'+d+'px;left:'+(e.clientX - r.left)+'px;top:'+(e.clientY - r.top)+'px'; btn.appendChild(rp); setTimeout(function(){ rp.remove(); }, 650); });
+    btn.addEventListener('click', function(){ if (reduce) return;
+      var r = btn.getBoundingClientRect(), cx = r.right - 30, cy = r.top + r.height / 2, cols = ['#c4f07a','#f6c768','#3f9e1c','#fff3cf'];
+      for (var i = 0; i < 22; i++){ var c = document.createElement('i'); c.className = 'confetti'; c.style.left = cx + 'px'; c.style.top = cy + 'px'; c.style.background = cols[i % 4]; document.body.appendChild(c);
+        var a = -Math.PI / 2 + (Math.random() - .5) * Math.PI * 1.4, v = 70 + Math.random() * 110;
+        c.animate([{transform:'translate(-50%,-50%)',opacity:1},{transform:'translate(calc(-50% + '+(Math.cos(a)*v)+'px), calc(-50% + '+(Math.sin(a)*v+60)+'px)) rotate('+(Math.random()*540)+'deg)',opacity:0}],{duration:800+Math.random()*300,easing:'cubic-bezier(.15,.7,.3,1)',fill:'forwards'});
+        setTimeout(c.remove.bind(c), 1200); } });
+  });
+})();
+</script>
+</body>
+</html>
