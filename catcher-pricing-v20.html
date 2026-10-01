@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catcher Academy – Math Mentorship for ADHD</title>
+<meta name="description" content="Nightly one-on-one math mentorship for students with ADHD, grades 4 to 9.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{--navy:#0d1828;--navy-2:#14233a;--ivory:#f6f1e7;--paper:#fbf8f2;--champagne:#e7d6b2;--gold:#b08d57;--ink:#1a1e24;--muted:#6b6e72;--line:#e3dccd;
+  --serif:"Instrument Serif",Georgia,serif;--sans:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+@media (max-width:600px){.wrap{padding:0 20px}}
+.eyebrow{font:500 12px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;margin:0}
+.serif{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.012em}
+em{font-style:italic}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:14px;min-height:56px;padding:0 30px;border-radius:999px;text-decoration:none;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;transition:background .25s ease,color .25s ease,box-shadow .25s ease,transform .25s ease}
+.btn svg{transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.btn:hover svg{transform:translateX(4px)}
+.btn-champ{background:var(--champagne);color:var(--navy);box-shadow:0 10px 30px -14px rgba(231,214,178,.7)}
+.btn-champ:hover{background:#f1e4c6}
+.btn-navy{background:var(--navy);color:var(--ivory)}
+.btn-navy:hover{background:var(--navy-2)}
+.btn-line{border:1px solid currentColor;background:transparent}
+.btn-line:hover{background:var(--navy);color:var(--ivory);border-color:var(--navy)}
+.btn-block{width:100%;justify-content:center}
+.link{display:inline-flex;align-items:center;gap:10px;font:600 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:6px 0;border-bottom:1px solid currentColor}
+
+/* nav */
+.nav{position:absolute;top:0;left:0;right:0;z-index:10;color:var(--ivory)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:88px;border-bottom:1px solid rgba(246,241,231,.18)}
+.brand{font:400 26px/1 var(--serif);letter-spacing:.01em;text-decoration:none}
+.nav ul{display:flex;align-items:center;gap:34px;list-style:none;margin:0;padding:0;font:500 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.nav ul a{text-decoration:none;opacity:.85}
+.nav .btn{min-height:44px;padding:0 22px;font-size:12px}
+@media (max-width:860px){.nav ul li:not(.keep){display:none}}
+
+/* hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;color:var(--ivory);background:var(--navy);overflow:hidden}
+.hero-media{position:absolute;inset:0}
+.hero-media img,.hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 40%}
+.hero-media video{opacity:0;transition:opacity 1.4s ease}
+.hero-media video.on{opacity:1}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,24,40,.94) 0%,rgba(13,24,40,.78) 36%,rgba(13,24,40,.15) 70%,rgba(13,24,40,.25) 100%),linear-gradient(0deg,rgba(13,24,40,.9) 0%,rgba(13,24,40,0) 40%)}
+.hero .wrap{position:relative;width:100%;padding-top:140px;padding-bottom:80px}
+.hero .eyebrow{color:var(--champagne)}
+.hero h1{font-size:clamp(58px,8.6vw,128px);line-height:.94;margin:28px 0 30px;max-width:900px}
+.hero h1 em{color:var(--champagne)}
+.hero .sub{font-size:clamp(18px,1.7vw,21px);line-height:1.6;color:rgba(246,241,231,.86);max-width:540px;margin:0}
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:22px 34px;margin-top:44px}
+.cred{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:64px;padding-top:26px;border-top:1px solid rgba(246,241,231,.18);font-size:14px;color:rgba(246,241,231,.72)}
+.cred b{font:400 22px/1 var(--serif);color:var(--ivory);margin-right:6px}
+@media (max-width:760px){.hero-media img,.hero-media video{object-position:62% 30%}.hero-media::after{background:linear-gradient(180deg,rgba(13,24,40,.35) 0%,rgba(13,24,40,.82) 48%,var(--navy) 100%)}.hero .btn{width:100%;justify-content:center;letter-spacing:.1em;padding:0 20px;white-space:nowrap}}
+@media (prefers-reduced-motion:no-preference){
+  .js .hero .rv0{opacity:0;transform:translateY(22px);transition:opacity 1.1s ease,transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .js .hero.go .rv0{opacity:1;transform:none}
+  .js .hero.go .d1{transition-delay:.15s}.js .hero.go .d2{transition-delay:.35s}.js .hero.go .d3{transition-delay:.55s}.js .hero.go .d4{transition-delay:.75s}
+  .js .hero-media img{transform:scale(1.06);transition:transform 6s cubic-bezier(.2,.7,.2,1)}
+  .js .hero.go .hero-media img{transform:none}
+}
+
+/* sections */
+.sec{padding:140px 0}
+.ivory{background:var(--ivory)}
+.navy{background:var(--navy);color:var(--ivory)}
+.sec h2{font-size:clamp(44px,5.4vw,76px);line-height:1.02}
+.lead{font-size:19px;color:var(--muted);max-width:560px}
+.eyebrow.gold{color:var(--gold)}
+
+/* statement */
+.statement{text-align:center}
+.statement p.big{font:400 clamp(34px,4.2vw,58px)/1.18 var(--serif);max-width:980px;margin:28px auto 0;letter-spacing:-.01em}
+.statement p.big em{color:var(--gold)}
+
+/* glance */
+.glance{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:70px}
+.glance div{padding:34px 26px 0 0}
+.glance div + div{padding-left:26px;border-left:1px solid var(--line)}
+.glance b{display:block;font:400 clamp(54px,6vw,84px)/1 var(--serif)}
+.glance span{display:block;margin-top:12px;font-size:14px;color:var(--muted);max-width:200px}
+@media (max-width:860px){.glance{grid-template-columns:1fr 1fr}.glance div:nth-child(3){padding-left:0;border-left:0}}
+
+/* method */
+.method{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:80px}
+.method .num{font:italic 400 30px/1 var(--serif);color:var(--gold)}
+.method h3{font-size:40px;line-height:1.05;margin:22px 0 14px}
+.method p{margin:0;color:var(--muted)}
+.method > div{border-top:1px solid var(--line);padding-top:28px}
+@media (max-width:860px){.method{grid-template-columns:1fr;gap:40px}}
+
+/* voices */
+.voices{display:grid;grid-template-columns:1.3fr 1fr;gap:70px;align-items:start}
+.feature blockquote{margin:30px 0 26px;font:400 clamp(30px,3.4vw,46px)/1.22 var(--serif)}
+.feature cite,.small cite{font:500 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--champagne);font-style:normal}
+.small{border-top:1px solid rgba(246,241,231,.18);padding:30px 0}
+.small blockquote{margin:0 0 16px;font:400 23px/1.35 var(--serif);color:rgba(246,241,231,.92)}
+.stars{color:var(--champagne);letter-spacing:4px;font-size:14px}
+.verify{margin-top:50px;font-size:14px;color:rgba(246,241,231,.6)}
+.verify a{color:var(--champagne)}
+@media (max-width:860px){.voices{grid-template-columns:1fr;gap:20px}}
+
+/* programs */
+.plans-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:26px;margin-bottom:60px}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px;background:#fff}
+.toggle button{font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;border:0;background:none;padding:12px 18px;border-radius:999px;cursor:pointer;color:var(--ink)}
+.toggle button.on{background:var(--navy);color:var(--ivory)}
+.toggle button span{color:var(--gold);margin-left:6px}
+.grid{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:22px;align-items:stretch}
+.plan{background:#fff;border:1px solid var(--line);padding:42px 36px 36px;display:flex;flex-direction:column}
+.tier{font:500 12px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0}
+.plan h3{font-size:40px;line-height:1.05;margin:18px 0 10px}
+.pitch{margin:0 0 30px;color:var(--muted);min-height:3.3em}
+.price{display:flex;align-items:baseline;gap:8px;padding-top:26px;border-top:1px solid var(--line)}
+.price b{font:400 62px/1 var(--serif)}
+.price span{color:var(--muted);font-size:15px}
+.bill{font-size:14px;color:var(--muted);margin:10px 0 26px}
+.plan ul{list-style:none;margin:0 0 34px;padding:0;flex:1}
+.plan li{display:flex;gap:14px;padding:10px 0;font-size:16px}
+.plan li.no{color:#a2a3a5}
+.mk{color:var(--gold);flex:none}
+.mk.no{color:#b9babb}
+.plan.featured{background:var(--navy);color:var(--ivory);border-color:var(--navy);margin:-24px 0;padding-top:66px;position:relative;box-shadow:0 40px 80px -40px rgba(13,24,40,.6)}
+.plan.featured .pitch,.plan.featured .bill,.plan.featured .price span{color:rgba(246,241,231,.66)}
+.plan.featured .price{border-color:rgba(246,241,231,.16)}
+.plan.featured .tier,.plan.featured .mk{color:var(--champagne)}
+.badge{position:absolute;top:26px;left:36px;font:500 11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--navy);background:var(--champagne);padding:7px 12px;border-radius:999px}
+.fine{text-align:center;margin:16px 0 0;font-size:13px;color:rgba(246,241,231,.6)}
+.plan .link{align-self:center;color:var(--ink)}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.plan.featured{order:-1;margin:0}.pitch{min-height:0}}
+.assure{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 40px;margin:60px 0 0;padding:0;list-style:none;font-size:14px;color:var(--muted)}
+
+/* faq */
+.faq{max-width:820px}
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:28px 0;font:400 28px/1.2 var(--serif)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:300 26px/1 var(--sans);color:var(--gold)}
+details[open] summary::after{content:"–"}
+details p{margin:0 0 28px;color:var(--muted);max-width:680px}
+
+/* final */
+.final{position:relative;overflow:hidden;text-align:center;color:var(--ivory);background:var(--navy);padding:170px 0}
+.final .media{position:absolute;inset:0}
+.final .media video{width:100%;height:100%;object-fit:cover;opacity:.32}
+.final .media::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(13,24,40,.55),rgba(13,24,40,.92))}
+.final .wrap{position:relative}
+.final h2{font-size:clamp(56px,8vw,120px);line-height:.98}
+.final h2 em{color:var(--champagne)}
+.final p{font-size:19px;color:rgba(246,241,231,.8);margin:28px auto 44px;max-width:540px}
+footer{background:var(--navy);color:rgba(246,241,231,.55);font-size:13px;padding:34px 0 110px;border-top:1px solid rgba(246,241,231,.12)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 28px}
+footer a{text-decoration:none}
+
+/* dock */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--navy);color:var(--ivory);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:none;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .3s ease;border-top:1px solid rgba(246,241,231,.14)}
+.dock.show{transform:none}
+.dock b{display:block;font:400 22px/1 var(--serif)}
+.dock span{font-size:12px;color:rgba(246,241,231,.65)}
+.dock .btn{min-height:46px;padding:0 20px;font-size:12px}
+@media (max-width:760px){.dock{display:flex}}
+
+
+/* matriculation */
+.matric .m-head{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:end}
+.matric .m-head p:not(.eyebrow){margin:0;color:rgba(246,241,231,.72);font-size:18px}
+.matric h2 em{color:var(--champagne)}
+.unis{list-style:none;margin:80px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(246,241,231,.18);border-bottom:1px solid rgba(246,241,231,.18)}
+.unis li{padding:44px 30px 40px 0;display:flex;flex-direction:column;gap:12px}
+.unis li + li{padding-left:30px;border-left:1px solid rgba(246,241,231,.18)}
+.unis b{font:400 clamp(30px,3vw,42px)/1.08 var(--serif);color:var(--ivory)}
+.unis span{font:500 12px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--champagne)}
+.creds{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:70px}
+.creds .eyebrow{color:var(--champagne)}
+.c-big{font:400 36px/1.1 var(--serif);margin:16px 0 10px}
+.c-sub{margin:0;color:rgba(246,241,231,.7);max-width:440px}
+@media (max-width:860px){.matric .m-head{grid-template-columns:1fr;gap:24px}.unis{grid-template-columns:1fr}.unis li,.unis li + li{padding:30px 0;border-left:0}.unis li + li{border-top:1px solid rgba(246,241,231,.18)}.creds{grid-template-columns:1fr;gap:40px}}
+@media (prefers-reduced-motion:no-preference){
+  .js .rv{opacity:0;transform:translateY(26px);transition:opacity 1s ease,transform 1.1s cubic-bezier(.2,.7,.2,1)}
+  .js .rv.in{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="/">Catcher Academy</a>
+    <ul>
+      <li><a href="#method">Method</a></li>
+      <li><a href="#voices">Families</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li class="keep"><a class="btn btn-line" href="#programs">Begin</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-media" aria-hidden="true">
+    <img src="https://assets.mixkit.co/videos/9011/9011-thumb-720-0.jpg" alt="" fetchpriority="high">
+    <video muted loop playsinline preload="auto" data-src="https://assets.mixkit.co/videos/9011/9011-720.mp4" data-src-sm="https://assets.mixkit.co/videos/9011/9011-360.mp4"></video>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow rv0 d1">One-on-one math mentorship · Grades 4–9 · ADHD</p>
+    <h1 class="rv0 d2">Built differently.<br><em>Built to excel.</em></h1>
+    <p class="sub rv0 d3">Nightly, one-on-one math mentorship for students with ADHD. The discipline of a private tutor every evening, so their effort becomes the results they are capable of.</p>
+    <div class="hero-actions rv0 d4">
+      <a class="btn btn-champ" href="#programs">Begin a complimentary week <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="link" href="#method">The method</a>
+    </div>
+    <div class="cred rv0 d4"><span><b>5.0</b>across 912 verified ratings</span><span><b>3,771</b>one-on-one lessons</span><span>Former students at <b style="font-size:19px">National Taiwan University · Tsing Hua · Ohio State</b></span></div>
+  </div>
+</header>
+
+<main>
+
+<section class="sec statement" aria-label="Philosophy">
+  <div class="wrap">
+    <p class="eyebrow gold">Our conviction</p>
+    <p class="big rv">Some of the sharpest minds in any classroom have ADHD. They don't need more pressure. <em>They need a mentor who shows up every night</em> and expects their best.</p>
+    <div class="glance rv">
+      <div><b>5.0</b><span>Average rating across 912 verified family ratings</span></div>
+      <div><b>99.8%</b><span>Five-star ratings, 2021 to 2025</span></div>
+      <div><b>3,771</b><span>One-on-one lessons taught by our head of teaching</span></div>
+      <div><b>Nightly</b><span>Mentorship at homework time. No scheduling.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec navy matric" aria-labelledby="matric-title">
+  <div class="wrap">
+    <div class="m-head">
+      <div>
+        <p class="eyebrow" style="color:var(--champagne)">Where our students have gone</p>
+        <h2 id="matric-title" class="rv" style="margin-top:22px">The same method.<br><em>Proven at the top.</em></h2>
+      </div>
+      <p class="rv">Before Catcher, Tony Lai taught math one-on-one for years. His former students have gone on to some of the most selective universities in Asia and the United States.</p>
+    </div>
+    <ul class="unis">
+      <li class="rv"><b>National Taiwan University</b><span>Taiwan's top-ranked university</span></li>
+      <li class="rv"><b>National Tsing Hua University</b><span>One of Taiwan's top research universities</span></li>
+      <li class="rv"><b>The Ohio State University</b><span>United States</span></li>
+    </ul>
+    <div class="creds">
+      <div class="rv"><p class="eyebrow">Head of teaching</p><p class="c-big">Tony Lai</p><p class="c-sub">Graduate of National Taiwan University. 3,771 one-on-one lessons, rated 5.0 by families.</p></div>
+      <div class="rv"><p class="eyebrow">Recognition</p><p class="c-big">LANDED Accelerator</p><p class="c-sub">Catcher Academy is participating in the LANDED Accelerator, working with Stony Brook University.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec ivory" id="method" aria-labelledby="method-title">
+  <div class="wrap">
+    <p class="eyebrow gold">The method</p>
+    <h2 id="method-title" class="rv" style="margin-top:22px;max-width:860px">Ability is given.<br><em>Excellence is practiced.</em></h2>
+    <div class="method">
+      <div class="rv"><span class="num">i.</span><h3>Consistency</h3><p>A mentor is present the moment homework begins, every evening. For an ADHD mind, showing up is half the work. We make it automatic.</p></div>
+      <div class="rv"><span class="num">ii.</span><h3>Rigor</h3><p>Each session stretches one problem past comfortable. When a student stalls, the problem is broken down, never handed over. They do the thinking.</p></div>
+      <div class="rv"><span class="num">iii.</span><h3>Visibility</h3><p>After every session you receive a clear account: what was attempted, what was corrected, what comes next. Effort you can see.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec navy" id="voices" aria-labelledby="voices-title">
+  <div class="wrap voices">
+    <div class="feature">
+      <p class="eyebrow" style="color:var(--champagne)" id="voices-title">From our families</p>
+      <blockquote class="rv">“At school he always said he understood, but his test scores never showed it. With patience, he is gaining real confidence in math.”</blockquote>
+      <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p style="margin:12px 0 0"><cite>Parent · Elementary math</cite></p>
+    </div>
+    <div>
+      <div class="small rv"><blockquote>“After the first lesson she said it was clearer than her class at school. We committed to twenty lessons that day.”</blockquote><cite>Parent · Middle school math</cite></div>
+      <div class="small rv"><blockquote>“He builds from the core logic, so our son now checks whether he truly understands a concept instead of memorizing.”</blockquote><cite>Parent · Middle school math</cite></div>
+    </div>
+  </div>
+  <div class="wrap"><p class="verify">Reviews of one-on-one lessons with Tony Lai, our head of teaching, whose method Catcher is built on. Translated where noted. <a href="https://en.amazingtalker.com/teachers-and-tutors/d1f9384e-d941-49d8-81cc-95bb5d855e96" target="_blank" rel="noopener">Verify all 912 ratings</a></p></div>
+</section>
+
+<section class="sec" id="programs" aria-labelledby="programs-title">
+  <div class="wrap">
+    <div class="plans-head">
+      <div>
+        <p class="eyebrow gold">Programs</p>
+        <h2 id="programs-title" class="rv" style="margin-top:22px">Choose a program.</h2>
+      </div>
+      <div class="toggle" role="group" aria-label="Billing period">
+        <button type="button" class="on" data-period="monthly" aria-pressed="true">Monthly</button>
+        <button type="button" data-period="semester" aria-pressed="false">Semester<span>−20%</span></button>
+      </div>
+    </div>
+    <div class="grid">
+      <article class="plan rv">
+        <p class="tier">Core</p>
+        <h3>Foundations</h3>
+        <p class="pitch">Thirty mentored minutes each evening.</p>
+        <div class="price"><b data-price="standard">$20</b><span>per month</span></div>
+        <p class="bill" data-bill="standard">Billed monthly. Cancel anytime.</p>
+        <ul><li><span class="mk">—</span>Thirty minutes of mentorship daily</li><li><span class="mk">—</span>Unlimited practice</li><li class=no><span class="mk no">×</span>Session ends at thirty minutes</li><li class=no><span class="mk no">×</span>No parent reports</li></ul>
+        <a class="link" href="#">Select Core</a>
+      </article>
+      <article class="plan featured rv">
+        <span class="badge">Recommended</span>
+        <p class="tier">Honors</p>
+        <h3>The full program</h3>
+        <p class="pitch">No time limit. Their mentor stays until the last problem is finished.</p>
+        <div class="price"><b data-price="all">$200</b><span>per month</span></div>
+        <p class="bill" data-bill="all">Billed monthly. Pause or cancel anytime.</p>
+        <ul><li><span class="mk">—</span>Unlimited mentorship, every evening</li><li><span class="mk">—</span>A written report after every session</li><li><span class="mk">—</span>Weekly progress review</li><li><span class="mk">—</span>Private lessons with Tony, on request</li><li><span class="mk">—</span>Everything in Core</li></ul>
+        <a class="btn btn-champ btn-block" href="#">Begin with Honors <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <p class="fine">7 days complimentary · No card required · 30-day guarantee</p>
+      </article>
+      <article class="plan rv">
+        <p class="tier">Scholars · By application</p>
+        <h3>Private mentorship</h3>
+        <p class="pitch">Honors, with Tony teaching in person.</p>
+        <div class="price"><b>$5,000</b><span>per month</span></div>
+        <p class="bill">Limited to six families.</p>
+        <ul><li><span class="mk">—</span>Everything in Honors</li><li><span class="mk">—</span>Tony in your home, three afternoons a week</li><li><span class="mk">—</span>Direct line to Tony, seven days a week</li><li><span class="mk">—</span>Monthly review with you and the school</li></ul>
+        <a class="btn btn-line btn-block" href="#">Request an interview</a>
+      </article>
+    </div>
+    <ul class="assure"><li>Pause at any time</li><li>Inactive for 30 days? We pause it for you</li><li>Your child never sees a price</li></ul>
+  </div>
+</section>
+
+<section class="sec ivory" aria-labelledby="faq-title">
+  <div class="wrap faq">
+    <p class="eyebrow gold">Questions</p>
+    <h2 id="faq-title" style="margin:22px 0 40px">Before you begin.</h2>
+    <details><summary>Core or Honors?</summary><p>Core provides thirty mentored minutes each evening. Honors has no time limit and includes a written report after every session. Homework rarely ends at minute thirty.</p></details>
+    <details><summary>Does the mentor give answers?</summary><p>No. The mentor questions, prompts and breaks problems into steps. Your child does the work. That is the point.</p></details>
+    <details><summary>What happens after the complimentary week?</summary><p>Nothing automatic. There is no card on file. Choose a program when you are ready.</p></details>
+  </div>
+</section>
+
+</main>
+
+<section class="final" aria-labelledby="final-title">
+  <div class="media" aria-hidden="true"><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/9094/9094-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/9094/9094-720.mp4" data-src-sm="https://assets.mixkit.co/videos/9094/9094-360.mp4"></video></div>
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--champagne)">Begin</p>
+    <h2 id="final-title" class="rv" style="margin-top:24px">Their best work<br><em>starts tonight.</em></h2>
+    <p class="rv">A complimentary week of the full Honors program. No card required.</p>
+    <a class="btn btn-champ" href="#programs">Begin a complimentary week <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 AsiaMath AI, Inc.</span>
+    <span><a href="/about">About</a> · <a href="/terms-of-service">Terms</a> · <a href="/privacy-policy">Privacy</a></span>
+  </div>
+</footer>
+
+<div class="dock" role="region" aria-label="Recommended program">
+  <div><b>Honors</b><span data-dock-line>$200 per month · 7 days complimentary</span></div>
+  <a class="btn btn-champ" href="#programs">Begin</a>
+</div>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, hero = document.querySelector('.hero'), small = innerWidth < 760;
+  requestAnimationFrame(function(){ hero.classList.add('go'); });
+  var hv = document.querySelector('.hero-media video');
+  if (!reduce) { hv.src = small ? hv.dataset.srcSm : hv.dataset.src; hv.addEventListener('playing', function(){ hv.classList.add('on'); }); hv.play().catch(function(){}); }
+
+  var prices = {
+    monthly:  { standard:'$20', all:'$200', sBill:'Billed monthly. Cancel anytime.', aBill:'Billed monthly. Pause or cancel anytime.', dock:'$200 per month' },
+    semester: { standard:'$16', all:'$160', sBill:'$80 for five months. No auto-renewal.', aBill:'$800 for five months. No auto-renewal.', dock:'$160 per month' }
+  };
+  var btns = document.querySelectorAll('.toggle button');
+  btns.forEach(function(b){ b.addEventListener('click', function(){
+    btns.forEach(function(x){ x.classList.remove('on'); x.setAttribute('aria-pressed','false'); });
+    b.classList.add('on'); b.setAttribute('aria-pressed','true');
+    var p = prices[b.dataset.period];
+    document.querySelector('[data-price="standard"]').textContent = p.standard;
+    document.querySelector('[data-price="all"]').textContent = p.all;
+    document.querySelector('[data-bill="standard"]').textContent = p.sBill;
+    document.querySelector('[data-bill="all"]').textContent = p.aBill;
+    document.querySelector('[data-dock-line]').textContent = p.dock + ' · 7 days complimentary';
+  }); });
+
+  var dock = document.querySelector('.dock'), fin = document.querySelector('.final');
+  function onScroll(){ dock.classList.toggle('show', hero.getBoundingClientRect().bottom < 0 && fin.getBoundingClientRect().top > innerHeight * .7); }
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.15});
+    document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+    var vo = new IntersectionObserver(function(es){ es.forEach(function(e){ var v = e.target;
+      if (e.isIntersecting){ if (!v.src) v.src = small ? v.dataset.srcSm : v.dataset.src; v.play().catch(function(){}); } else if (v.src) v.pause(); }); }, {rootMargin:'200px 0px'});
+    document.querySelectorAll('.final video').forEach(function(v){ vo.observe(v); });
+  }
+})();
+</script>
+</body>
+</html>
