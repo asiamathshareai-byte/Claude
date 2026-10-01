@@ -365,7 +365,7 @@ details p{margin:0 0 24px;color:var(--muted);max-width:680px}
 .final{text-align:center;position:relative;overflow:hidden}
 .final-bg{position:absolute;inset:0}
 .final-bg img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15)}
-.final-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(14,16,15,.72) 0%,rgba(14,16,15,.94) 70%)}
+.final-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(14,16,15,.45) 0%,rgba(14,16,15,.8) 75%)}
 .final .wrap{position:relative}
 .final.section{padding:150px 0}
 .final h2{font-size:clamp(46px,8vw,104px)!important}
@@ -380,10 +380,95 @@ footer a{text-decoration:none}
 .dock span{display:block;font-size:13px;color:var(--muted-dark)}
 .dock .btn{min-height:46px;padding:0 18px}
 @media (max-width:760px){.dock{display:flex;transform:translateY(110%);transition:transform .3s ease}.dock.show{transform:none}}
+
+/* ===== v13: one continuous scene ===== */
+:root{--bone:#0e100f;--bone-2:rgba(255,255,255,.04);--paper:rgba(18,21,19,.58);--line:rgba(255,255,255,.12);--text:#f4f1ea;--muted:#a9aca5;--forest:#c4f07a;--glass-b:rgba(255,255,255,.16)}
+html{background:var(--ink)}
+body{background:transparent;color:var(--text)}
+.hero,.proof,.plans,.section,.section.dark,.final,#coach,main{background:transparent!important}
+.scene{position:relative}
+.scene > .bg{position:absolute;left:0;right:0;top:-140px;bottom:-140px;z-index:-1;overflow:hidden;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 180px,#000 calc(100% - 180px),transparent 100%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 180px,#000 calc(100% - 180px),transparent 100%)}
+.scene > .bg video,.scene > .bg img{position:absolute;left:0;top:-8%;width:100%;height:116%;object-fit:cover;opacity:.95;filter:saturate(.95) contrast(1.05);will-change:transform}
+.scene > .bg::after{content:"";position:absolute;inset:0;background:radial-gradient(130% 90% at 50% 45%,rgba(14,16,15,.38) 0%,rgba(14,16,15,.62) 65%,rgba(14,16,15,.85) 100%)}
+.scene > .bg.left::after{background:linear-gradient(90deg,rgba(14,16,15,.9) 0%,rgba(14,16,15,.6) 45%,rgba(14,16,15,.08) 100%)}
+.scene > .bg.right::after{background:linear-gradient(270deg,rgba(14,16,15,.9) 0%,rgba(14,16,15,.6) 45%,rgba(14,16,15,.08) 100%)}
+.scene > .bg.heavy::after{background:rgba(14,16,15,.66)}
+@media (max-width:760px){.scene > .bg.left::after,.scene > .bg.right::after{background:rgba(14,16,15,.78)}}
+
+/* glass */
+.plan,.rc,.table-scroll,.feed,.step,.kpis,.faq details,.review{-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2)}
+.grid{border:0;gap:18px}
+.plan{background:var(--paper);border:1px solid var(--glass-b);border-radius:12px}
+.plan + .plan{border-left:1px solid var(--glass-b)}
+.plan.featured{background:linear-gradient(180deg,rgba(196,240,122,.14),rgba(18,21,19,.7) 40%);border:1.5px solid var(--signal);box-shadow:0 0 0 1px rgba(196,240,122,.25),0 30px 80px -20px rgba(196,240,122,.28);margin:-18px 0}
+.plan.featured + .plan{border-left:1px solid var(--glass-b)}
+.plan li{border-color:var(--line)!important}
+.plan li.no{color:#8b8e87}
+.ic-yes{stroke:var(--signal)}
+.btn-ink{background:#f4f1ea;color:var(--ink)}
+.btn-ink:hover{background:#fff}
+.toggle{border-color:var(--glass-b);background:rgba(18,21,19,.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.toggle button{color:var(--text)}
+.toggle button.on{background:var(--signal);color:var(--signal-ink)}
+.toggle button.on span{color:var(--signal-ink)}
+@media (max-width:900px){.plan,.plan + .plan,.plan.featured + .plan{border:1px solid var(--glass-b)}.plan.featured{border:1.5px solid var(--signal);margin:12px 0 0}}
+.assure li::before{color:var(--signal)}
+.table-scroll{border:1px solid var(--glass-b);border-radius:12px}
+table{background:rgba(18,21,19,.55)}
+thead th{background:rgba(255,255,255,.05)}
+th,td{border-bottom-color:var(--line)}
+.col-hi{background:rgba(196,240,122,.1)!important;color:#fff}
+thead .col-hi{color:var(--signal)}
+td.col-hi{border-bottom-color:rgba(196,240,122,.18)}
+.kpis{border:1px solid var(--glass-b);border-radius:12px;background:rgba(18,21,19,.5);padding:0 22px}
+.kpis div + div{border-left-color:var(--line)}
+.rc{background:rgba(18,21,19,.62);border:1px solid var(--glass-b);border-radius:12px}
+.rc-row.alt .rc:nth-child(odd){background:rgba(196,240,122,.1);border-color:rgba(196,240,122,.45);color:#fff}
+.rc-mono{background:var(--signal);color:var(--signal-ink)}
+.rc-row.alt .rc:nth-child(odd) .rc-mono{background:#f4f1ea;color:var(--ink)}
+.rc-row{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.step{background:rgba(18,21,19,.55);border-color:var(--glass-b)}
+.step figure video{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1);transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s ease}
+.step:hover figure video{transform:scale(1.05);filter:none}
+.feed{background:rgba(18,21,19,.6)}
+.stats{border-top:1px solid var(--glass-b)}
+.portrait figcaption{background:rgba(14,16,15,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--glass-b)}
+.aside{border-left-color:var(--signal)}
+.faq details{border-top:1px solid var(--glass-b)!important;background:rgba(18,21,19,.45);padding:0 22px;margin-bottom:10px;border:1px solid var(--glass-b)!important;border-radius:10px}
+.faq details p{color:var(--muted)}
+.section .eyebrow,.proof-head .eyebrow{color:var(--signal)}
+.proof-head h2 em{color:var(--signal)}
+.lede{color:#d8dad4}
+.note a,.proof-foot a{color:var(--signal)}
+.tony-stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.tony-stats span{border:1px solid var(--glass-b);background:rgba(18,21,19,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-radius:999px;padding:10px 16px;font-size:15px}
+.tony-stats b{color:var(--signal);font-family:var(--display);font-weight:800;margin-right:6px}
+.marquee{background:transparent;border:0;padding:36px 0;position:relative;z-index:1}
+.marquee-track{font-size:clamp(40px,7vw,96px);-webkit-text-stroke:1.5px rgba(244,241,234,.5);color:transparent}
+.marquee-track span:nth-child(even){color:var(--signal);-webkit-text-stroke:0}
+.final .final-bg video{width:100%;height:100%;object-fit:cover}
+footer{background:transparent;border-top:1px solid var(--line)}
+
+/* scroll progress */
+.progress{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:left;transform:scaleX(0);background:var(--signal);box-shadow:0 0 12px rgba(196,240,122,.7);z-index:50}
+.nav{position:sticky;top:0;z-index:40;background:rgba(14,16,15,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.hero-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;filter:grayscale(.15) contrast(1.05)}
+.hero-bg video.on{opacity:1}
+.hero-bg::after{z-index:1}
+
+/* reveal */
+@media (prefers-reduced-motion:no-preference){
+  .js .rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .js .rv.in{opacity:1;transform:none}
+  .js .rv.d1{transition-delay:.1s}.js .rv.d2{transition-delay:.2s}.js .rv.d3{transition-delay:.3s}
+}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 
 <nav class="nav" aria-label="Main">
   <div class="wrap">
@@ -398,7 +483,7 @@ footer a{text-decoration:none}
 </nav>
 
 <header class="hero">
-  <div class="hero-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1800&q=70" srcset="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=70 900w, https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1800&q=70 1800w, https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=2600&q=70 2600w" sizes="100vw" alt="" fetchpriority="high"></div>
+  <div class="hero-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1800&q=70" srcset="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=70 900w, https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1800&q=70 1800w, https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=2600&q=70 2600w" sizes="100vw" alt="" fetchpriority="high"><video muted loop playsinline preload="auto" data-hero data-src="https://assets.mixkit.co/videos/609/609-720.mp4" data-src-sm="https://assets.mixkit.co/videos/609/609-360.mp4"></video></div>
   <div class="float f1" aria-hidden="true"><svg class="ring" viewBox="0 0 34 34"><circle class="bg" cx="17" cy="17" r="14"/><circle class="fg" cx="17" cy="17" r="14"/></svg><small>Tonight's streak</small><b><span data-streak>7</span> <em>in a row</em></b><br><span class="pb">Personal best</span></div>
   <div class="float f2" aria-hidden="true"><span class="catchie"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10140c" stroke-width="2.2" stroke-linecap="round"><circle cx="9" cy="10" r="1.2" fill="#10140c"/><circle cx="15" cy="10" r="1.2" fill="#10140c"/><path d="M8.5 14.5c1 1.3 2.2 2 3.5 2s2.5-.7 3.5-2"/></svg></span><p data-type="One more. You've got this.">One more. You've got this.</p></div>
   <div class="wrap">
@@ -413,7 +498,8 @@ footer a{text-decoration:none}
   </div>
 </header>
 
-<section class="proof" id="proof" aria-labelledby="proof-title">
+<section class="proof scene" id="proof" aria-labelledby="proof-title">
+  <div class="bg" aria-hidden="true"><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/9585/9585-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/9585/9585-720.mp4" data-src-sm="https://assets.mixkit.co/videos/9585/9585-360.mp4" style="object-position:50% 50%"></video></div>
   <div class="wrap">
     <div class="proof-head">
       <div>
@@ -440,16 +526,11 @@ footer a{text-decoration:none}
 
 <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>One more</span><span>You've got this</span><span>Start</span><span>Push</span><span>Recover</span><span>Record</span><span>Finish line</span><span>One more</span><span>You've got this</span><span>Start</span><span>Push</span><span>Recover</span><span>Record</span><span>Finish line</span><span>One more</span><span>You've got this</span><span>Start</span><span>Push</span><span>Recover</span><span>Record</span><span>Finish line</span><span>One more</span><span>You've got this</span><span>Start</span><span>Push</span><span>Recover</span><span>Record</span><span>Finish line</span></div></div>
 
-<div class="pass">
-  <div class="wrap">
-    <p><strong>Guest Pass</strong>Every membership begins with 7 days of All Access. Free. No card on file.</p>
-    <a href="#plans">Choose a membership ↓</a>
-  </div>
-</div>
 
 <main class="light">
 
-<section class="plans" id="plans">
+<section class="plans scene" id="plans">
+  <div class="bg" aria-hidden="true"><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/23056/23056-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/23056/23056-720.mp4" data-src-sm="https://assets.mixkit.co/videos/23056/23056-360.mp4" style="object-position:60% 50%"></video></div>
   <div class="wrap">
     <div class="plans-head">
       <div>
@@ -521,7 +602,8 @@ footer a{text-decoration:none}
   </div>
 </section>
 
-<section class="section" style="padding-top:56px">
+<section class="section scene" style="padding-top:56px">
+  <div class="bg right" aria-hidden="true"><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/40758/40758-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/40758/40758-720.mp4" data-src-sm="https://assets.mixkit.co/videos/40758/40758-360.mp4" style="object-position:50% 50%"></video></div>
   <div class="wrap">
     <p class="eyebrow">The comparison</p>
     <h2 class="display">A coach every night.<br>For less than one a week.</h2>
@@ -547,21 +629,23 @@ footer a{text-decoration:none}
   </div>
 </section>
 
-<section class="section dark" id="method">
+<section class="section dark scene" id="method">
+  <div class="bg heavy" aria-hidden="true"><img src="https://images.unsplash.com/photo-1502904550040-7534597429ae?auto=format&fit=crop&w=1600&q=70" alt="" loading="lazy"></div>
   <div class="wrap">
     <p class="eyebrow">The Method</p>
     <h2 class="display">Four phases.<br>Every session.</h2>
     <p class="lede" style="color:#c9cbc5">Structured like a training session, because for an ADHD brain, starting and staying are the hard part. The math comes after.</p>
     <div class="method">
-      <div class="step"><figure><span class="n">01</span><img src="https://images.unsplash.com/photo-1610484826967-09c5720778c7?auto=format&fit=crop&w=700&q=70" srcset="https://images.unsplash.com/photo-1610484826967-09c5720778c7?auto=format&fit=crop&w=500&q=70 500w, https://images.unsplash.com/photo-1610484826967-09c5720778c7?auto=format&fit=crop&w=900&q=70 900w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 280px" alt="" loading="lazy" style="object-position:40% 50%"></figure><div class="body"><h3>Start</h3><p>The hardest problem is the first one. Every session opens with one they can win.</p></div></div>
-      <div class="step"><figure><span class="n">02</span><img src="https://images.unsplash.com/photo-1502904550040-7534597429ae?auto=format&fit=crop&w=700&q=70" srcset="https://images.unsplash.com/photo-1502904550040-7534597429ae?auto=format&fit=crop&w=500&q=70 500w, https://images.unsplash.com/photo-1502904550040-7534597429ae?auto=format&fit=crop&w=900&q=70 900w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 280px" alt="" loading="lazy" style="object-position:70% 50%"></figure><div class="body"><h3>Push</h3><p>One more. Then one more. A harder problem the moment they're ready for it.</p></div></div>
-      <div class="step"><figure><span class="n">03</span><img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=700&q=70" srcset="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=500&q=70 500w, https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=900&q=70 900w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 280px" alt="" loading="lazy" style="object-position:50% 50%"></figure><div class="body"><h3>Recover</h3><p>Stuck is part of training. The coach splits it into smaller steps. No sighing. No rushing.</p></div></div>
-      <div class="step"><figure><span class="n">04</span><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=700&q=70" srcset="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=70 500w, https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=70 900w" sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 280px" alt="" loading="lazy" style="object-position:35% 50%"></figure><div class="body"><h3>Record</h3><p>Every win logged. Every mistake they fixed themselves, reported to you.</p></div></div>
+      <div class="step"><figure><span class="n">01</span><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/4761/4761-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/4761/4761-720.mp4" data-src-sm="https://assets.mixkit.co/videos/4761/4761-360.mp4" style="object-position:40% 50%"></video></figure><div class="body"><h3>Start</h3><p>The hardest problem is the first one. Every session opens with one they can win.</p></div></div>
+      <div class="step"><figure><span class="n">02</span><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/32813/32813-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/32813/32813-720.mp4" data-src-sm="https://assets.mixkit.co/videos/32813/32813-360.mp4" style="object-position:70% 50%"></video></figure><div class="body"><h3>Push</h3><p>One more. Then one more. A harder problem the moment they're ready for it.</p></div></div>
+      <div class="step"><figure><span class="n">03</span><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/50116/50116-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/50116/50116-720.mp4" data-src-sm="https://assets.mixkit.co/videos/50116/50116-360.mp4" style="object-position:50% 50%"></video></figure><div class="body"><h3>Recover</h3><p>Stuck is part of training. The coach splits it into smaller steps. No sighing. No rushing.</p></div></div>
+      <div class="step"><figure><span class="n">04</span><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/50109/50109-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/50109/50109-720.mp4" data-src-sm="https://assets.mixkit.co/videos/50109/50109-360.mp4" style="object-position:35% 50%"></video></figure><div class="body"><h3>Record</h3><p>Every win logged. Every mistake they fixed themselves, reported to you.</p></div></div>
     </div>
   </div>
 </section>
 
-<section class="section dark" style="padding-top:0">
+<section class="section dark scene" style="padding-top:40px">
+  <div class="bg left" aria-hidden="true"><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/6378/6378-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/6378/6378-720.mp4" data-src-sm="https://assets.mixkit.co/videos/6378/6378-360.mp4" style="object-position:70% 50%"></video></div>
   <div class="wrap coach">
     <div>
       <p class="eyebrow">The coach</p>
@@ -582,7 +666,8 @@ footer a{text-decoration:none}
   </div>
 </section>
 
-<section class="section">
+<section class="section scene">
+  <div class="bg left" aria-hidden="true"><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/4531/4531-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/4531/4531-720.mp4" data-src-sm="https://assets.mixkit.co/videos/4531/4531-360.mp4" style="object-position:35% 50%"></video></div>
   <div class="wrap parents">
     <div>
       <p class="eyebrow">For parents</p>
@@ -613,16 +698,19 @@ footer a{text-decoration:none}
   </div>
 </section>
 
-<section class="section" id="coach" style="background:var(--bone-2)">
+<section class="section scene" id="coach">
+  <div class="bg left" aria-hidden="true"><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/44448/44448-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/44448/44448-720.mp4" data-src-sm="https://assets.mixkit.co/videos/44448/44448-360.mp4" style="object-position:65% 40%"></video></div>
   <div class="wrap">
     <p class="eyebrow">Head Coach</p>
     <h2 class="display">Tony Lai.</h2>
     <p class="lede" style="color:var(--muted)">Co-founder and head coach. 3,771 one-on-one lessons. 5.0 across 912 ratings. Tony designed the method Catchie coaches by, and he's there when you want a human: $150 a session, on any membership.</p>
+    <div class="tony-stats"><span><b>3,771</b>lessons</span><span><b>5.0</b>average rating</span><span><b>2021</b>coaching since</span></div>
     <p class="note" style="margin-top:22px"><a href="#proof">Read what families say ↑</a></p>
   </div>
 </section>
 
-<section class="section">
+<section class="section scene">
+  <div class="bg heavy" aria-hidden="true"><img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1600&q=70" alt="" loading="lazy"></div>
   <div class="wrap faq">
     <p class="eyebrow">Questions</p>
     <h2 class="display" style="margin-bottom:36px">Before you start.</h2>
@@ -637,7 +725,7 @@ footer a{text-decoration:none}
 </main>
 
 <section class="section dark final">
-  <div class="final-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=1800&q=70" srcset="https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=900&q=70 900w, https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=1800&q=70 1800w" sizes="100vw" alt="" loading="lazy"></div>
+  <div class="final-bg" aria-hidden="true"><video muted loop playsinline preload="none" poster="https://assets.mixkit.co/videos/45912/45912-thumb-720-0.jpg" data-src="https://assets.mixkit.co/videos/45912/45912-720.mp4" data-src-sm="https://assets.mixkit.co/videos/45912/45912-360.mp4" style="object-position:50% 40%"></video></div>
   <div class="wrap">
     <p class="eyebrow">Guest Pass</p>
     <h2 class="display">The first week<br>is on us.</h2>
@@ -722,6 +810,34 @@ footer a{text-decoration:none}
   if (!reduce && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ countUp(e.target); io.unobserve(e.target); } }); }, {threshold:.6});
     document.querySelectorAll('[data-onview]').forEach(function(el){ el.textContent = fmt(0, el); io.observe(el); });
+  }
+
+  /* ===== v13: videos, parallax, reveal, progress ===== */
+  var small = innerWidth < 760;
+  function srcOf(v){ return small && v.dataset.srcSm ? v.dataset.srcSm : v.dataset.src; }
+  var hv = document.querySelector('video[data-hero]');
+  if (hv && !reduce) { hv.src = srcOf(hv); hv.addEventListener('playing', function(){ hv.classList.add('on'); }); hv.play().catch(function(){}); }
+  var vids = [].slice.call(document.querySelectorAll('video[data-src]:not([data-hero])'));
+  if (!reduce && 'IntersectionObserver' in window) {
+    var vio = new IntersectionObserver(function(es){ es.forEach(function(e){ var v = e.target;
+      if (e.isIntersecting) { if (!v.src) v.src = srcOf(v); v.play().catch(function(){}); } else if (v.src) v.pause(); }); }, {rootMargin:'200px 0px'});
+    vids.forEach(function(v){ vio.observe(v); });
+  }
+  var layers = [].slice.call(document.querySelectorAll('.scene > .bg > video, .scene > .bg > img'));
+  var bar = document.querySelector('.progress'), ticking = false;
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = 'scaleX(' + (h > 0 ? scrollY / h : 0) + ')';
+    if (!reduce) layers.forEach(function(el){ var r = el.parentNode.getBoundingClientRect();
+      if (r.bottom > -200 && r.top < innerHeight + 200) el.style.transform = 'translate3d(0,' + ((r.top + r.height / 2 - innerHeight / 2) * -0.08).toFixed(1) + 'px,0)'; });
+    ticking = false;
+  }
+  addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, {passive:true});
+  onScroll();
+  var rvs = document.querySelectorAll('main h2, .proof-head > *, .kpis, .plan, .assure, .table-scroll, #method h2, #method .lede, .step, .coach > *, .parents > div > *, #coach h2, #coach .lede, .tony-stats, .faq details, .final h2, .final .lede');
+  if (!reduce && 'IntersectionObserver' in window) {
+    var rio = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); rio.unobserve(e.target); } }); }, {threshold:.12});
+    rvs.forEach(function(el, i){ el.classList.add('rv'); if (el.matches('.plan, .step')) el.classList.add('d' + ([].indexOf.call(el.parentNode.children, el) % 4)); rio.observe(el); });
   }
   var feed = document.querySelector('.feed');
   if ('IntersectionObserver' in window) {
