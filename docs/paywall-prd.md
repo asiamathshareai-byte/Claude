@@ -35,6 +35,12 @@
 - **一個家長帳號 = 一個 Stripe Customer**，可以加入多個孩子。
 - **每個孩子各自一份訂閱**，各自選方案、各自計時。
 - 家長在同一個帳號內為所有孩子付款，卡片共用。
+- **一個座位 = 一個孩子的訂閱**。家長新增孩子時一起選方案，「Add seats」就是付費入口（見第 4.1 節）。
+- **註冊時送的 1 個座位 = 第一個孩子的 7 天試用座位**。試用結束未付費時，座位保留、孩子資料保留，但不能開新課。
+- **停用孩子**：家長端新增「停用」按鈕。停用後取消該孩子的訂閱（用到本期結束），座位釋出，手足折扣在下個扣款週期自動重算。孩子資料保留，可以重新啟用（重新付費）。
+- **一個孩子只屬於一個家長帳號**：第一版不支援共同監護。付款人就是建立孩子的家長。
+- **付款前要先完成 Email 驗證**，確保收得到收據和通知。
+- **付費用戶不需要人工審核**：付款成功即開通，跳過現有的「pending」審核狀態。
 
 ## 4. 手足優惠
 
@@ -98,7 +104,9 @@
 
 **額度**
 - 每天最多 **60 分鐘**，每月最多 **1,200 分鐘（20 小時）**。
-- 「每天」以家長帳號設定的時區午夜重置。
+- 「每天」以家長帳號設定的時區午夜重置。時區在家長第一次付費時自動抓瀏覽器時區，家長可以在設定中修改。
+- **只有上課、練習、小考計時**。首頁聊天、學習地圖、歷史紀錄、外觀設定不計時，讓孩子隨時可以回來。
+- **ADHD 休息活動不計時**：呼吸練習、心情與精力檢查、注意力檢查、小遊戲的時間要從課堂時間中扣除。
 - 「每月」以該孩子的**計費週期**重置，學期方案則以購買日起每滿一個月重置。
 - **一堂課的定義（已確認）**：孩子開始一堂課（按「Start practice」進入上課頁）就開始計時，到離開上課頁為止。後端要建立一筆 `usage_sessions`，記錄開始與結束時間；不能沿用現在「每交一題就一個新 session」的做法。
 - **閒置判定**：沿用團隊既有的掛機判定機制，判定為掛機的時間不計入額度。計時以後端為準。
@@ -113,6 +121,8 @@
 
 Catcher、Academy 和試用期間沒有任何額度限制。
 
+**Catcher 公平使用**：單一孩子當月使用超過 **100 小時**時，通知團隊（內部 Slack 或 Email）人工查看是否為多人共用帳號。**不擋孩子、不通知家長、不顯示在任何介面。**
+
 ## 8. 升級與降級
 
 **升級（Lite → Catcher）**
@@ -121,7 +131,7 @@ Catcher、Academy 和試用期間沒有任何額度限制。
 - 升級成功後，家長端顯示：**「This month on us! Appreciate your trust!」**
 - **學期方案的升級（Lite 學期 → Catcher，已確認）**：同樣立即生效、當月不補差額，顯示「This month on us! Appreciate your trust!」。
   - 升級當天起算一個月內免費使用 Catcher；滿一個月後開始 Catcher 月費（手足優惠照算）。家長也可以在升級時改買 Catcher 學期方案。
-  - Lite 學期尚未用完的月份，依未使用月數換算成 Stripe 帳戶餘額（每月 $16，手足優惠後依實付價格計），自動抵扣之後的 Catcher 帳單。（這是我的預設做法，若要改成不折抵請告訴我）
+  - Lite 學期尚未用完的月份，依未使用月數換算成 Stripe 帳戶餘額（每月 $16，手足優惠後依實付價格計），自動抵扣之後的 Catcher 帳單。（已確認）
 
 **降級（Catcher → Lite）**
 - 在**本期結束時**生效（用 Stripe Subscription Schedule），本期內維持 Catcher。
@@ -183,7 +193,9 @@ Catcher、Academy 和試用期間沒有任何額度限制。
 | Catcher 學期 | Catcher – Semester | $800 | one-time |
 | Academy | Catcher Academy | $5,000 | recurring, monthly |
 
-**Coupons**：`SIBLING_30`、`SIBLING_50`（見第 4 節）。
+**Coupons**：`SIBLING_30`、`SIBLING_50`（見第 4 節）；`BETA_EARLY`（$50 off，duration=repeating，3 個月，只套 Catcher 月費，見第 20 節）。
+- 同一個孩子的訂閱只套一張折扣券，取對家長最有利的那張（例如 Beta 孩子同時符合手足 7 折時，用手足 7 折）。
+- Founding Families 不建立 Stripe 訂閱，見第 20 節。
 
 **需要處理的 webhooks**
 
@@ -203,7 +215,8 @@ Catcher、Academy 和試用期間沒有任何額度限制。
 
 ```
 families        id, parent_user_id, stripe_customer_id, timezone
-children        id, family_id, name, grade
+children        id, family_id, name, grade, status(active|deactivated), comp_plan(null|catcher_lifetime)
+consents        id, parent_user_id, terms_version, privacy_version, accepted_at, ip
 subscriptions   id, child_id, plan(lite|catcher|academy), billing(trial|monthly|semester),
                 status(trialing|grace|active|past_due|canceled|expired|refunded),
                 stripe_subscription_id, stripe_payment_intent_id,
@@ -214,6 +227,7 @@ usage_sessions  id, child_id, started_at, ended_at, counted_minutes, overage_min
 ```
 
 **權限判斷（後端統一函式）**：`can_start_session(child_id)`
+0. 孩子的 `comp_plan = catcher_lifetime`（Founding Families）→ 視同 Catcher，可以；`children.status = deactivated` → 不行。
 1. 狀態是 `trialing`、`grace`、`active`、`past_due`（寬限 7 天內）→ 繼續往下判斷；其他狀態 → 不行。
 2. 方案不是 Lite → 可以。
 3. 方案是 Lite → 今天已用分鐘 < 60 **且**本月已用分鐘 < 1,200 → 可以；否則 → 不行。
@@ -234,6 +248,8 @@ usage_sessions  id, child_id, started_at, ended_at, counted_minutes, overage_min
 | 扣款失敗 | 請更新卡片，服務 7 天內不中斷 |
 | 學期到期前 14、3 天 | 續購提醒 |
 | 退款完成 | 退款確認 |
+| Beta 用戶開始收費前 14 天 | 收費說明、30 天免費過渡期、早鳥價 |
+| 停用孩子 | 確認停用與服務結束日 |
 
 ## 18. 驗收標準（QA 測試案例）
 
@@ -253,14 +269,70 @@ usage_sessions  id, child_id, started_at, ended_at, counted_minutes, overage_min
 14. 孩子端任何畫面、任何 AI 回覆都不出現價格、方案名稱或「升級」。
 15. Lite 孩子開始上課 → 沒有麥克風按鈕、不嘗試語音連線；直接呼叫語音 API 時後端回拒絕。
 16. Lite 升級 Catcher → 下一堂課立即有語音；Catcher 降級 Lite → 本期結束前仍有語音，下期起沒有。
+17. Lite 孩子上課時做呼吸練習 3 分鐘 → 這 3 分鐘不計入額度；在首頁聊天 10 分鐘 → 不計入額度。
+18. 家長停用第二個孩子 → 該孩子用到本期結束；下期第三個孩子的折扣從 5 折變成 7 折。
+19. Founding Family 的孩子 → 不需付款即可用 Catcher 全部功能；家長加第二個孩子 → 以手足 7 折付費。
+20. Email 未驗證的家長點選付費 → 先被導到驗證 Email 的畫面。
 
-## 19. 待確認事項
+## 19. 方案功能對照
+
+| 功能 | 試用 | Lite | Catcher | Academy |
+|---|---|---|---|---|
+| 上課、練習、小考 | 無限 | 每月 20 小時、每天 1 小時 | 無限 | 無限 |
+| 文字聊天、手寫 | 有 | 有 | 有 | 有 |
+| 語音家教 | 有 | 沒有 | 有 | 有 |
+| 家長報告 | 全部 | **只有「本週重點」** | 全部 | 全部 |
+| 歷史紀錄、外觀設定、背景音樂 | 有 | 有 | 有 | 有 |
+| Tony 到府 | – | – | – | 有 |
+
+- Lite 家長打開報告的其他區塊（專注度、單堂分析、筆記）時，看到模糊預覽和「Unlock with Catcher」按鈕。孩子端不受影響。
+- 家長端放「Talk to our team」聯絡按鈕（Tony 真人課），不顯示價格。
+
+## 20. 現有用戶轉付費
+
+**Founding Families（終身免費）**
+- 免費的是 **Catcher 完整版**，只限申請時登記的那一個孩子（依條款「personal, may not be transferred」）。
+- 後端在該孩子設定 `comp_plan = catcher_lifetime`，不建立 Stripe 訂閱、不需要卡片。
+- 同一家庭之後加的孩子正常付費，並享有手足折扣（Founding 孩子算第 1 個）。
+- **待提供**：Founding Families 名單（家長 Email 與孩子），上線前由團隊匯入。
+
+**現有 Beta 用戶**
+- 開始收費前 **14 天**寄信通知。
+- 收費日起給 **30 天免費過渡期**，期間可使用 Catcher 完整功能。
+- 過渡期後選 Catcher 月費的孩子，前 **3 個月 $150/月**（`BETA_EARLY` 折扣券），之後恢復 $200。
+
+## 21. 法務與合規
+
+- **服務條款要改**：刪除「fees are non-refundable」，改成與 30 天退款保證一致的條文。建議文字：
+  > You may request a full refund of the first payment for each child within 30 days of that payment. After 30 days, fees are non-refundable, and you may cancel at any time to stop future charges. Semester plans are paid once and do not renew automatically.
+- **兒童隱私（COPPA）**：付款流程（家長信用卡）要請律師確認，能否作為「可驗證的家長同意」的一部分。
+- **同意紀錄存到後端**：家長同意條款時，記錄條款版本、隱私政策版本、時間和 IP（`consents` 表），取代現在只存在瀏覽器的做法。
+- **幣別與語言**：第一版只收美元，付費相關頁面只有英文。
+- **銷售稅**：第一版不啟用 Stripe Tax，之後再研究。
+
+## 22. 介面位置
+
+- 家長帳號選單新增「**Plan & billing**」：各孩子的方案、下次扣款日、付款方式（Stripe Customer Portal）、收據、升降級、取消、退款、停用孩子。
+- 家長首頁每個孩子的卡片顯示**方案名稱和到期日或續訂日**。
+- 官網新增 **`/pricing`**（使用 v23），導覽列加上「Pricing」。
+- 孩子端所有付費相關訊息（試用到期、額度用完、暫停服務）沿用 Catchie 語氣，**由 Jennifer 確認文案**，絕對不出現價格。
+
+## 23. 收費上線前的相關產品調整（非付費牆，但會影響收費）
+
+1. **孩子密碼**：家長新增孩子時設定 4–6 位數 PIN，不再讓預設密碼等於登入代碼，避免多個孩子共用一個帳號。
+2. **拿掉向孩子詢問位置**：時區改用家長設定或瀏覽器時區。
+3. **答錯時的文字講解**：答錯時顯示簡短的步驟講解（可由 Gemini 產生並快取），讓沒有語音的 Lite 孩子也學得到。
+
+## 24. 待確認事項與決定紀錄
 
 1. **銷售稅**：是否啟用 Stripe Tax 代收美國各州銷售稅？**之後再研究，第一版先不啟用。**
+2. **Founding Families 名單**：請提供家長 Email 與孩子名單，上線前匯入（見第 20 節）。
+3. **律師確認 COPPA 流程**（見第 21 節）。
 
 **已確認**
 - 「寫到完」：進行中的課永遠不中斷、超時不扣額度；額度用完後不能開新課（見第 7 節）。
-- 學期方案中途升級：同樣「This month on us」，詳見第 8 節。
+- 學期方案中途升級：同樣「This month on us」，未用完的 Lite 學期月份折成帳戶餘額，詳見第 8 節。
+- 功能盤點文件第四節的其餘問題全部照建議（見第 3、7、19–23 節）。
 - 定價頁 v23 已加上手足優惠說明（信任列與常見問題），並改成 Lite 每月 20 小時、語音只在 Catcher。
 - 每個家庭只有一次 7 天試用，之後加的孩子直接付費（見第 4.1、5 節）。
 - 語音家教只給 Catcher（見第 2、6.5 節）。
