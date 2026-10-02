@@ -250,4 +250,4 @@ usage_sessions  id, child_id, started_at, ended_at, counted_minutes, overage_min
 2. **試用的次數**：每個孩子都有一次 7 天試用，還是每個家庭只有一次？（建議：每個家庭一次。之後加入的孩子不再試用，避免重複使用。）
 3. **學期方案中途升級**（Lite 學期 → Catcher）：要補差額，還是同樣「This month on us」直接升級？
 4. **銷售稅**：是否啟用 Stripe Tax 代收美國各州銷售稅？（建議請會計確認，數位教育服務在部分州需要課稅。）
-5. **頁面文案要同步更新**：v11 / v21 上的 Lite 寫的是「30 min a day」，要改成「20 hours a month, up to 1 hour a day」；並加上手足優惠的說明。
+5. **頁面文案要同步更新**：v23 已改成「20 hours a month, up to 1 hour a day」，並標示語音只在 Catcher；手足優惠的說明還沒加。
