@@ -16,15 +16,16 @@
 
 ## 2. 方案總覽
 
-| 方案 | 價格 | 使用額度 | 計費方式 | 購買方式 |
-|---|---|---|---|---|
-| 免費試用 | $0 | Catcher 完整功能，無限制 | 7 天，不綁卡，再加 3 天寬限期 | 註冊即開始 |
-| Lite | $20/月 | 每月 20 小時，每天最多 1 小時 | 月費自動續訂 | Stripe Checkout |
-| Lite 學期 | $80 一次付清（5 個月，8 折） | 同 Lite | 一次性付款，不自動續約 | Stripe Checkout |
-| Catcher | $200/月 | 無限制 | 月費自動續訂 | Stripe Checkout |
-| Catcher 學期 | $800 一次付清（5 個月，8 折） | 同 Catcher | 一次性付款，不自動續約 | Stripe Checkout |
-| Academy | $5,000/月 | Catcher + Tony 到府 | 月費 | 申請制，審核後人工寄 Stripe 付款連結 |
+| 方案 | 價格 | 使用額度 | 語音家教 | 計費方式 | 購買方式 |
+|---|---|---|---|---|---|
+| 免費試用 | $0 | Catcher 完整功能，無限制 | 有 | 7 天，不綁卡，再加 3 天寬限期 | 註冊即開始 |
+| Lite | $20/月 | 每月 20 小時，每天最多 1 小時 | 沒有（文字＋手寫） | 月費自動續訂 | Stripe Checkout |
+| Lite 學期 | $80 一次付清（5 個月，8 折） | 同 Lite | 沒有 | 一次性付款，不自動續約 | Stripe Checkout |
+| Catcher | $200/月 | 無限制 | 有 | 月費自動續訂 | Stripe Checkout |
+| Catcher 學期 | $800 一次付清（5 個月，8 折） | 同 Catcher | 有 | 一次性付款，不自動續約 | Stripe Checkout |
+| Academy | $5,000/月 | Catcher + Tony 到府 | 有 | 月費 | 申請制，審核後人工寄 Stripe 付款連結 |
 
+- **語音家教只給 Catcher（已確認）**：試用、Catcher、Catcher 學期、Academy 有語音；Lite 和 Lite 學期只有文字聊天和手寫。語音（OpenAI Realtime）是成本最高的功能，也是 Lite 升級到 Catcher 最主要的理由。
 - 幣別：USD。
 - 付款方式：Stripe Checkout 支援的信用卡、Apple Pay、Google Pay、Link。
 - Tony 的 1:1 真人課（$150/小時）**不在本次範圍**：沒有預約或付款系統，頁面上只放「聯繫官方」，由專人處理。
@@ -68,6 +69,14 @@
    - `metadata` 帶 `family_id`、`child_id`、`plan`、`billing`（monthly 或 semester）。
 3. 家長在 Stripe 頁面完成付款，導回 `/parent/billing?status=success`。
 4. **權限以 webhook 為準**：前端不能因為導回成功頁就開通，要等後端收到 webhook 並更新狀態。成功頁顯示「Setting things up…」並輪詢狀態。
+
+## 6.5 語音家教的開關（Lite 沒有語音）
+
+- 後端在建立語音連線（`POST /api/realtime/session`、`api/realtime/token`）前檢查 `can_use_voice(child_id)`；Lite 一律拒絕，不能只靠前端隱藏。
+- Lite 孩子的上課頁**不自動連語音**，也不顯示麥克風、喇叭和「Voice connection unavailable」訊息；Catchie 直接以文字陪伴。孩子端**不出現「升級才有語音」之類的字眼**（見第 14 節）。
+- 家長端：方案比較、Lite 孩子的卡片和報告中，標示「Voice tutoring — Catcher」，附升級按鈕。
+- 試用結束轉 Lite：語音在轉換當下關閉。Catcher 降級 Lite：本期結束前保留語音，下期起關閉。Lite 升級 Catcher：語音立即開通。
+- 進行中的語音課**不會因為方案變更被中斷**（與第 7 節的不打斷原則一致），只在開新課時套用新方案。
 
 ## 7. 使用額度與「不打斷」原則（Lite）
 
@@ -193,6 +202,8 @@ usage_sessions  id, child_id, started_at, ended_at, counted_minutes, overage_min
 
 進行中的課**不呼叫**這個函式，因為永遠不中斷。
 
+**語音判斷**：`can_use_voice(child_id)`：`can_start_session` 為「可以」**且**方案是試用、Catcher（月費或學期）或 Academy → 可以；Lite → 不行。在每堂課開始時判斷一次。
+
 ## 17. 通知一覽（寄給家長）
 
 | 時機 | 內容 |
@@ -222,10 +233,14 @@ usage_sessions  id, child_id, started_at, ended_at, counted_minutes, overage_min
 12. 取消訂閱 → 用到本期最後一天；期間可以恢復。
 13. 學期方案到期 → 不自動扣款；到期前 14、3 天收到提醒信。
 14. 孩子端任何畫面、任何 AI 回覆都不出現價格、方案名稱或「升級」。
+15. Lite 孩子開始上課 → 沒有麥克風按鈕、不嘗試語音連線；直接呼叫語音 API 時後端回拒絕。
+16. Lite 升級 Catcher → 下一堂課立即有語音；Catcher 降級 Lite → 本期結束前仍有語音，下期起沒有。
 
 ## 19. 待確認事項
 
-6. **語音家教是否只給 Catcher？**（建議：是，Lite 只有文字與手寫。語音是成本最高的功能，也是最清楚的升級理由。）
+
+**已確認**
+- 語音家教只給 Catcher（見第 2、6.5 節）。
 
 **已確認、不列入付費牆範圍**
 - 家長報告的內容（包含沒開語音的孩子）由團隊另外處理。
