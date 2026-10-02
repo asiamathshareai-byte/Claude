@@ -119,7 +119,9 @@ Catcher、Academy 和試用期間沒有任何額度限制。
 - **立即生效**，額度限制當下解除。
 - **本期不補差額**：Stripe 更新 Subscription 時設定 `proration_behavior: 'none'`，下一個扣款日起才收 $200。
 - 升級成功後，家長端顯示：**「This month on us! Appreciate your trust!」**
-- 學期方案的升級：見第 13 節待確認。
+- **學期方案的升級（Lite 學期 → Catcher，已確認）**：同樣立即生效、當月不補差額，顯示「This month on us! Appreciate your trust!」。
+  - 升級當天起算一個月內免費使用 Catcher；滿一個月後開始 Catcher 月費（手足優惠照算）。家長也可以在升級時改買 Catcher 學期方案。
+  - Lite 學期尚未用完的月份，依未使用月數換算成 Stripe 帳戶餘額（每月 $16，手足優惠後依實付價格計），自動抵扣之後的 Catcher 帳單。（這是我的預設做法，若要改成不折抵請告訴我）
 
 **降級（Catcher → Lite）**
 - 在**本期結束時**生效（用 Stripe Subscription Schedule），本期內維持 Catcher。
@@ -254,12 +256,12 @@ usage_sessions  id, child_id, started_at, ended_at, counted_minutes, overage_min
 
 ## 19. 待確認事項
 
-1. **「寫到完」的解讀**：目前寫成「進行中的課永遠不中斷、超時不扣額度、額度用完後不能開新課」。如果意思是 Lite 根本不擋新課，請告訴我。
-2. **學期方案中途升級**（Lite 學期 → Catcher）：要補差額，還是同樣「This month on us」直接升級？
-3. **銷售稅**：是否啟用 Stripe Tax 代收美國各州銷售稅？（建議請會計確認，數位教育服務在部分州需要課稅。）
-4. **頁面文案要同步更新**：v23 已改成「20 hours a month, up to 1 hour a day」，並標示語音只在 Catcher；手足優惠的說明還沒加。
+1. **銷售稅**：是否啟用 Stripe Tax 代收美國各州銷售稅？**之後再研究，第一版先不啟用。**
 
 **已確認**
+- 「寫到完」：進行中的課永遠不中斷、超時不扣額度；額度用完後不能開新課（見第 7 節）。
+- 學期方案中途升級：同樣「This month on us」，詳見第 8 節。
+- 定價頁 v23 已加上手足優惠說明（信任列與常見問題），並改成 Lite 每月 20 小時、語音只在 Catcher。
 - 每個家庭只有一次 7 天試用，之後加的孩子直接付費（見第 4.1、5 節）。
 - 語音家教只給 Catcher（見第 2、6.5 節）。
 
