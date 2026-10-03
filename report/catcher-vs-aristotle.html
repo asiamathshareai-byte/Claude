@@ -1,0 +1,72 @@
+<title>Catcher vs Aristotle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column; verdict cards, then a grouped comparison table with a winner column */
+:root{
+ --bg:#f6f7f4;--surface:#ffffff;--ink:#1f2a24;--muted:#5d6b62;--line:#dfe4dc;
+ --cat:#2f6b4a;--cat-soft:#e3efe7;--ari:#2d5d8a;--ari-soft:#e2ebf4;--eq:#6b7a70;--eq-soft:#eceee9;
+ --display:"Noto Serif TC","Songti TC",serif;--body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a16;--surface:#1c241f;--ink:#e6ece7;--muted:#a3b1a8;--line:#2e3a33;--cat:#7cc09a;--cat-soft:#1f3529;--ari:#8db6e0;--ari-soft:#1d2a38;--eq:#a3b1a8;--eq-soft:#26302a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141a16;--surface:#1c241f;--ink:#e6ece7;--muted:#a3b1a8;--line:#2e3a33;--cat:#7cc09a;--cat-soft:#1f3529;--ari:#8db6e0;--ari-soft:#1d2a38;--eq:#a3b1a8;--eq-soft:#26302a;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;padding-inline:16px;padding-block:0 64px}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:48px}
+header{padding-block:44px 22px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cat)}
+h1{font-family:var(--display);font-size:clamp(30px,5vw,44px);line-height:1.2;margin:0;text-wrap:balance}
+h1 .vs{color:var(--muted);font-weight:600;padding-inline:.25em} h1 .a{color:var(--ari)} h1 .c{color:var(--cat)}
+.lede{color:var(--muted);max-width:64ch;margin:0}
+.score{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.score span{font-size:14px;padding:4px 12px;border-radius:999px;font-variant-numeric:tabular-nums}
+h2{font-family:var(--display);font-size:24px;margin:0 0 16px;text-wrap:balance}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;min-width:0}
+.card h3{margin:0 0 8px;font-size:16px}
+.card.c h3{color:var(--cat)} .card.a h3{color:var(--ari)} .card.p h3{color:var(--ink)}
+.card ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:8px;font-size:14.5px}
+.tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:14.5px}
+thead th{position:sticky;top:0;background:var(--surface);text-align:left;padding:14px 14px;border-bottom:2px solid var(--line);font-size:15px}
+thead th.c{color:var(--cat)} thead th.a{color:var(--ari)}
+tbody th,tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+tbody th[scope=row]{font-weight:500;width:14%;color:var(--muted)}
+tbody td:nth-child(2),tbody td:nth-child(3){width:32%}
+td.lead{font-weight:500}
+tr.grp th{background:var(--eq-soft);font-family:var(--display);font-size:16px;padding:10px 14px;color:var(--ink)}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.pill.c{background:var(--cat-soft);color:var(--cat)} .pill.a{background:var(--ari-soft);color:var(--ari)} .pill.e{background:var(--eq-soft);color:var(--eq)}
+td small{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
+.note{font-size:13px;color:var(--muted);margin:12px 0 0}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px}
+footer a{color:var(--ari)}
+@media (max-width:820px){.cards{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+<header>
+ <span class="eyebrow">競品比較 · 2026-10-03</span>
+ <h1><span class="c">Catcher Academy</span><span class="vs">vs</span><span class="a">Aristotle</span></h1>
+ <p class="lede">兩個都是 AI 家教、主力方案都是每月約 $200。Aristotle 是什麼科目都教的語音家教；Catcher 是專為 ADHD 孩子設計的數學家教，背後有真人老師。</p>
+ <div class="score"><span class="pill c">Catcher 領先 15 項</span><span class="pill a">Aristotle 領先 13 項</span><span class="pill e">持平 9 項</span></div>
+</header>
+
+<section>
+ <h2>重點結論</h2>
+ <div class="cards">
+  <div class="card c"><h3>我們贏在哪</h3><ul><li>專為 ADHD 設計：注意力檢查、精力檢查、休息活動、感官調整，Aristotle 都沒有。</li><li>真人老師 Tony 和 Academy：「AI + 真的老師」是他們給不了的信任。</li><li>涵蓋 4–5 年級：Aristotle 從 6 年級開始，國小高年級是我們的空間。</li><li>付費設計更體貼：7 天全功能試用、30 天退款、手足優惠、學期方案、課中不打斷、孩子看不到價格。</li></ul></div>
+  <div class="card a"><h3>我們要補的</h3><ul><li>上傳作業：家長最直接的需求是「幫我看今天的作業」。</li><li>每堂課後寄 Email 摘要給家長，而且不依賴語音。</li><li>AI 在白板上畫步驟，手寫要能被批改。</li><li>跨堂記憶：「上次你卡在通分，我們今天從那裡開始」。</li><li>公開隱私承諾：不存錄音、不賣資料，寫在官網上。</li></ul></div>
+  <div class="card p"><h3>定價怎麼講</h3><ul><li>$200 對 $199：家長一定會比較。我們要講清楚多了什麼：ADHD 專注設計、真人老師、試用 7 天比 3 堂長、30 天退款。</li><li>Lite $20 對 Scholar $49：我們便宜很多，但沒有語音。這剛好把家長推向 $200，符合「大家都選 Catcher」的目標。</li><li>Aristotle 拿 $1,000/月的真人家教做比較；我們的錨點是 Academy $5,000，更有力。</li></ul></div>
+ </div>
+</section>
+
+<section>
+ <h2>功能差異表</h2>
+ <div class="tw"><table>
+  <thead><tr><th scope="col">項目</th><th scope="col" class="c">Catcher Academy</th><th scope="col" class="a">Aristotle</th><th scope="col">誰領先</th></tr></thead>
+  <tbody><tr class="grp"><th colspan="4" scope="colgroup">定位</th></tr><tr><th scope="row">主要對象</th><td class="lead">ADHD 孩子與他們的家長</td><td class="">一般國高中生（競爭型學校）</td><td><span class="pill c">Catcher</span><small>我們是專為 ADHD 設計；他們沒提到 ADHD，只提到閱讀障礙</small></td></tr><tr><th scope="row">年級</th><td class="">4–9 年級</td><td class="">6–12 年級</td><td><span class="pill e">持平</span><small>我們涵蓋國小高年級；他們涵蓋高中</small></td></tr><tr><th scope="row">科目</th><td class="">數學（10 個領域、132 個主題）</td><td class="lead">65 個科目：數學、自然、英文、歷史、外語、AP、IB、SAT/ACT</td><td><span class="pill a">Aristotle</span></td></tr><tr><th scope="row">平台</th><td class="">網頁</td><td class="">網頁</td><td><span class="pill e">持平</span></td></tr><tr class="grp"><th colspan="4" scope="colgroup">價格與方案</th></tr><tr><th scope="row">免費試用</th><td class="lead">7 天 Catcher 全功能，不綁卡，再加 3 天寬限</td><td class="">3 次一小時的課</td><td><span class="pill c">Catcher</span><small>我們的試用更長、更完整</small></td></tr><tr><th scope="row">入門方案</th><td class="">Lite $20/月：每月 20 小時、每天 1 小時，沒有語音</td><td class="">Scholar $49/月：每月 8 次（每週 2 次），有語音</td><td><span class="pill e">持平</span><small>我們便宜很多，但入門方案沒有語音</small></td></tr><tr><th scope="row">主力方案</th><td class="">Catcher $200/月：無限、語音、完整報告</td><td class="">Infinite $199/月：無限</td><td><span class="pill e">持平</span><small>價格幾乎一樣，比的是內容</small></td></tr><tr><th scope="row">高階方案</th><td class="lead">Academy $5,000/月：Tony 到府（申請制）</td><td class="">沒有</td><td><span class="pill c">Catcher</span><small>價格錨點，他們沒有</small></td></tr><tr><th scope="row">學期方案</th><td class="lead">有：Lite $80、Catcher $800（5 個月，8 折）</td><td class="">沒有</td><td><span class="pill c">Catcher</span></td></tr><tr><th scope="row">手足優惠</th><td class="lead">第 2 個孩子 7 折，第 3 個起 5 折</td><td class="">沒有提到折扣（可邀請多個孩子）</td><td><span class="pill c">Catcher</span></td></tr><tr><th scope="row">退款</th><td class="lead">首筆付款 30 天內自助全額退款</td><td class="">官網沒寫</td><td><span class="pill c">Catcher</span></td></tr><tr><th scope="row">取消</th><td class="">用到本期結束</td><td class="">隨時取消</td><td><span class="pill e">持平</span></td></tr><tr><th scope="row">不打斷承諾</th><td class="lead">課中永遠不因額度或付款中斷</td><td class="">沒有提到</td><td><span class="pill c">Catcher</span></td></tr><tr><th scope="row">補助管道</th><td class="">沒有</td><td class="lead">有 ESA（教育儲蓄帳戶）補助說明頁</td><td><span class="pill a">Aristotle</span><small>美國部分州可以用 ESA 付家教費</small></td></tr><tr class="grp"><th colspan="4" scope="colgroup">教學方式</th></tr><tr><th scope="row">語音家教</th><td class="">有（只在 Catcher 方案）</td><td class="lead">有（所有方案，可隨時打斷）</td><td><span class="pill a">Aristotle</span><small>語音是他們的核心</small></td></tr><tr><th scope="row">蘇格拉底式引導</th><td class="">有（提示一步步出現）</td><td class="">有（主打「不給答案」）</td><td><span class="pill e">持平</span></td></tr><tr><th scope="row">手寫</th><td class="">孩子在格子畫布手寫算式</td><td class="lead">共用白板，AI 會畫步驟和圖</td><td><span class="pill a">Aristotle</span><small>他們的 AI 會畫給孩子看；我們的手寫目前還沒批改</small></td></tr><tr><th scope="row">上傳作業或課本</th><td class="">沒有</td><td class="lead">可上傳 PDF 和圖片，包含整本課本</td><td><span class="pill a">Aristotle</span><small>家長最常見的需求：「幫我看今天的作業」</small></td></tr><tr><th scope="row">記得上次學到哪</th><td class="">有掌握度紀錄（半衰期 21 天）</td><td class="lead">記得每次上課內容、卡在哪、喜歡怎麼被講解</td><td><span class="pill a">Aristotle</span></td></tr><tr><th scope="row">學習地圖</th><td class="lead">花園地圖，主題依掌握度上色</td><td class="">依技能追蹤錯誤和掌握度</td><td><span class="pill c">Catcher</span><small>我們的地圖對孩子更有吸引力</small></td></tr><tr><th scope="row">練習題</th><td class="">依主題出題（例如分數 68 題）</td><td class="">依弱點量身出題</td><td><span class="pill e">持平</span></td></tr><tr><th scope="row">讀書計畫與預約</th><td class="">沒有</td><td class="lead">SAT/ACT/AP 讀書計畫、預約上課、上課提醒</td><td><span class="pill a">Aristotle</span></td></tr><tr class="grp"><th colspan="4" scope="colgroup">ADHD 專注設計</th></tr><tr><th scope="row">注意力檢查</th><td class="lead">每 5 題一次小遊戲（找呼吸的點）</td><td class="">沒有</td><td><span class="pill c">Catcher</span><small>我們最明確的差異</small></td></tr><tr><th scope="row">精力與心情檢查</th><td class="lead">上課前選精力（快 / 穩 / 慢），自動調整節奏</td><td class="">沒有</td><td><span class="pill c">Catcher</span></td></tr><tr><th scope="row">休息活動</th><td class="lead">呼吸練習、配色、找不同、連線小遊戲</td><td class="">沒有</td><td><span class="pill c">Catcher</span></td></tr><tr><th scope="row">感官調整</th><td class="lead">背景音樂、減少動畫、三種主題、自訂密度</td><td class="">沒有提到</td><td><span class="pill c">Catcher</span></td></tr><tr><th scope="row">進度回饋</th><td class="lead">植物從種子長成大樹</td><td class="">沒有提到</td><td><span class="pill c">Catcher</span></td></tr><tr class="grp"><th colspan="4" scope="colgroup">家長端</th></tr><tr><th scope="row">每堂課摘要</th><td class="">有（目前依賴語音資料）</td><td class="lead">每堂課後寄 Email 摘要</td><td><span class="pill a">Aristotle</span><small>他們直接寄到信箱</small></td></tr><tr><th scope="row">家長儀表板</th><td class="">週報、專注度、單堂分析、筆記</td><td class="">儀表板、摘要、技能掌握</td><td><span class="pill e">持平</span></td></tr><tr><th scope="row">看完整逐字稿</th><td class="">沒有</td><td class="lead">可以看每堂課內容和逐字稿</td><td><span class="pill a">Aristotle</span></td></tr><tr><th scope="row">孩子看不到價格</th><td class="lead">有（付費只在家長端）</td><td class="">沒有提到</td><td><span class="pill c">Catcher</span></td></tr><tr><th scope="row">真人老師</th><td class="lead">Tony（3,771 堂課經驗）；Academy 到府</td><td class="">純 AI，沒有真人</td><td><span class="pill c">Catcher</span><small>我們的信任來源</small></td></tr><tr><th scope="row">學校與老師版</th><td class="">沒有</td><td class="lead">老師和班級免費使用</td><td><span class="pill a">Aristotle</span><small>他們用這個打進學校</small></td></tr><tr class="grp"><th colspan="4" scope="colgroup">安全與隱私</th></tr><tr><th scope="row">AI 安全說明</th><td class="">上課前顯示：AI 不是老師、醫生或治療師</td><td class="">有完整安全頁</td><td><span class="pill e">持平</span></td></tr><tr><th scope="row">不當內容處理</th><td class="">拒絕診斷、用藥、治療建議；不問個資</td><td class="lead">三層把關，標記後由真人審查，必要時通知家長</td><td><span class="pill a">Aristotle</span><small>他們有真人即時審查</small></td></tr><tr><th scope="row">語音儲存</th><td class="">未公開</td><td class="lead">不存原始錄音，只留逐字稿</td><td><span class="pill a">Aristotle</span><small>建議我們也寫清楚</small></td></tr><tr><th scope="row">資料</th><td class="">未公開</td><td class="lead">不賣資料、加密</td><td><span class="pill a">Aristotle</span></td></tr></tbody>
+ </table></div>
+ <p class="note">Catcher 的內容來自實際操作 catcheracademy.com 和付費牆 PRD（部分付費功能還在開發）。Aristotle 的內容來自官網首頁、定價頁和安全頁的公開說明，沒有實際註冊使用。</p>
+</section>
+<footer>來源：<a href="https://www.heyaristotle.com/">heyaristotle.com</a> · <a href="https://www.heyaristotle.com/pricing">定價頁</a> · <a href="https://www.heyaristotle.com/safety">安全頁</a>（2026-10-03 擷取）</footer>
+</div>
